@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<!--
+	Dopetrope by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Project: ETL Craigslist Web Scraper</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<section id="header">
+
+					<!-- Logo -->
+						<h1>Using mathematics to solve problems with real world data excites me.</h1>
+
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li><a href="index.html">Home</a></li>
+								<li class="current">
+									<a href="portfolio.html">Portfolio</a>
+									<ul>
+										<li><a href="reddit_accounting_survey_analysis.html">Reddit Accounting Survey Analysis</a></li>
+										<li><a href="us_accounting_viz.html">U.S. Accounting Viz</a></li>
+										<li><a href="etl_craigslist_web_scraper.html">ETL Craigslist Web Scraper</a></li>
+										<li>
+											<a href="tv_ad_report.html">TV Advertising Report</a>
+										</li>
+										<li><a href="sql_queries.html">SQL Queries</a>
+											<!-- <ul>
+												<li><a href="#">Magna phasellus</a></li>
+												<li><a href="#">Etiam dolore nisl</a></li>
+												<li><a href="#">Veroeros feugiat</a></li>
+												<li><a href="#">Nisl sed aliquam</a></li>
+												<li><a href="#">Dolore adipiscing</a></li>
+											</ul> -->
+										</li>
+										<li>
+											<a href="pokemon_classifier.html">Pokémon Legendary Classifier</a>
+										</li>
+										<li>
+											<a href="acupuncture_analysis.html">Acupuncture Analysis</a>
+										</li>
+									</ul>
+								</li>
+								<li><a href="https://drive.google.com/file/d/1B_CcPaHRbLbAyZ3RoUIeKbmIT0T0Y1l0/view?usp=sharing">Resume</a></li>
+								<li><a href="about.html">About</a></li>
+								<!-- <li><a href="tbd_sidebar.html">tbd</a></li> -->
+							</ul>
+						</nav>
+
+				</section>
+
+			<!-- Main -->
+				<section id="main">
+					<div class="container">
+
+						<!-- Content -->
+							<article class="box post">
+								<a href="#" class="image featured"><img src="images/etl_craigslist_web_scraper/etl_thumbnail.png" alt="" style="height: 400px;"/></a>
+								<header>
+									<h2><a href="https://github.com/papir805/craigslist_web_scraper">Extract, Transform, Load (ETL) Craigslist Web Scraper</a></h2>
+									<p>Goal: To build a dataset of tutoring prices that can be used to understand my local and national competition as a math tutor.</p>
+									<i class="icon solid fa-code">
+										 Python, PostgreSQL
+										</i>
+										<br>
+										<i class="icon solid fa-chart-line"> Web Scraping, Data Cleaning</i>
+								</header>
+								<p>
+									As a math tutor, a majority of my business comes from word-of-mouth recommendations or Craigslist (CL) and I wanted to understand my competition on CL better.<br><br>
+									I built this web scraper, using Python, to grab prices of tutors from the services section, then stored the information in a PostgreSQL database, to be used later in exploratory data analysis (EDA).<br><br>
+									Because I tutor math in addition to teaching, I'm curious to know how my prices compare to other tutors in my neighboring areas, as well as in other parts of the country.
+								</p>
+								<p>
+									The full project can be found on <a href="https://github.com/papir805/craigslist_web_scraper">my GitHub</a>.
+								</p>
+								<p>
+									The process:
+									<ol>
+										<li>Extract posting information from Craigslist.</li>
+										<li>Transform the data to my own specifications.</li>
+										<li>Load the data into a PostgreSQL database.</li>
+									</ol>
+								</p>
+								<section>
+									<header>
+										<h3>Part 1: Extract</h3>
+										<i class="icon solid fa-book">
+										Pandas, Requests and BeautifulSoup
+										</i>
+									</header>
+									<p>
+										To begin, I created a bunch of functions that would perform various tasks necessary to scrape posting information for Craigslist.  
+									</p>
+									<p>
+										<ul>
+											<li>I had to scrape URL information for all of the various geographic regions on Craigslist in the US
+													<ul>Ex: sacramento.craigslist.org, sfbayarea.craigslist.org, miami.craigslist.org
+													</ul>
+											</li>
+											<li>Initiate HTTP requests to each of those URLs for search results for the string "math tutor" in the services section.</li>
+											<li>Scrape posting information from each search result and store in a Pandas DataFrame.</li>
+										</ul>
+									</p>
+								</section>
+								<section>
+									<header>
+										<h3>Part 2: Transform</h3>
+										<i class="icon solid fa-book">
+										 Pandas, NumPy, and Sklearn
+										</i>
+									</header>
+									<p>
+										Once the posting information had been scraped. I had to manipulate it such that it could be used for analysis.
+									</p>
+									<p>
+										<h4>2.1 Drop duplicate posts</h4>
+										I was surprised to find that although I had scraped from 4720 postings nationwide, only 1257 of them were unique.  Investigating further, I found that that many math tutors place ads in multiple geographic locations, hence why there were so many duplicate postings.
+									</p>
+									<p>
+										Furthermore, some tutors change the wording of their posts, making detection difficult.  Instead of identifying which posts had text that matched 100%, I had to use something known as the cosine similarity.  By calculating the cosine similarity for each post I could identify when a post was similar enough to other postings and mark them as duplicates.
+									</p>
+									<p>
+										<h4>2.2 Determining the hourly rate</h4>
+										Since posts can be so different from tutor to tutor, one post may have no pricing information, while another post can have a single flat hourly rate, and others can have more complicated pricing schedules that change based on the length of a tutoring session (ex: $30 for 1 hr, $50 for 2 hrs), or a multitude of other factors like the subject tutored (ex: algebra vs. calculus).
+									</p>
+									<p>
+										Posts that had no pricing information had to be identified and excluded from the analysis, whereas posts that had a single flat hourly rate were kept and the pricing information stored, however posts with more complicated pricing schedules were more difficult to deal with.
+									</p>
+									<p>
+										My current implementation for handling these kinds of posts is lacking, but is as follows:
+										<ul> 
+											<li>If two prices were mentioned in a post, average them.</li>
+											<li>If three or more prices are mentioned, flag the post, then manually inspect and fill in the price later.</li>
+										</ul> 
+									</p>
+								</section>
+								<section>
+									<header>
+										<h3>Part 3: Load</h3>
+										<i class="icon solid fa-book">
+										 Pandas and Psycopg2
+										</i>
+									</header>
+									<p>
+										After the data is transformed appropriately, I export the Pandas DataFrame containing the data to Excel CSV files and then use Psycopg2 to insert rows from the CSV file into a local PostgreSQL database.
+									</p>
+								</section>
+							</article>
+
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<section id="footer">
+					<div class="container">
+						<div class="row">
+							<!-- <div class="col-8 col-12-medium">
+								<section>
+									<header>
+										<h2>Blandit nisl adipiscing</h2>
+									</header>
+									<ul class="dates">
+										<li>
+											<span class="date">Jan <strong>27</strong></span>
+											<h3><a href="#">Lorem dolor sit amet veroeros</a></h3>
+											<p>Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat etiam.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>23</strong></span>
+											<h3><a href="#">Ipsum sed blandit nisl consequat</a></h3>
+											<p>Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>15</strong></span>
+											<h3><a href="#">Magna tempus lorem feugiat</a></h3>
+											<p>Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>12</strong></span>
+											<h3><a href="#">Dolore tempus ipsum feugiat nulla</a></h3>
+											<p>Feugiat lorem dolor sed nullam tempus lorem ipsum dolor sit amet nullam consequat.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>10</strong></span>
+											<h3><a href="#">Blandit tempus aliquam?</a></h3>
+											<p>Feugiat sed tempus blandit tempus adipiscing nisl lorem ipsum dolor sit amet dolore.</p>
+										</li>
+									</ul>
+								</section>
+							</div> -->
+							<div class="col-4 col-12-medium">
+								<section>
+									<!-- <center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center>
+								</section> -->
+							</div>
+							<div class="col-4 col-6-medium col-12-small">
+								<section>
+									<!-- <center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center> -->
+								</section>
+							</div>
+							<div class="col-4 col-6-medium col-12-small">
+								<section>
+									<center>
+										<header>
+											<h2>Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+	<!-- 										<li><a class="icon solid fa-envelope" href="mailto:papir805@gmail.com"><span class="label">Email</span></a></li> -->
+											<!-- <li><a class="icon brands fa-dribbble" href="#"><span class="label">Dribbble</span></a></li>
+											<li><a class="icon brands fa-tumblr" href="#"><span class="label">Tumblr</span></a></li> -->
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										
+										</ul>
+										<ul class="contact">
+										<!-- <li>
+											<h3>Address</h3>
+											<p>
+												Untitled Incorporated<br />
+												1234 Somewhere Road Suite<br />
+												Nashville, TN 00000-0000
+											</p>
+										</li> -->
+										<li>
+											<h3>E-mail:</h3>
+											<p><a href="mailto:papir805@gmail.com">papir805@gmail.com</a></p>
+										</li>
+										<!-- <li>
+											<h3>Phone</h3>
+											<p>(800) 000-0000</p>
+										</li> -->
+									</ul>
+
+									</center>
+								</section>
+							</div>
+							<div class="col-4 col-12-medium">
+								<section>
+									<!-- <center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center> -->
+									<!-- <ul class="contact"> -->
+										<!-- <li>
+											<h3>Address</h3>
+											<p>
+												Untitled Incorporated<br />
+												1234 Somewhere Road Suite<br />
+												Nashville, TN 00000-0000
+											</p>
+										</li> -->
+<!-- 										<li>
+											<h3 style="color:black;">E-mail:</h3>
+											<p><a href="mailto:papir805@gmail.com">papir805@gmail.com</a></p>
+										</li> -->
+										<!-- <li>
+											<h3>Phone</h3>
+											<p>(800) 000-0000</p>
+										</li> -->
+<!-- 									</ul> -->
+								</section>
+							</div>
+							<div class="col-12">
+
+								<!-- Copyright -->
+									<div id="copyright">
+										<ul class="links">
+											<li>&copy; Jonathan Papir. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+										</ul>
+									</div>
+
+							</div>
+						</div>
+					</div>
+				</section>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

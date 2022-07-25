@@ -1,0 +1,364 @@
+<!DOCTYPE HTML>
+<!--
+	Dopetrope by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Project: Acupuncture Analysis</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<section id="header">
+
+					<!-- Logo -->
+						<h1>Using mathematics to solve problems with real world data excites me.</h1>
+
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li><a href="index.html">Home</a></li>
+								<li class="current">
+									<a href="portfolio.html">Portfolio</a>
+									<ul>
+										<li><a href="reddit_accounting_survey_analysis.html">Reddit Accounting Survey Analysis</a></li>
+										<li><a href="us_accounting_viz.html">U.S. Accounting Viz</a></li>
+										<li><a href="etl_craigslist_web_scraper.html">ETL Craigslist Web Scraper</a></li>
+										<li>
+											<a href="tv_ad_report.html">TV Advertising Report</a>
+										</li>
+										<li><a href="sql_queries.html">SQL Queries</a>
+											<!-- <ul>
+												<li><a href="#">Magna phasellus</a></li>
+												<li><a href="#">Etiam dolore nisl</a></li>
+												<li><a href="#">Veroeros feugiat</a></li>
+												<li><a href="#">Nisl sed aliquam</a></li>
+												<li><a href="#">Dolore adipiscing</a></li>
+											</ul> -->
+										</li>
+										<li>
+											<a href="pokemon_classifier.html">Pokémon Legendary Classifier</a>
+										</li>
+										<li>
+											<a href="acupuncture_analysis.html">Acupuncture Analysis</a>
+										</li>
+									</ul>
+								</li>
+								<li><a href="https://drive.google.com/file/d/1B_CcPaHRbLbAyZ3RoUIeKbmIT0T0Y1l0/view?usp=sharing">Resume</a></li>
+								<li><a href="about.html">About</a></li>
+								<!-- <li><a href="tbd_sidebar.html">tbd</a></li> -->
+							</ul>
+						</nav>
+
+				</section>
+
+			<!-- Main -->
+				<section id="main">
+					<div class="container">
+
+						<!-- Content -->
+							<article class="box post">
+<!-- 								<a href="#" class="image featured"><img src="images/acupuncture_analysis/acupuncture.jpeg" alt="" style="height: 400px;"/></a> -->
+								<header>
+									<h2><a href="https://github.com/papir805/acupuncture_scholarly_analysis">Acupuncture Analysis</a></h2>
+									<p>Goal: To learn how to apply my knowledge of hypothesis testing, confidence intervals, and linear regression using Python statistical packages.</p>
+									<i class="icon solid fa-code">
+													 Python</i>
+									<br>
+									<i class="icon solid fa-chart-line"> A/B Testing, Confidence Intervals, Linear Regression</i>
+								</header>
+								<p>
+								The full project can be found on <a href="https://github.com/papir805/acupuncture_scholarly_analysis">my GitHub</a>.
+							</p>
+								<p>
+									<h3>An Overview</h3><br>
+									The study was designed to determine the effect of acupuncture, with needle manipulation at different frequencies, on patients with hypertension on two pressure points, ST9 and LR3 (see picture below).<br>
+									<img src="images/acupuncture_analysis/pressure_points.png" alt=""/><br>
+									Patients were divided into four treatment groups:
+									<ol>
+										<li>ST9 High-Frequency Group (ST9-H)</li>
+										<li>ST9 Low-Frequency Group (ST9-L)</li>
+										<li>LR3 High-Frequency Group (LR3-H)</li>
+										<li>LR3 Low-Frequency Group (LR3-L)</li>
+									</ol>
+									High frequency groups received acupuncture treatments where the needle was twirled on the pressure point 120 times within one minute, whereas low frequency groups had acupuncture treatments that were twirled 60 times within one minute.  Each patient received five acupuncture sessions per week for a period of 12 weeks and patients were monitored for another 12 weeks following their last acupuncture session.
+									</p>
+									<p>
+									Systolic Blood Pressure (SBP) and Diastolic Blood Pressure (DBP) for each patient was recorded at baseline, 6 weeks, 12 weeks, 16 weeks, 20 weeks, and 24 weeks of the experiment.  Daytime (6am-10:59pm) blood pressures were measured once every 30 minutes and nighttime (11pm-5:59am) blood pressures were measured once an hour.  These measurements were then used to calculate the mean of the following at each of the time intervals listed above:
+									<ul>
+										<li>24-hr DBP</li>
+										<li>24-hr SBP</li>
+										<li>Daytime DBP</li>
+										<li>Daytime SBP</li>
+										<li>Nighttime DBP</li>
+										<li>Nighttime SBP</li>
+										<li>Morning DBP</li>
+										<li>Morning SBP</li>
+									</ul>
+									Using this data, I was able to pose a bunch of different hypotheses and test them.
+								<section>
+									<header>
+										<h3>Question 1: Is there a significant difference in the proportion of patients above or below age 60, who have high 24-hour systolic blood pressure at the end of the experiment (24 weeks)?</h3>
+									</header>
+									<p>
+										Using a Z-test for the difference between two population proportions, with a 5% level of significance, it appears that the proportion of those below age 60 with high systolic blood pressure is the same as it is for those age 60+.  This is interesting because the scholarly article says that 2/3 of those above age 60 have hypertension, yet in our sample we're only seeing roughly 1/2 having hypertension in each of the two age groups.<br>
+										<br>
+										Keep in mind that there are two types of hypertension, systolic hypertension and diastolic hypertension, and I would assume that 2/3 proportion stated in the scholarly article are for both types of hypertension combined, however it's unclear.  Given that this hypothesis test focused solely on systolic blood pressure, that could be part of the discrepancy.<br>
+										<br>
+										Furthermore, we're looking at results after 24 weeks of the acupuncture treatment, so while we might expect to see a higher proportion of those age 60+ with hypertension, perhaps the acupuncture treatments have been more effective on the older patients in this study.
+									</p>
+								</section>
+								<section>
+									<header>
+										<h3>Question 2: Is there a significant difference in the proportion of patients with high systolic blood pressure across the four treatment groups at the end of the experiment?</h3>
+									</header>
+									<p>
+										Using a Chi-Square goodness of fit test, with a 5% level of significance, it appears at least one of the four treatment groups has a higher proportion of subjects with high systolic blood pressure.<br>
+										<br>
+										More investigation would have to be performed in order to determine which treatment group it was. 
+									</p>
+								</section>
+								<section>
+									<header>
+										<h3>Question 3: Is there a linear relationship between age and 24 hour diastolic blood pressure at the end of the experiment?</h3>
+									</header>
+									<p>
+										Using an F test, with a 2.5% level of significance, it appears there is a linear relationship between age and 24 hour diastolic blood pressure.  In the model, the coefficient for age was found to be -0.4067, meaning that a patient who is one year older than another patient will expect to see a 24 hour diastolic blood pressure that is .4067 mmHg lower.<br>
+										<br>
+										The scatterplot and line of best fit can be seen below:<br>
+										<img src="images/acupuncture_analysis/lin_reg_age_dbp.png" alt=""/> 
+									</p>
+								</section>
+								<section>
+									<header>
+										<h3>Question 4: Is there a linear relationship between age and 24 hour systolic blood pressure at the end of the experiment?</h3>
+									</header>
+									<p>
+										Using an F test, with a 5% level of significance, it appears there is NOT a linear relationship between age and 24 hour systolic blood pressure.  In other words, age is a not a good predictor of ones' 24 hour systolic blood pressure.<br>
+										<br>
+										While diastolic blood pressure may depend on age, our data indicates that systolic blood pressure does not.
+									</p>
+								</section>
+								<section>
+									<header>
+										<h3>Question 5: Can we make a better linear regression model for predicting 24 hour systolic blood pressure by adjusting for other factors?</h3>
+									</header>
+									<p>
+										<h4>5.1 Constructing the model</h4>
+										Given that the point of the experiment was to test the efficacy of different kinds of acupunture treatments, I would like to incporporate this information into the model.  Furthermore, many medical studies adjust for gender and because we've already shown age is correlated with systolic blood pressure, I'll include both those variables too.<br>
+										<br>
+										Using dummy variables for the treatment groups, we have the following coding scheme:
+										<ul>
+											<li>`x_1={(1,if text{patient in ST9-H}),(0,if text{patient not in ST9-H}):}`</li><br>
+											<li>`x_2={(1,if text{patient in ST9-L}),(0,if text{patient not in ST9-L}):}`</li><br>
+											<li>`x_1={(1,if text{patient in ST9-H}),(0,if text{patient not in ST9-H}):}`</li><br>
+											<li>`x_4 = text{age in years}`</li><br>
+											<li>`x_1={(1,if text{patient is male}),(0,if text{patient is female}):}`</li><br>
+										</ul>
+										Using these variables, I constructed a multi-variate linear regression model of the form: `\haty = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_3 + \beta_4x_4 + \beta_5x_5`
+									</p>
+									<p>
+										<h4>5.2 Checking for statistical significance in our predictors</h4> 
+										Using an F-test with a 5% level of significance, none of our predictors were statistically significant when predicting 24 hour systolic blood pressure after 24 weeks of the experiment.<br>
+										<br>
+										This could mean that a linear model is not appropriate, but it could also be a problem with the predictors themselves.
+									</p>
+									<p>
+										<h4>5.3 Investigating treatment group, age, and gender</h4>
+										<img src="images/acupuncture_analysis/mult_lin_reg_q5_summary.png" alt=""/> <br>
+										After inspecting the regression summary, the only statistically significant predictor was group_2, corresponding to the ST9-L treatment group, which had a p-value of 0.020.<br>
+										<br>
+										This could coincide with the observation from Question 2 regarding how at least one treatment group had a higher proportion of patients with high systolic blood pressure.<br>
+										<br>
+										Further investigation would be needed, but perhaps the ST9-L group had a lower proportion of patients with high systolic blood pressure whereas other groups did not.
+									</p>
+								</section>
+								<section>
+									<header>
+										<h3>Conclusion(s)</h3>
+									</header>
+									<p>
+										Unfortunately, no conclusive evidence has been found so far that any of the treatments are effective at combating hypertension.  However, there was some evidence that adjusting the twirling frequency of an acupuncture treatment could produce different effects when applied to the same acupuncture site.<br>
+										<br>
+										As a result, the article notes that in future clinical trials, close attention needs to be paid to an acupuncture treatment's parameters, such as twirling frequency, in order to more accurately compare one treatment against another.
+									</p>
+								</section>
+							</article>
+
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<section id="footer">
+					<div class="container">
+						<div class="row">
+							<!-- <div class="col-8 col-12-medium">
+								<section>
+									<header>
+										<h2>Blandit nisl adipiscing</h2>
+									</header>
+									<ul class="dates">
+										<li>
+											<span class="date">Jan <strong>27</strong></span>
+											<h3><a href="#">Lorem dolor sit amet veroeros</a></h3>
+											<p>Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat etiam.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>23</strong></span>
+											<h3><a href="#">Ipsum sed blandit nisl consequat</a></h3>
+											<p>Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>15</strong></span>
+											<h3><a href="#">Magna tempus lorem feugiat</a></h3>
+											<p>Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>12</strong></span>
+											<h3><a href="#">Dolore tempus ipsum feugiat nulla</a></h3>
+											<p>Feugiat lorem dolor sed nullam tempus lorem ipsum dolor sit amet nullam consequat.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>10</strong></span>
+											<h3><a href="#">Blandit tempus aliquam?</a></h3>
+											<p>Feugiat sed tempus blandit tempus adipiscing nisl lorem ipsum dolor sit amet dolore.</p>
+										</li>
+									</ul>
+								</section>
+							</div> -->
+							<div class="col-4 col-12-medium">
+								<section>
+									<!-- <center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center>
+								</section> -->
+							</div>
+							<div class="col-4 col-6-medium col-12-small">
+								<section>
+									<!-- <center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center> -->
+								</section>
+							</div>
+							<div class="col-4 col-6-medium col-12-small">
+								<section>
+									<center>
+										<header>
+											<h2>Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+	<!-- 										<li><a class="icon solid fa-envelope" href="mailto:papir805@gmail.com"><span class="label">Email</span></a></li> -->
+											<!-- <li><a class="icon brands fa-dribbble" href="#"><span class="label">Dribbble</span></a></li>
+											<li><a class="icon brands fa-tumblr" href="#"><span class="label">Tumblr</span></a></li> -->
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										
+										</ul>
+										<ul class="contact">
+										<!-- <li>
+											<h3>Address</h3>
+											<p>
+												Untitled Incorporated<br />
+												1234 Somewhere Road Suite<br />
+												Nashville, TN 00000-0000
+											</p>
+										</li> -->
+										<li>
+											<h3>E-mail:</h3>
+											<p><a href="mailto:papir805@gmail.com">papir805@gmail.com</a></p>
+										</li>
+										<!-- <li>
+											<h3>Phone</h3>
+											<p>(800) 000-0000</p>
+										</li> -->
+									</ul>
+
+									</center>
+								</section>
+							</div>
+							<div class="col-4 col-12-medium">
+								<section>
+									<!-- <center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center> -->
+									<!-- <ul class="contact"> -->
+										<!-- <li>
+											<h3>Address</h3>
+											<p>
+												Untitled Incorporated<br />
+												1234 Somewhere Road Suite<br />
+												Nashville, TN 00000-0000
+											</p>
+										</li> -->
+<!-- 										<li>
+											<h3 style="color:black;">E-mail:</h3>
+											<p><a href="mailto:papir805@gmail.com">papir805@gmail.com</a></p>
+										</li> -->
+										<!-- <li>
+											<h3>Phone</h3>
+											<p>(800) 000-0000</p>
+										</li> -->
+<!-- 									</ul> -->
+								</section>
+							</div>
+							<div class="col-12">
+
+								<!-- Copyright -->
+									<div id="copyright">
+										<ul class="links">
+											<li>&copy; Jonathan Papir. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+										</ul>
+									</div>
+
+							</div>
+						</div>
+					</div>
+				</section>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+	</body>
+</html>
