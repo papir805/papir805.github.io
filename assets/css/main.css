@@ -1565,6 +1565,11 @@ input, select, textarea {
 
 	footer {
 		margin: 2.25em 0 0 0;
+		position: absolute;
+
+		left: 0;
+		right: 0;
+		bottom: 0;
 	}
 
 /* Box */
@@ -1573,6 +1578,7 @@ input, select, textarea {
 		background: #ffffff;
 		border-bottom: solid 1px #ccc;
 		padding: 2.75em 1.75em 2.75em 1.75em;
+		position: relative;
 	}
 
 		.box .image.featured {
@@ -1599,8 +1605,8 @@ input, select, textarea {
 		}
 
 		.box footer ul.actions {
-			margin-bottom: 0;
-			justify-content: flex-end;
+			margin-bottom: 20px;
+			justify-content: center;
 			display: flex;
 		}
 
