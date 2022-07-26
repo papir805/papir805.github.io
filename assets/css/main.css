@@ -1801,7 +1801,7 @@ input, select, textarea {
 
 			ul.contact li h3 {
 				position: absolute;
-				left: 0;
+				right: 150px;
 				top: 1.3em;
 				font-size: 1.1em;
 			}
