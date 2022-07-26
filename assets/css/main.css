@@ -286,6 +286,7 @@ input, select, textarea {
 
 		.row > .col-4 {
 			width: 33.33333%;
+			display: flex;
 		}
 
 		.row > .off-4 {
@@ -1599,6 +1600,8 @@ input, select, textarea {
 
 		.box footer ul.actions {
 			margin-bottom: 0;
+			justify-content: flex-end;
+			display: flex;
 		}
 
 /* Button */
@@ -2184,6 +2187,11 @@ input, select, textarea {
 	}
 
 		#banner header {
+/*			color: #d52349;
+			padding: 0;
+			font-style: normal;
+			margin: 0;
+			font-size: 1.5em;*/
 			background-color: rgba(34, 30, 31, 0.98);
 			display: inline-block;
 			padding: 2.5em 5em;
