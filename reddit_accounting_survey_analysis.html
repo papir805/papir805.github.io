@@ -73,10 +73,11 @@
 										</i><br>
 										<i class="icon solid fa-chart-line"> Data Cleaning, Exploratory Data Analysis, Visualization, Linear Regression</i>
 								</header>
+								<h3>Background</h3>
 								<p>
 									Because my wife was preparing to enter into the field of accounting and I was looking to develop projects to demonstrate proficiency with data analysis, I combined the two ideas together to create this project. 
 								</p>
-									My wife had also done her own research on the field in regards to maximizing long term salary earning potential.  She stated that accountants with their CPA license earn more, as do accountants who start at a public accounting firm, then transition into working as an accountant in industry at a private company. 
+									My wife had done her own research on the field in regards to maximizing long term salary earning potential.  She stated that accountants with their CPA license earn more, as do accountants who start at a public accounting firm, then transition into working as an accountant in industry at a private company. 
 								</p>
 									I used this data to better understand if those statements are true, as well as what a typical accountant looks like, by breaking the analysis into three Jupyter notebooks:<br><br>
 
@@ -105,8 +106,14 @@
 									<p>
 										<h4>1.2 Cleaning strings:</h4>
 										Since the survey responses came from Google Forms, which prompts users to type in their responses to the survey questions, all data in our CSV file are strings.  Fields that related to numerical entries, such as salary, or hours per week, needed to be manipulated.<br><br>
-										EX: Values like "73k" needed to be changed to 73000<br>
-										Commas and dollar signs needed to be removed<br><br>
+										<ul>
+											<li>
+												Values like "73k" needed to be changed to 73000
+											</li>
+											<li>
+												Commas and dollar signs needed to be removed
+											</li>
+										</ul>
 										Other fields such as "Line of Service" needed their entries standardized.  Survey respondants were allowed to type in their line of service and consequently entries such as Tax and Audit, Tax & Audit, Audit and Tax, Audit/Tax, etc., all describe the same line of service.  I was able to distill 36 unique strings down to just 9 distinct lines of service.<br><br> 
 										Additionally, I was able to distill 2 distinct entries for "Gender" down to 1 by renaming the "Prefer not to say" and "Other" categories into "Undisclosed".
 										</p>
@@ -115,7 +122,7 @@
 										Fields like "Current Salary + Bonus", "Years of Experience", "Average Hours Per Week", or "Years Public Before Exit" all needed to be re-cast from string to float.
 									</p>
 									<p>
-										 <h4>1.4 Cleaning Null values</h4>
+										 <h4>1.4 Replacing/Imputing Null values</h4>
 										   Gender: Replaced Null values with Undisclosed<br>
 										   Line of Service: Replaced Null values with Other<br>
 										   Current Industry: Replaced Null values with Other<br>
@@ -170,7 +177,7 @@
 										Once a baseline for the typical accountant is established, then I began to use the qualitative data to understand different segments of the accounting population.  For instance, what is the typical salary for male vs. female accountants, or for accountants that have their CPA license vs. those who don't.
 									</p>
 									<p>
-										While performing the EDA, I'm also looking for data that will support my wife's research regarding which factors will increase an accountants long-term salary earning potential.  Namely:<br>
+										While performing the EDA, I'm also looking for data that will support my wife's research regarding which factors will increase an accountant's long-term salary earning potential.  Namely:<br>
 										<ol>
 											<li>What impact does having a CPA license have on annual salary?</li>
 											<li>What impact does beginning one's career as an accountant for a public accounting firm vs. beginning a career as an accountant for a company in private industry?</li>
