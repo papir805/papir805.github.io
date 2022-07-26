@@ -2193,11 +2193,11 @@ input, select, textarea {
 	}
 
 		#banner header {
-/*			color: #d52349;
+			color: #d52349;
 			padding: 0;
 			font-style: normal;
 			margin: 0;
-			font-size: 1.5em;*/
+			font-size: 1.5em;
 			background-color: rgba(34, 30, 31, 0.98);
 			display: inline-block;
 			padding: 2.5em 5em;
