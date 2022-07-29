@@ -1544,6 +1544,9 @@ input, select, textarea {
 			font-style: italic;
 			margin: 0.5em 0 0 0;
 			padding-bottom: 0.5em;
+
+			line-height:  35px; /* This line fixes the spacing between sentences in resume 
+								   objective on index.html */
 		}
 
 		header.major {
