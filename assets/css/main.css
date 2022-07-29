@@ -218,6 +218,10 @@ input, select, textarea {
 				width: calc(100% - 40px);
 			}
 
+			.right {
+				justify-content: center;
+			}
+
 		}
 
 /* Row */
