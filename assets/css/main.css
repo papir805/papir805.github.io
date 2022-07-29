@@ -1808,7 +1808,7 @@ input, select, textarea {
 		ul.contact li {
 			position: relative;
 			border-top: solid 1px #ddd;
-			padding: 1.3em 0 1.3em 7em;
+			padding: 1.3em 0 1.3em 4em;
 		}
 
 			ul.contact li h3 {
