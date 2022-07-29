@@ -183,6 +183,11 @@ input, select, textarea {
 		width: 70em;
 	}
 
+	.right {
+		display: flex;
+		justify-content: flex-end;
+	}
+
 		@media screen and (max-width: 1680px) {
 
 			.container {
