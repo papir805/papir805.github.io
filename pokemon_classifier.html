@@ -72,7 +72,7 @@
 										 Python
 									</i>
 									<br>
-									<i class="icon solid fa-chart-line"> Visualization, k-Nearest Neighbors, Logistic Regression</i>
+									<i class="icon solid fa-chart-line"> Visualization, k-Nearest Neighbors, Logistic Regression, Over and Under-Sampling Techniques</i>
 								</header>
 							<p>
 								<h3><u>Method</u></h3>
@@ -81,6 +81,7 @@
 									<li>Check correlation between all Pokémon stats to identify predictors most associated with a Pokémon being legendary.</li>
 									<li>Construct k-Nearest Neighbor (kNN) models by training on generation 1-6 Pokémon, then check performance by testing on generation 7 Pokémon.</li>
 									<li>Construct Logistic Regression models by training on generation 1-6 Pokémon, then check performance by testing on generation 7 Pokémon.</li>
+									<li>Attempt over and under-sampling techniques to deal with heavily imbalanced classes (8% legendary vs. 92% non-legendary) and re-create kNN and logistic regression models.</li>
 								</ol>
 							</p>
 							<p>
@@ -197,11 +198,39 @@
 										The logistic regression model yielded the same accuracy (82%) as the kNN model on generation 7 Pokémon.<br><br>
 										Investigating further, both models made the exact same predictions.  Out of 80 new Pokémon in generation 7, both models predicted 78 would be non-legendary and only 2 to be legendary.<br><br>Unfortunately neither kNN nor logistic regression do much better than a naive model which always guesses a newly observed Pokémon will be non-legendary.  The search for a better model continues.
 									</p>
+								</section>
+								<section>
+									<header>
+										<h3><u>Part 5: Over and Under-Sampling Techniques</u></h3>
+										<i class="icon solid fa-book">
+										Imblearn
+										</i>
+									</header>
 									<p>
-										<h3><u>Part 5: Coming Soon</u></h3>
-										Linear Discriminant Analysis, Quadratic Discriminant Analysis, and revisiting kNN and logistic regression by altering the bayes decision boundary.
-
-										Also, using under-sampling and over-sampling techniques to over come the large class imbalance between legendary and non-legendary Pokémon.  Using these techniques I'm hopeful kNN and logistic regression models will stop being heavily biased towards classifying a Pokémon as non-legendary.
+										<h4>5.1 Background</h4>
+										Classification algorithms have a tough time when working with largely imbalanced datasets.  These algorithms are designed to maximize performance and sometimes the best way to do that is to always guess the same thing.  For instance, in the Pokémon data from generation 1-6, 92% of the Pokémon are non-legendary.  If the model always guesses non-legendary, it will be right 92% of the time, which is close to the maximum of 100%.  Increasing performance above 92% will be difficult, but is the key difference in making the model great.
+									</p>
+									<p>
+										Using a combination of over and under-sampling techniques, the generation 1-6 Pokémon data set can be transformed and new models trained on the transformed data.  Using the imbalanced_learn library from SKlearn, one can over-sample the minority class by creating new "synthetic" minority observations and add them to the data set, as well as under-sample the majority class by removing majority observations.  Chaining these together will produce a synthetic dataset that is more balanced and easier to train the model on.  Because we want to understand how the model reacts to new data, the model will still be tested on untransformed data, to more closely resemble incoming newly unseen data.
+									</p>
+									<p>
+										<h4>5.2 kNN and Logistic Regression Performance on Gen 7 and Gen 8 Pokémon</h4> 
+										After employing both techniques, kNN and logistic regression both saw significant increases in performance and all of a sudden weren't biased towards predicting non-legendary anymore.  Both models adapted well to new Pokémon from generation 7, as well as from generation 8, having 94% and 92% accuracy, respectively.  Interestingly, both kNN and logistic regression performed exactly the same, making the exact same predictions again, as can be seen below.  
+									</p>
+									<br>
+										<img src="images/pokemon_classifier/smote_summary.png" alt=""/>
+										<br> 
+									<p>
+										There are probably better models out there, but since they're performing equally well, for now kNN and logistic regression are tied.  They're both performing well, adapting nicely to new data, and seem like great models to use.
+									</p>
+								</section>
+								<section>
+									<p>
+										<h3><u>Part 6: Coming Soon</u></h3>
+										Will other models like Linear Discriminant Analysis or Quadratic Discriminant Analysis perform better?  
+									</p>
+									<p>
+										Also, revisiting kNN and logistic regression one more time and altering the bayes decision boundary.
 									</p>
 								</section>
 							</article>
