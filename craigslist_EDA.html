@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Project: Craigslist Exploratoratory Data Analysis</title>
+		<title>Project: Craigslist Tutoring Exploratoratory Data Analysis</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -23,17 +23,29 @@
 					<!-- Nav -->
 						<nav id="nav">
 							<ul>
-								<li><a href="index.html">Home</a></li>
+								<li>
+									<a href="index.html">Home</a>
+								</li>
 								<li class="current">
 									<a href="portfolio.html">Portfolio</a>
 									<ul>
-										<li><a href="reddit_accounting_survey_analysis.html">Reddit Accounting Survey Analysis</a></li>
-										<li><a href="us_accounting_viz.html">U.S. Accounting Viz</a></li>
-										<li><a href="etl_craigslist_web_scraper.html">ETL Craigslist Web Scraper</a></li>
+										<li>
+											<a href="reddit_accounting_survey_analysis.html">Reddit Accounting Survey Analysis</a>
+										</li>
+										<li>
+											<a href="us_accounting_viz.html">U.S. Accounting Viz</a>
+										</li>
+										<li>
+											<a href="etl_craigslist_web_scraper.html">ETL Craigslist Web Scraper</a>
+										</li>
+										<li>
+											<a href="craigslist_EDA.html">Craigslist Tutoring EDA</a>
+										</li>
 										<li>
 											<a href="tv_ad_report.html">TV Advertising Report</a>
 										</li>
-										<li><a href="sql_queries.html">SQL Queries</a>
+										<li>
+											<a href="sql_queries.html">SQL Queries</a>
 											<!-- <ul>
 												<li><a href="#">Magna phasellus</a></li>
 												<li><a href="#">Etiam dolore nisl</a></li>
@@ -43,7 +55,7 @@
 											</ul> -->
 										</li>
 										<li>
-											<a href="pokemon_classifier.html">Pokémon Legendary Classifier</a>
+											<a href="pokemon_classifier.html">Pokémon Classification</a>
 										</li>
 										<li>
 											<a href="acupuncture_analysis.html">Acupuncture Analysis</a>
@@ -82,8 +94,13 @@
 									<h5>The process:</h5>
 									<ol>
 										<li>Create table in database for United States Census data to aid visualizations.</li>
-										<li>Query information from local PostgreSQL database into memory and visualize using Python.</li>
-										<li>Save visualizations to my website.</li>
+										<li>Query information from local PostgreSQL database segmented by various geographic locations and visualize using Python.</li>
+											<ul>
+												<li>US Census Region</li>
+												<li>US Divisions: Coming Soon</li>
+												<li>State</li>
+												<li>SF Bay Area</li>
+											</ul>
 									</ol>
 								</p>
 								<section>
@@ -104,17 +121,18 @@
 									<header>
 										<h3><u>Part 2: Querying and Visualizing the Data</u></h3>
 										<i class="icon solid fa-book">
-										 PostgreSQL, Pandas, Psycopg2, Plotly Express
+										 PostgreSQL, Pandas, Psycopg2, Plotly Express, Matplotlib
 										</i>
 									</header>
 									<p>
-										<h4>2.1 Query for mean hourly price and number of postings by US Census Region</h4>
+										<h4>2.1 Segmenting by US Census Region</h4>
+										<h5>Query for mean hourly price and number of postings</h5>
 										<p>
 											Because Craigslist postings stay up for extended periods of time and can be reposted once expired, my database has multiple instances of the same posts due to the web scraper being run multiple times over many days.<br>
 											<br>The first block of the SQL query below creates a common table expression (CTE), which limits the scope of my analysis to just data from a recent run of the web scraper, on 2022-02-03, using a WHERE clause.  Furthermore, since the main purpose of the analysis is to understand pricing of my competition, the WHERE clause limits the CTE to inlude only observations that have a price.<br>
 											<br>The second block joins the CTE to the US Census data, so that we can categorize a post as belonging to one of four regions: West, Midwest, South, and Northeast.  Because some states on Craigslist have no postings for tutoring, our dataset doesn't contain information for all 50 states.  We need to use a left join on the US Census data in order to ensure the names of all 50 states end up in our final table.<br>
-											<br>The third block uses window functions to calculate the average hourly price and count of the number of postings when partitioned by US Census region.  Because of the way plotly works, it needs state level granularity in order to plot correctly, which is why I use a window function as opposed to the standard GROUP BY.  If I were to use GROUP BY, we'd lose the state level granularity and Plotly couldn't produce the graph I want.  Unfortunately, this means that many of the rows become duplicates, so I also use the ROW_NUMBER window function, which will help me filter out duplicates in the final block of the query.<br>
-											<br>The final block filters out the duplicates using ROW_NUMBER.
+											<br>The third block uses window functions to calculate the average hourly price and count of the number of postings when partitioned by US Census region.  Because of the way plotly works, it needs state level granularity in order to plot correctly, which is why I use a window function as opposed to the standard GROUP BY.  If I were to use GROUP BY, we'd lose the state level granularity and Plotly couldn't produce the graph I want.  Unfortunately, because of the way window functions work, this means that many of the rows become duplicates, so I also use the ROW_NUMBER window function, which will help me filter out duplicates in the final block of the query.<br>
+											<br>The final block filters out the duplicates using a condition on ROW_NUMBER.
 										</p>
 										<pre>
 											<code>
@@ -152,15 +170,18 @@ ORDER BY 1;
 										</pre>
 									</p>
 									<p>
-										<h4>2.2 Visualizing mean hourly price and number of postings by US Census Region</h4>
+										<h5>Visualizing using Plotly</h5>
 										<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://papir805.github.io/mean_price_by_us_census_region_plotly.html" height="525" width="100%"></iframe>
 									</p>
 									<p>
-										<h4>2.3 Query for mean hourly price and number of postings by state</h4>
+										Looking at the map plotted above, it's interesting to note that the vast majority of postings (202 / 308 = ~60%) come from the Western US, with a mean of $44.79 / hr for tutoring.  The Northeast region has the highest mean of $44.98, only slightly higher than in the West.
+									<p>
+										<h4>2.2 Segmenting by State</h4>
+										<h5>Query for mean hourly price and number of postings</h5>
 										The first block of the query below creates a common table expression (CTE) containing the average hourly tutoring cost, as well as the number of postings, broken down by state.<br>
 										<br>
 										As discussed before, I filter the data to only include postings from 2022-02-03 and that have a non-null entry for price.<br>
-										<br>The last block in the query below uses another left join between the US Census table adn the CTE in order to get the state abbreviations (ex: CA, NY, etc.), which is necessary for visualizing the data using Plotly Express in the next step.
+										<br>The last block uses another left join between the US Census table and the CTE in order to get the state abbreviations (ex: CA, NY, etc.), which is necessary for visualizing the data using Plotly Express in the next step.
 									</p>
 										<code>
 											<pre>
@@ -184,13 +205,13 @@ LEFT JOIN mean_price_size_by_state AS mp
 											</pre>
 										</code>
 									<p>
-										<h4>2.4 Visualizing mean hourly price and number of postings by state</h4>
+										<h4>Visualizing using Plotly</h4>
 										<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://papir805.github.io/mean_price_by_state_plotly.html" height="525" width="100%"></iframe>
 									</p>
 									<p>
-										Paying attention to the colorbar in the graph above, states with a high average hourly rate are orange, and darker orange colors correspond to the highest average hourly rates.<br>
-										<br>Idaho, Massachusets, and the District of Columbia have the darkest orange coloring and the highest mean hourly price, however these states only have 2, 5, and 8 posts, respectively.  With so few data points on tutors from these states, I'd be skeptical regarding if they're truly the costliest states for tutoring.<br>
-										<br>Focusing on what states remain, the following five states are the costliest and have at least 10 postings:
+										Paying attention to the colorbar in the graph above, the darker the green color, the higher the average hourly rate for tutoring.<br>
+										<br>Idaho, Tennessee, Massachusets, and the District of Columbia have the darkest green coloring and the highest mean hourly price, however these states only have 2, 2, 5, and 8 posts, respectively.  With so few data points on tutors from these states, I'd be skeptical regarding if they're truly the costliest states for tutoring.  By the way, District of Columbia is there, but is hard to see...zoom in and you'll see it.<br>
+										<br>Focusing on the remaining states that are darker green, the following states are the five costliest and have at least 10 postings:
 										<ol>
 											<li>New YorK: $50.37 / hr</li>
 											<li>California: $48.21 / hr</li>
@@ -200,23 +221,45 @@ LEFT JOIN mean_price_size_by_state AS mp
 
 										</ol>
 									</p>
+									<p>
+										<h4>2.3 Segmenting the SF Bay Area</h4>
+										<h5>Query for mean hourly price and number of postings</h5>
+									</p>
+									This query is much easier than the previous ones.  I do the same filtering in the WHERE condition as before, but filter by region to include only results for sfbayarea, then group by subregion and compute the average hourly price and number of postings for each subregion.
+									<pre>
+										<code>
+SELECT subregion
+     , AVG(price) AS mean_price
+     , COUNT(id) AS num_posts
+FROM cl_tutoring
+WHERE date_scraped = '2022-02-03'
+  AND price IS NOT NULL
+  AND region = 'sfbayarea'
+GROUP BY subregion
+ORDER BY 3 DESC;
+										</code>
+									</pre>
+
+									<p>
+										<h4>Visualizing using Matplotlib</h4>
+										<br>
+									</p>
+									<img src="images/craigslist_EDA/mean_price_and_num_posts_sfbayarea.png" alt=""/>
+										<br> 
+										<p>
+											San Francisco is by far the costliest, with an average price of $79.81 / hr and also had the greatest number of tutoring postings at 13.  To my suprise, the South Bay, where I'm located, was the cheapest at $40.93 / hr, with the third highest number of postings at 7.  The rest of the SF Bay Area subregions were all fairly close in price, although the only one of these subregions with a respectable amount of posts was the East Bay.
+										</p>
 									
 								</section>
 								<section>
 									<header>
-										<h3><u>Part 3: Load</u></h3>
-										<i class="icon solid fa-book">
-										 Pandas and Psycopg2
-										</i>
+										<h3>Part 3: Conclusion(s)</h3>
 									</header>
 									<p>
-										After the data is transformed appropriately, I export the Pandas DataFrame containing the data to Excel CSV files and then use Psycopg2 to insert rows from the CSV file into a local PostgreSQL database.
+										My geographic location, the South Bay, has one of the highest cost of living in the nation and is certainly one of the highest in regards to tutoring costs.  That being said, the average hourly tutoring rate in the South Bay ($ 40.93 / hr) is below the average for the West ($44.79 / hr) and below the average for the state ($48.21 / hr), as well as being the lowest in the SF Bay Area too. 
 									</p>
 								</section>
-
-								<section>
-									<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://papir805.github.io/mean_price_by_state_plotly.html" height="525" width="100%"></iframe>
-								</section>
+								
 							</article>
 
 					</div>
