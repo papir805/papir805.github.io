@@ -64,85 +64,143 @@
 
 						<!-- Content -->
 							<article class="box post">
-								<a href="#" class="image featured"><img src="images/etl_craigslist_web_scraper/etl_thumbnail.png" alt="" style="height: 400px;"/></a>
 								<header>
-									<h2><a href="https://github.com/papir805/craigslist_web_scraper">Extract, Transform, Load (ETL) Craigslist Web Scraper</a></h2>
-									<p>Goal: To build a dataset of tutoring prices that can be used to understand my local and national competition as a math tutor.</p>
+									<h2>Analyzing Craigslist Tutoring Prices</a></h2>
+									<p>Goal: To analyze the dataset of tutoring prices I built and understand my local and national competition as a math tutor.</p>
 									<i class="icon solid fa-code">
-										 Python, PostgreSQL, HTML
+										 Python, PostgreSQL
 										</i>
 										<br>
-										<i class="icon solid fa-chart-line"> Web Scraping, Data Cleaning</i>
+										<i class="icon solid fa-chart-line"> Data Analysis, Visualization</i>
 								</header>
 								<p>
 									<h3><u>Background</u></h3>
 									As a math tutor, a majority of my business comes from word-of-mouth recommendations or Craigslist (CL) and I wanted to understand my competition on CL better.<br><br>
-									I built this web scraper, using Python, to grab prices of tutors from the services section, then stored the information in a PostgreSQL database, to be used later in exploratory data analysis (EDA).<br><br>
-									Because I tutor math in addition to teaching, I'm curious to know how my prices compare to other tutors in my neighboring areas, as well as in other parts of the country.
+									<a href="etl_craigslist_web_scraper.html">In another project</a>, I built a tool that mined tutoring prices from Craigslist postings and stored them in a local PostgreSQL database.  In order to analyze the dataset, I queried it from the database using SQL and then created visualizations using Python.  These are the results.
 								</p>
 								<p>
-									The full project can be found on <a href="https://github.com/papir805/craigslist_web_scraper">my GitHub</a>.
-								</p>
-								<p>
-									The process:
+									<h5>The process:</h5>
 									<ol>
-										<li>Extract posting information from Craigslist.</li>
-										<li>Transform the data to my own specifications.</li>
-										<li>Load the data into a PostgreSQL database.</li>
+										<li>Create table in database for United States Census data to aid visualizations.</li>
+										<li>Query information from local PostgreSQL database into memory and visualize using Python.</li>
+										<li>Save visualizations to my website.</li>
 									</ol>
 								</p>
 								<section>
 									<header>
-										<h3><u>Part 1: Extract</u></h3>
+										<h3><u>Part 1: Creating table for United States (US) Census Data</u></h3>
 										<i class="icon solid fa-book">
-										Pandas, Requests and BeautifulSoup
+										PostgreSQL, Pandas, Psycopg2
 										</i>
 									</header>
 									<p>
-										To begin, I created a bunch of functions that would perform various tasks necessary to scrape posting information for Craigslist.  
+										Craigslist postings aren't segmented by US regions such as North, West, South, and East, or by the more granular US divisions such as New England, Middle Atlantic, South Atlantic, etc.  Because I wanted to be able to segment my analysis based on these dimensions, I downloaded publicly available data from the US Census.
 									</p>
 									<p>
-										<ul>
-											<li>I had to scrape URL information for all of the various geographic regions on Craigslist in the US
-													<ul>Ex: sacramento.craigslist.org, sfbayarea.craigslist.org, miami.craigslist.org
-													</ul>
-											</li>
-											<li>Initiate HTTP requests to each of those URLs for search results for the string "math tutor" in the services section.</li>
-											<li>Scrape posting information from each search result and store in a Pandas DataFrame.</li>
-										</ul>
+										After using Psycopg2 to initalize a connection to my local PostgreSQL database, I created a table called us_census_regions and loaded the data from the US census onto it.
 									</p>
 								</section>
 								<section>
 									<header>
-										<h3><u>Part 2: Transform</u></h3>
+										<h3><u>Part 2: Querying and Visualizing the Data</u></h3>
 										<i class="icon solid fa-book">
-										 Pandas, NumPy, and Sklearn
+										 PostgreSQL, Pandas, Psycopg2, Plotly Express
 										</i>
 									</header>
 									<p>
-										Once the posting information had been scraped. I had to manipulate it such that it could be used for analysis.
+										<h4>2.1 Query for mean hourly price and number of postings by US Census Region</h4>
+										<p>
+											Because Craigslist postings stay up for extended periods of time and can be reposted once expired, my database has multiple instances of the same posts due to the web scraper being run multiple times over many days.<br>
+											<br>The first block of the SQL query below creates a common table expression (CTE), which limits the scope of my analysis to just data from a recent run of the web scraper, on 2022-02-03, using a WHERE clause.  Furthermore, since the main purpose of the analysis is to understand pricing of my competition, the WHERE clause limits the CTE to inlude only observations that have a price.<br>
+											<br>The second block joins the CTE to the US Census data, so that we can categorize a post as belonging to one of four regions: West, Midwest, South, and Northeast.  Because some states on Craigslist have no postings for tutoring, our dataset doesn't contain information for all 50 states.  We need to use a left join on the US Census data in order to ensure the names of all 50 states end up in our final table.<br>
+											<br>The third block uses window functions to calculate the average hourly price and count of the number of postings when partitioned by US Census region.  Because of the way plotly works, it needs state level granularity in order to plot correctly, which is why I use a window function as opposed to the standard GROUP BY.  If I were to use GROUP BY, we'd lose the state level granularity and Plotly couldn't produce the graph I want.  Unfortunately, this means that many of the rows become duplicates, so I also use the ROW_NUMBER window function, which will help me filter out duplicates in the final block of the query.<br>
+											<br>The final block filters out the duplicates using ROW_NUMBER.
+										</p>
+										<pre>
+											<code>
+WITH cl_tutoring_2022_02_03 AS (
+    SELECT *
+    FROM cl_tutoring
+    WHERE date_scraped = '2022-02-03'
+      AND price IS NOT NULL
+      ),
+
+cl_tutoring_w_census AS (
+   SELECT cr.state
+        , cr.state_code
+        , cr.us_region 
+        , COALESCE(cl.price, 0) AS price
+        , cl.id
+     FROM us_census_regions AS cr
+LEFT JOIN cl_tutoring_2022_02_03 AS cl
+       ON cr.state = cl.state
+  ),
+
+mean_price_size_by_us_region as (SELECT state
+     , state_code
+     , us_region
+     , AVG(price) OVER (PARTITION BY us_region) AS mean_price
+     , COUNT(id) OVER (PARTITION BY us_region) AS num_posts
+     , ROW_NUMBER() OVER (PARTITION BY us_region, state) AS rn
+ FROM cl_tutoring_w_census)
+
+SELECT *
+FROM mean_price_size_by_us_region
+WHERE rn = 1
+ORDER BY 1;
+											</code>
+										</pre>
 									</p>
 									<p>
-										<h4>2.1 Drop duplicate posts</h4>
-										I was surprised to find that although I had scraped from 4720 postings nationwide, only 1257 of them were unique.  Investigating further, I found that that many math tutors place ads in multiple geographic locations, hence why there were so many duplicate postings.
+										<h4>2.2 Visualizing mean hourly price and number of postings by US Census Region</h4>
+										<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://papir805.github.io/mean_price_by_us_census_region_plotly.html" height="525" width="100%"></iframe>
 									</p>
 									<p>
-										Furthermore, some tutors change the wording of their posts, making detection difficult.  Instead of identifying which posts had text that matched 100%, I had to use something known as the cosine similarity.  By calculating the cosine similarity for each post I could identify when a post was similar enough to other postings and mark them as duplicates.
+										<h4>2.3 Query for mean hourly price and number of postings by state</h4>
+										The first block of the query below creates a common table expression (CTE) containing the average hourly tutoring cost, as well as the number of postings, broken down by state.<br>
+										<br>
+										As discussed before, I filter the data to only include postings from 2022-02-03 and that have a non-null entry for price.<br>
+										<br>The last block in the query below uses another left join between the US Census table adn the CTE in order to get the state abbreviations (ex: CA, NY, etc.), which is necessary for visualizing the data using Plotly Express in the next step.
+									</p>
+										<code>
+											<pre>
+WITH mean_price_size_by_state AS (
+SELECT cl.state
+             , AVG(cl.price) AS mean_price
+             , COUNT(cl.id) AS num_posts
+ FROM cl_tutoring AS cl
+WHERE cl.date_scraped = '2022-02-03'
+    AND cl.price IS NOT NULL
+GROUP BY cl.state
+)
+
+SELECT cr.state
+            , cr.state_code
+            , COALESCE(mp.mean_price, 0) AS mean_price 
+            , COALESCE(mp.num_posts, 0) AS num_posts 
+ FROM us_census_regions AS cr
+LEFT JOIN mean_price_size_by_state AS mp
+    ON cr.state=mp.state;
+											</pre>
+										</code>
+									<p>
+										<h4>2.4 Visualizing mean hourly price and number of postings by state</h4>
+										<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://papir805.github.io/mean_price_by_state_plotly.html" height="525" width="100%"></iframe>
 									</p>
 									<p>
-										<h4>2.2 Determining the hourly rate</h4>
-										Since posts can be so different from tutor to tutor, one post may have no pricing information, while another post can have a single flat hourly rate, and others can have more complicated pricing schedules that change based on the length of a tutoring session (ex: $30 for 1 hr, $50 for 2 hrs), or a multitude of other factors like the subject tutored (ex: algebra vs. calculus).
+										Paying attention to the colorbar in the graph above, states with a high average hourly rate are orange, and darker orange colors correspond to the highest average hourly rates.<br>
+										<br>Idaho, Massachusets, and the District of Columbia have the darkest orange coloring and the highest mean hourly price, however these states only have 2, 5, and 8 posts, respectively.  With so few data points on tutors from these states, I'd be skeptical regarding if they're truly the costliest states for tutoring.<br>
+										<br>Focusing on what states remain, the following five states are the costliest and have at least 10 postings:
+										<ol>
+											<li>New YorK: $50.37 / hr</li>
+											<li>California: $48.21 / hr</li>
+											<li>Colorado: $44.54 / hr</li>
+											<li>Arizona: $42.29 / hr</li>
+											<li>Florida: $40.09 / hr</li>
+
+										</ol>
 									</p>
-									<p>
-										Posts that had no pricing information had to be identified and excluded from the analysis, whereas posts that had a single flat hourly rate were kept and the pricing information stored, however posts with more complicated pricing schedules were more difficult to deal with.
-									</p>
-									<p>
-										My current implementation for handling these kinds of posts is lacking, but is as follows:
-										<ul> 
-											<li>If two prices were mentioned in a post, average them.</li>
-											<li>If three or more prices are mentioned, flag the post, then manually inspect and fill in the price later.</li>
-										</ul> 
-									</p>
+									
 								</section>
 								<section>
 									<header>
