@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Project: SQL Queries</title>
+		<title>Porting R code from ISLR (2e) to Python</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -63,6 +63,9 @@
 										<li>
 											<a href="acupuncture_analysis.html">Acupuncture Analysis</a>
 										</li>
+										<li>
+											<a href="islr_python.html">Porting Code From Intro to Stat Learning (2e)</a>
+										</li>
 									</ul>
 								</li>
 								<li><a href="https://drive.google.com/file/d/1B_CcPaHRbLbAyZ3RoUIeKbmIT0T0Y1l0/view?usp=sharing">Resume</a></li>
@@ -81,21 +84,65 @@
 							<article class="box post">
 <!-- 								<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a> -->
 								<header>
-									<h2>SQL Queries</h2>
-									<p>Queries to practice solving common business problems using joins, window functions, subqueries, common table expressions, and more.</p>
+									<h2>Porting code from ISLR</h2>
+									<p></p>
 									<i class="icon solid fa-code">
-										 PostgreSQL and MySQL
+										 R and Python
 										</i>
 										<br>
-										<i class="icon solid fa-chart-line">  Queries</i>
+										<i class="icon solid fa-chart-line">  Regression, Neural Networks, Survival Analysis, and Hypothesis Testing</i>
 								</header>
 								<p>
 									<h3><u>Background</u></h3>
-									Using toy data, I practiced solving business problems from two websites: <a href="https://platform.stratascratch.com/coding?questionType=2%2C1&company=&topic=&curated_filter=&is_correct_solution=&is_bookmarked=&is_freemium=true&in_depth_solution=&difficulty=&code_type=1&python=&filters=&page=1&page_size=100">StrataScratch</a> and <a href="https://github.com/smpetersgithub/AdvancedSQLPuzzles/blob/main/Advanced%20SQL%20Puzzles/Advanced%20SQL%20Puzzles.pdf">Advanced SQL Puzzles</a>.
+									To learn more about machine learning algorithms, I've been reading through the book <a href="https://statlearning.com">Introduction to Statistical Learning (Second Edition)</a>, commonly referred to as ISLR (2e), pictured below:
+									<img src="images/ISLR_Python/islr_2e_image.png"
+										 width="200"
+										 height="300" />
 								</p>
 								<p>
-									<h3><u>Queries</u></h3>
-									The queries include documentation of my logic and can be viewed on my GitHub: <a href="https://github.com/papir805/stratascratch_SQL_puzzles">PostgreSQL</a> or <a href="https://github.com/papir805/advanced_sql_puzzles">MySQL</a>
+									The labs are all performed in R and the exercises in the book are meant to be as well, however everything can be done in Python, if you know the right libraries and how to use them.  There are several great GitHub repos out there where people have performed most of the labs or exercises in Python, however not all labs and exerises have been ported over yet.  In particular, the second edition of ISLR included several chapters that weren't present in the first edition.
+								</p>
+								<p>
+
+									At the time of this writing, ISLR 2e had only been out a little over a year (published in August 2021) and consequently there are no resources that I've been able to find on the labs or exercises from these new chapters:
+									<li>Chapter 10 - Deep Learning</li>
+									<li>Chapter 11 - Survial Analysis and Censored Data</li>
+									<li>Chapter 13 - Multiple Testing</li>
+								</p>
+								<p>
+									To fill the void, I plan to port the R code from these new chapters into Python.  <br/>
+									<br>
+									As I work through other chapters in the book, I may also add any code I create for those labs or exercises here too.
+								</p>
+								
+									<h3><u>Code:</u></h3>
+									GitHub repo found <a href="https://github.com/papir805/ISLR2">here</a>
+									
+									<ul>
+										<li>Chapter 10 - Deep Learning</li>
+											<ul>
+												<li><a href="https://nbviewer.org/github/papir805/ISLR2/blob/master/Python/chp10/labs/chp_10_lab_me.ipynb">Labs</a></li>
+
+												<li><a href="https://nbviewer.org/github/papir805/ISLR2/blob/master/Python/chp10/exercises/chp_10_exercises_me.ipynb">Applied Exercises</a></li>
+											</ul>
+										<li>Chapter 11 - Survival Analysis and Censored Data</li>
+											<ul>
+												<li>Labs: Coming Soon</li>
+
+												<li>Applied Exercises: Coming Soon</li>
+											</ul>
+										<li>Chapter 13 - Multiple Testing</li>
+											<ul>
+												<li>Labs: Coming Soon</li>
+
+												<li>Applied Exercises: Coming Soon</li>
+											</ul>
+									</ul>
+								
+								<br/>
+								<h3><u>References:</u></h3>
+								<p>
+									James, G., Witten, D., Hastie, T., Tibshirani, R. (2021). An Introduction to Statistical Learning with Applications in R, Second Edition, Springer Science+Business Media, New York. <a href="https://www.statlearning.com/">https://www.statlearning.com/</a>
 								</p>
 								<!-- <section>
 									<header>
