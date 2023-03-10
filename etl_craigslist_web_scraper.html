@@ -92,19 +92,22 @@
 								</header>
 								<p>
 									<h3><u>Background</u></h3>
-									As a math tutor, a majority of my business comes from word-of-mouth recommendations or Craigslist (CL) and I wanted to understand my competition on CL better.<br><br>
-									I built this web scraper, using Python, to grab prices of tutors from the services section, then stored the information in a PostgreSQL database, to be used later in exploratory data analysis (EDA).<br><br>
-									Because I tutor math in addition to teaching, I'm curious to know how my prices compare to other tutors in my neighboring areas, as well as in other parts of the country.
-								</p>
-								<p>
+									As a math tutor, a majority of my business comes from word-of-mouth recommendations or Craigslist (CL) and I wanted to understand my competition on CL better.  I'm curious to know how my prices compare to other tutors in my neighboring areas, as well as in other parts of the country.<br><br>
+									I built this web scraper, using Python, to grab prices of tutors from the services section, then stored the information in a PostgreSQL database, to be used later in exploratory data analysis (EDA). <br><br>
 									The full project can be found on <a href="https://github.com/papir805/craigslist_web_scraper">my GitHub</a>.
 								</p>
 								<p>
 									<h5>The process:</h5>
 									<ol>
-										<li>Extract posting information from Craigslist.</li>
-										<li>Transform the data to my own specifications.</li>
-										<li>Load the data into a PostgreSQL database.</li>
+										<li>
+											Extract posting information from Craigslist.
+										</li>
+										<li>
+											Transform the data to my own specifications.
+										</li>
+										<li>
+											Load the data into a PostgreSQL database.
+										</li>
 									</ol>
 								</p>
 								<section>
@@ -119,12 +122,19 @@
 									</p>
 									<p>
 										<ul>
-											<li>I had to scrape URL information for all of the various geographic regions on Craigslist in the US
-													<ul>Ex: sacramento.craigslist.org, sfbayarea.craigslist.org, miami.craigslist.org
-													</ul>
+											<li>
+												I had to scrape URL information for all of the various geographic regions on Craigslist in the US
 											</li>
-											<li>Initiate HTTP requests to each of those URLs for search results for the string "math tutor" in the services section.</li>
-											<li>Scrape posting information from each search result and store in a Pandas DataFrame.</li>
+												<ul>
+													<li>
+													Ex: sacramento.craigslist.org, sfbayarea.craigslist.org, miami.craigslist.org</li>
+												</ul>
+											<li>
+												Initiate HTTP requests to each of those URLs for search results for the string "math tutor" in the services section.
+											</li>
+											<li>
+												Scrape posting information from each search result and store in a Pandas DataFrame.
+											</li>
 										</ul>
 									</p>
 								</section>
