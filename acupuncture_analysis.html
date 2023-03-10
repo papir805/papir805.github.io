@@ -7,6 +7,12 @@
 <html>
 	<head>
 		<title>Project: Acupuncture Analysis</title>
+		<script type="text/x-mathjax-config">
+  			MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+		</script>
+		<script type="text/javascript"
+		  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+		</script>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -106,7 +112,7 @@
 									High frequency groups received acupuncture treatments where the needle was twirled on the pressure point 120 times within one minute, whereas low frequency groups had acupuncture treatments that were twirled 60 times within one minute.  Each patient received five acupuncture sessions per week for a period of 12 weeks and patients were monitored for another 12 weeks following their last acupuncture session.
 									</p>
 									<p>
-									Systolic Blood Pressure (SBP) and Diastolic Blood Pressure (DBP) for each patient was recorded at baseline, 6 weeks, 12 weeks, 16 weeks, 20 weeks, and 24 weeks of the experiment.  Daytime (6am-10:59pm) blood pressures were measured once every 30 minutes and nighttime (11pm-5:59am) blood pressures were measured once an hour.  These measurements were then used to calculate the mean of the following at each of the time intervals listed above:
+									Systolic Blood Pressure (SBP) and Diastolic Blood Pressure (DBP) for each patient was recorded at baseline, 6 weeks, 12 weeks, 16 weeks, 20 weeks, and 24 weeks of the experiment.  Daytime blood pressures (6am-10:59pm) were measured once every 30 minutes and nighttime blood pressures (11pm-5:59am) were measured once an hour, with the first 2 hours of daytime (6am-8am) also being classified as morning.  These measurements were then used to calculate the mean of the following at each of the time intervals listed above:
 									<ul>
 										<li>24-hr DBP</li>
 										<li>24-hr SBP</li>
@@ -123,11 +129,14 @@
 										<h3><u>Question 1</u>: Is there a significant difference in the proportion of patients above or below age 60, who have high 24-hour systolic blood pressure at the end of the experiment (24 weeks)?</h3>
 									</header>
 									<p>
-										Using a Z-test for the difference between two population proportions, with a 5% level of significance, it appears that the proportion of those below age 60 with high systolic blood pressure is the same as it is for those age 60+.  This is interesting because the scholarly article says that 2/3 of those above age 60 have hypertension, yet in our sample we're only seeing roughly 1/2 having hypertension in each of the two age groups.<br>
-										<br>
-										Keep in mind that there are two types of hypertension, systolic hypertension and diastolic hypertension, and I would assume that 2/3 proportion stated in the scholarly article are for both types of hypertension combined, however it's unclear.  Given that this hypothesis test focused solely on systolic blood pressure, that could be part of the discrepancy.<br>
-										<br>
-										Furthermore, we're looking at results after 24 weeks of the acupuncture treatment, so while we might expect to see a higher proportion of those age 60+ with hypertension, perhaps the acupuncture treatments have been more effective on the older patients in this study.
+										<ins>In words</ins><br>
+$H_0:$ There is no difference in the proportion of high 24-hour SBP values (130+ mmHg) at 24 weeks between individuals less than 60 years of age and greater than or equal to 60 years.  <br>
+$H_a:$ There is a difference in the proportion of high 24-hour SBP values (130+ mmHg) at 24 weeks between individuals less than 60 years and greater than or equal to 60 years. <br>
+
+<br><ins>Using symbols</ins><br>
+$H_0: p_1 = p_2$ <br>
+$H_a: p_1 \neq p_2$<br><br>
+										Using a Z-test for the difference between two population proportions, with a 5% level of significance, it appears that the proportion of those below age 60 with high systolic blood pressure is the same as it is for those age 60+.  This is interesting because the scholarly article says that 2/3 of those above age 60 have hypertension, yet our sample doesn't provide significant evidence for that to be the case.<br>
 									</p>
 								</section>
 								<section>
@@ -171,13 +180,35 @@
 										<br>
 										Using dummy variables for the treatment groups, we have the following coding scheme:
 										<ul>
-											<li>`x_1={(1,if text{patient in ST9-H}),(0,if text{patient not in ST9-H}):}`</li><br>
-											<li>`x_2={(1,if text{patient in ST9-L}),(0,if text{patient not in ST9-L}):}`</li><br>
-											<li>`x_1={(1,if text{patient in ST9-H}),(0,if text{patient not in ST9-H}):}`</li><br>
-											<li>`x_4 = text{age in years}`</li><br>
-											<li>`x_1={(1,if text{patient is male}),(0,if text{patient is female}):}`</li><br>
+											<li>
+												$x_1 = \left\{\begin{aligned} 
+													1 &\text{ if patient in ST9-H} \\
+													0 &\text{ if patient not in ST9-H}
+												\end{aligned} \right.$
+											</li><br>
+											<li>
+												$x_2 = \left\{\begin{aligned} 
+													1 &\text{ if patient in ST9-L} \\
+													0 &\text{ if patient not in ST9-L}
+												\end{aligned} \right.$
+											</li><br>
+											<li>
+												$x_3 = \left\{\begin{aligned} 
+													1 &\text{ if patient in LR3-H} \\
+													0 &\text{ if patient not in LR3-H}
+												\end{aligned} \right.$
+											</li><br>
+											<li>
+												$x_4 = \text{age in years}$
+											</li><br>
+											<li>
+												$x_5 = \left\{\begin{aligned} 
+													1 &\text{ if patient is male} \\
+													0 &\text{ if patient is female}
+												\end{aligned} \right.$
+											</li><br>
 										</ul>
-										Using these variables, I constructed a multi-variate linear regression model of the form: `\haty = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_3 + \beta_4x_4 + \beta_5x_5`
+										Using these variables, I constructed a multi-variate linear regression model of the form: $\hat{y} = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_3 + \beta_4x_4 + \beta_5x_5$
 									</p>
 									<p>
 										<h4>5.2 Checking for statistical significance in our predictors</h4> 
@@ -188,11 +219,9 @@
 									<p>
 										<h4>5.3 Investigating treatment group, age, and gender</h4>
 										<img src="images/acupuncture_analysis/mult_lin_reg_q5_summary.png" alt=""/> <br>
-										After inspecting the regression summary, the only statistically significant predictor was group_2, corresponding to the ST9-L treatment group, which had a p-value of 0.020.<br>
-										<br>
-										This could coincide with the observation from Question 2 regarding how at least one treatment group had a higher proportion of patients with high systolic blood pressure.<br>
-										<br>
-										Further investigation would be needed, but perhaps the ST9-L group had a lower proportion of patients with high systolic blood pressure whereas other groups did not.
+										After inspecting the regression summary, the only statistically significant predictor was group_2, corresponding to the ST9-L treatment group, which had a p-value of 0.020.  
+										<br><br>
+										The coefficient of -8.1426 shows that patients who are in group_2 have a 24 hour systolic blood pressure that is 8.1426 lower than the baseline group, group 4.  Perhaps this indicates that the ST9-L acupuncture treatment was effective.<br>
 									</p>
 								</section>
 								<section>
