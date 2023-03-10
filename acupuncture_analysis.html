@@ -139,7 +139,7 @@ MathJax = {
 $H_0:$ There is no difference in the proportion of high 24-hour SBP values (130+ mmHg) at 24 weeks between individuals less than 60 years of age and greater than or equal to 60 years.  <br>
 $H_a:$ There is a difference in the proportion of high 24-hour SBP values (130+ mmHg) at 24 weeks between individuals less than 60 years and greater than or equal to 60 years. <br>
 <br><p>
-										Using a Z-test for the difference between two population proportions, with a 5% level of significance, it appears that the proportion of those below age 60 with high systolic blood pressure is the same as it is for those age 60+.  This is interesting because the scholarly article says that 2/3 of those above age 60 have hypertension, yet our sample doesn't provide significant evidence for that to be the case.
+										Using a Z-test for the difference between two population proportions, with a 5% level of significance, it appears that the proportion of those below age 60 with high systolic blood pressure is the same as it is for those age 60+.  This is interesting because systolic blood pressure is supposed to increase from age 30 onward, so it would be reasonable to expect a higher proportion of those over age 60 to have higher blood pressures. (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2805932/">source</a>)
 									</p>
 								</section>
 								<section>
@@ -162,7 +162,7 @@ $H_a:$ At least one of the groups has a proportion with high SBP (130+ mmHg) tha
 									$H_0:$ There is no linear relationship between age and 24hr DBP. <br>
 $H_a:$ There is a linear relationship between age and 24hr DBP.<br><br>
 									<p>
-										Using an F test, with a 2.5% level of significance, it appears there is a linear relationship between age and 24 hour diastolic blood pressure.  In the model, the coefficient for age was found to be -0.4067, meaning that a patient who is one year older than another patient will expect to see a 24 hour diastolic blood pressure that is .4067 mmHg lower at the end of the experiment.  This is not surprising as <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2805932/#:~:text=Diastolic%20blood%20pressure%20(DBP)%2C,pressure%20(PP)%20with%20ageing.">diastolic blood pressure is known to decrease starting at roughly 60 until at least 84</a>.<br>
+										Using an F test, with a 2.5% level of significance, it appears there is a linear relationship between age and 24 hour diastolic blood pressure.  In the model, the coefficient for age was found to be -0.4067, meaning that a patient who is one year older than another patient will expect to see a 24 hour diastolic blood pressure that is .4067 mmHg lower at the end of the experiment.  This is not surprising as diastolic blood pressure is known to decrease starting at roughly 60 until at least 84. (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2805932/#:~:text=Diastolic%20blood%20pressure%20(DBP)%2C,pressure%20(PP)%20with%20ageing.">source</a>)<br>
 										<br>
 										The scatterplot and line of best fit can be seen below:<br>
 										<img src="images/acupuncture_analysis/lin_reg_age_dbp.png" alt=""/> 
@@ -177,7 +177,7 @@ $H_a:$ There is a linear relationship between age and 24hr SBP.<br><br>
 									<p>
 										Using an F test, with a 5% level of significance, it appears there is NOT a linear relationship between age and 24 hour systolic blood pressure.  In other words, age is a not a good predictor of ones' 24 hour systolic blood pressure.<br>
 										<br>
-										While diastolic blood pressure may depend on age, our data indicates that systolic blood pressure does not.
+										While diastolic blood pressure may depend on age, our data indicates that systolic blood pressure does not.  This is also interesting as the source linked earlier stated that systolic blood pressure is supposed to steadily increase with age.
 									</p>
 								</section>
 								<section>
@@ -224,14 +224,14 @@ $H_a:$ There is a linear relationship between age and 24hr SBP.<br><br>
 										<h4>5.2 Checking for statistical significance in our predictors</h4> 
 										$H_0:$ None of our six independent variables explain the variation in 24hr SBP. <br>
 $H_a:$ At least one of our six independent variables explains the variation in 24hr SBP.<br><br>
-										Using an F-test with a 5% level of significance, none of our predictors were statistically significant when predicting 24 hour systolic blood pressure after 24 weeks of the experiment.<br>
+										Using an F-test with a 5% level of significance, none of our predictors explain the variation when predicting 24 hour systolic blood pressure after 24 weeks of the experiment.<br>
 										<br>
 										This could mean that a linear model is not appropriate, but it could also be a problem with the predictors themselves.
 									</p>
 									<p>
 										<h4>5.3 Investigating treatment group, age, and gender</h4>
 										<img src="images/acupuncture_analysis/mult_lin_reg_q5_summary.png" alt=""/> <br>
-										After inspecting the regression summary, the only statistically significant predictor was group_2, corresponding to the ST9-L treatment group, which had a p-value of 0.020.  
+										After inspecting the regression summary, a t-test indicates the group_2 predictor as being statistically significant, with a p-value of 0.020.
 										<br><br>
 										The coefficient of -8.1426 shows that patients who are in group_2 have a 24 hour systolic blood pressure that is 8.1426 lower than the baseline group, group 4.  Perhaps this indicates that the ST9-L acupuncture treatment was effective.<br>
 									</p>
