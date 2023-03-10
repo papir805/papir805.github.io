@@ -115,7 +115,7 @@
 										</i>
 									</header>
 									<p>
-										Craigslist postings aren't segmented by US regions such as North, West, South, and East, or by the more granular US divisions such as New England, Middle Atlantic, South Atlantic, etc.  Because I wanted to be able to segment my analysis based on these dimensions, I downloaded publicly available data from the US Census.
+										Craigslist postings aren't segmented by US Census regions such as North, West, South, and East, or by the more granular US divisions such as New England, Middle Atlantic, South Atlantic, etc.  Because I wanted to be able to segment my analysis based on these dimensions, I downloaded publicly available data from the US Census.
 									</p>
 									<p>
 										After using Psycopg2 to initalize a connection to my local PostgreSQL database, I created a table called us_census_regions and loaded the data from the US census onto it.
@@ -251,7 +251,7 @@ ORDER BY 3 DESC;
 									<img src="images/craigslist_EDA/mean_price_and_num_posts_sfbayarea.png" alt=""/>
 										<br> 
 										<p>
-											San Francisco is by far the costliest, with an average price of $79.81 / hr and also had the greatest number of tutoring postings at 13.  To my suprise, the South Bay, where I'm located, was the cheapest at $40.93 / hr, with the third highest number of postings at 7.  The rest of the SF Bay Area subregions were all fairly close in price, although the only one of these subregions with a respectable amount of posts was the East Bay.
+											San Francisco is by far the costliest, with an average price of $79.81 / hr and also had the greatest number of tutoring postings at 13.  To my suprise, the South Bay was the cheapest at $40.93 / hr, with the third highest number of postings at 7.  The rest of the SF Bay Area subregions were all fairly close in price, although the only one of these subregions with a respectable amount of posts was the East Bay.
 										</p>
 									
 								</section>
@@ -260,7 +260,7 @@ ORDER BY 3 DESC;
 										<h3>Part 3: Conclusion(s)</h3>
 									</header>
 									<p>
-										My geographic location, the South Bay, has one of the highest cost of living in the nation and is certainly one of the highest in regards to tutoring costs.  That being said, the average hourly tutoring rate in the South Bay ($40.93 / hr) is below the average for the West ($44.79 / hr) and below the average for the state ($48.21 / hr), as well as being the lowest in the SF Bay Area too. 
+										The South Bay, has one of the highest cost of living in the nation and is certainly one of the highest in regards to tutoring costs.  That being said, the average hourly tutoring rate in the South Bay ($40.93 / hr) is below the average for the West ($44.79 / hr) and below the average for the state ($48.21 / hr), as well as being the lowest in the SF Bay Area too. 
 									</p>
 								</section>
 								
