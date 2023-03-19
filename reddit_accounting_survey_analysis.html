@@ -202,26 +202,44 @@
 									</p>
 									<p>
 										<h4>2.1 Key Findings</h4>
-										The typical US accountant:<br>
+										<img src="images/accounting_analysis/reddit_accounting_analysis/accounting_boxplots.png" alt="" style="width: 70%;"/>
+										<h5>
+											<br>The typical US accountant:<br>
+										</h5>
 										<ul>
-											<li>Has average annual earnings between $83,000-$89,000, with median earnings between $72,000-$73,000.</li>
-											<li>Has between 3-4 years of experience.</li>
-											<li>Most accountants who began at a public accounting firm have spent 3-5 years working there before transitioning to work as an accountant in private industry.</li>
-											<li>Works an average of 45-46 hours per week.</li>
+											<li>Has between 2-5 years of experience.
+											<li>Most accountants who began at a public accounting firm have spent 2-4 years working there before transitioning to work as an accountant in private industry.</li>
+											<li>Has an average workweek between 40-50 hours per week.</li>
+											<li>Earns between $60,000-$95,000 annually, with median earnings around $73,000.</li>
 										</ul>
-										Segmenting based on Gender:<br>
+										<img src="images/accounting_analysis/reddit_accounting_analysis/gender_boxplot_and_proportions.png" alt="" style="width: 70%;"/>
+										<h5>
+											<br>Segmenting based on Gender:<br>
+										</h5>
+										
 										<ul>
-											<li>An overwhelming majority of respondents to the survey are male (roughly 3.5:1) and there is significant evidence to indicate a pay gap between male and female accountants exists.  These differences are visualized in a Tableau story in another project of mine, the <a href="us_accounting_viz.html">US Accounting Viz</a>.</li>
+											<li>An overwhelming majority of respondents to the survey are male (roughly 3.5:1) and there is some evidence to indicate a pay gap between male and female accountants exists.  These differences are visualized in a Tableau story in another project of mine, the <a href="us_accounting_viz.html">US Accounting Viz</a>.</li>
 										</ul>
-										Segmenting based on Has CPA:<br>
+										<img src="images/accounting_analysis/reddit_accounting_analysis/has_cpa_boxplot.png" alt="" style="width: 70%;"/>
+										<h5>
+											Segmenting based on Has CPA:<br>
+										</h5>
 										<ul>
-											<li>Roughly half of US accountants have their CPA, however those who do realize a very tangible increase in their average annual salary.  Accountants with their CPA license have mean annual salary that is $24,000 higher and a median annual salary that is $22,000 more than accountants who don't have their CPA license.</li>
+											<li>Roughly half of US accountants have their CPA, however those who have their license realize a very tangible increase in their average annual salary.  </li>
+											<ul>
+												<li>Accountants with their CPA license have mean annual salary that is $24,000 higher (denoted by the black star in the boxplots) and a median annual salary that is $22,000 more than accountants who don't have their CPA license.</li>
+											</ul>
 										</ul>
-										Segmenting based on Years Public Before Exit:<br>
+										<img src="images/accounting_analysis/reddit_accounting_analysis/exit_status_boxplot1.png" alt="" style="width: 70%;"/>
+										<h5>
+											Segmenting based on Years Public Before Exit:<br>
+										</h5>
 										<ul>
-											<li>Accountants who spent several years working in a public accounting firm before transitioning to work in private industry had a mean and median annual salary that was $25,000 higher than their counterparts who had only ever worked in private industry.</li>
+											<li>Accountants who spent several years working in a public accounting firm before transitioning to work in private industry had a mean and median annual salary that was $25,000 higher than their counterparts who had only ever worked in private industry.  (The mean is denoted by the black star in the boxplots)</li>
 										</ul>
-										Outliers:<br>
+										<h5>
+											Outliers:<br>
+										</h5>
 										<ul>
 											<li>An accountant was considered an outlier if their annual salary was greater than two standard deviations from the mean.  These accountants tended to have much more work experience and have probably been in the industry long enough to reach senior positions that pay large salaries.</li>
 											<li>The pay gap among genders is very pronounced here with some male accountants earning as much as $100,000 more than their female counterparts who have just as much, if not more, years of work experience.</li>
@@ -246,20 +264,45 @@
 										<h4>3.1 Method:</h4>
 										<ol>
 											<li>Use heatmaps to visualize the correlation between all of our variables and annual salary.</li>
+											<img src="images/accounting_analysis/reddit_accounting_analysis/heatmap1.png"style="width:40%">
+											<ul>
+												<li>
+													Years Experience and Years Public Before Exit were the quantitative variables most correlated with Current Salary + Bonus
+												</li>
+												<li>
+													Has CPA also showed moderate correlation with Current Salary + Bonus 
+												</li>
+											</ul>
 											<li>Construct various simple, polynomial, and multi-variate linear regression models and check if conditions for linear regression are present.</li>
 												<ul>
 													<li>Check residual plots.</li>
 													<li>Check QQ normal probability plots.</li>
+													<img src="images/accounting_analysis/reddit_accounting_analysis/residual_and_qq_plot1.png" style="width:60%">
 												</ul>
 											<li>Construct models using training data and verify performance against testing data.</li>
 										</ol>
 									</p>
 									<p>
 										<h4>3.2 Conclusion(s):</h4>
-									The model that performed best on testing data was a multi-variate linear regression model, which used "Has CPA" and "Years Experience" to predict annual salary.  The model has an estimated R2 score between 0.60 and 0.72 when verified against many different train/test splits through a bootstrap process.</p>
-									<p>
-										Accountants with their CPA license earn about 13% more than accountants without and accountants typically earn 7% more annually for each additional year of experience.
-									</p>
+										<div class="row">
+										  <div class="column">
+										    <img src="images/accounting_analysis/reddit_accounting_analysis/summary_output1.png"style="width:100%">
+										  </div>
+										  <div class="column">
+										    <img src="images/accounting_analysis/reddit_accounting_analysis/bootstrap_rmse_and_rval1.png"style="width:100%">
+										  </div>
+										</div>
+									<ul>
+										<li>
+											The model that performed best on testing data was a multi-variate linear regression model, which used "Has CPA" and "Years Experience" to predict annual salary.  The model has an estimated R2 score between 0.60 and 0.72 when verified against many different train/test splits through a bootstrap process.
+										</li>
+										<li>
+											Accountants with their CPA license have annual earnings about 1.13 (10^0.0545) times more than accountants who don't have their license.
+										</li> 
+										<li>
+											For each additional year of experience, an accountant will typically earn 1.07 (10^0.0292) times more than the previous year. 
+										</li>
+									</ul>
 								</section>
 							</article>
 
