@@ -138,9 +138,11 @@ MathJax = {
 									
 $H_0:$ There is no difference in the proportion of high 24-hour SBP values (130+ mmHg) at 24 weeks between individuals less than 60 years of age and greater than or equal to 60 years.  <br>
 $H_a:$ There is a difference in the proportion of high 24-hour SBP values (130+ mmHg) at 24 weeks between individuals less than 60 years and greater than or equal to 60 years. <br>
-<br><p>
+<br>							<img src="images/acupuncture_analysis/z_dist_graph1.png" alt=""/><br>
+									<p>
 										Using a Z-test for the difference between two population proportions, with a 5% level of significance, it appears that the proportion of those below age 60 with high systolic blood pressure is the same as it is for those age 60+.  This is interesting because systolic blood pressure is supposed to increase from age 30 onward, so it would be reasonable to expect a higher proportion of those over age 60 to have higher blood pressures. (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2805932/">source</a>)
 									</p>
+									<!-- <img src="images/acupuncture_analysis/chi_square_graph1.png" alt=""/><br> -->
 								</section>
 								<section>
 									<header>
@@ -149,6 +151,7 @@ $H_a:$ There is a difference in the proportion of high 24-hour SBP values (130+ 
 									$H_0:$ The proportion with high SBP (130+ mmHg) across all four treatment groups is the same
 <br>
 $H_a:$ At least one of the groups has a proportion with high SBP (130+ mmHg) that is different than the other groups.<br><br>
+									<img src="images/acupuncture_analysis/chi_square_graph2.png" alt=""/><br>
 									<p>
 										Using a Chi-Square goodness of fit test, with a 5% level of significance, it appears at least one of the four treatment groups has a higher proportion of subjects with high systolic blood pressure.<br>
 										<br>
@@ -231,9 +234,7 @@ $H_a:$ At least one of our six independent variables explains the variation in 2
 									<p>
 										<h4>5.3 Investigating treatment group, age, and gender</h4>
 										<img src="images/acupuncture_analysis/mult_lin_reg_q5_summary.png" alt=""/> <br>
-										After inspecting the regression summary, a t-test indicates the group_2 predictor as being statistically significant, with a p-value of 0.020.
-										<br><br>
-										The coefficient of -8.1426 shows that patients who are in group_2 have a 24 hour systolic blood pressure that is 8.1426 lower than the baseline group, group 4.  Perhaps this indicates that the ST9-L acupuncture treatment was effective.<br>
+										After inspecting the regression summary, a t-test indicates the group_2 predictor as being statistically significant, with a p-value of 0.020.  The coefficient of -8.1426 shows that patients who are in group_2 have a 24 hour systolic blood pressure that is 8.1426 lower than the baseline group, group 4.  Perhaps this indicates that the ST9-L acupuncture treatment was effective.<br>
 									</p>
 								</section>
 								<section>
