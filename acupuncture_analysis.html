@@ -155,7 +155,7 @@ $H_a:$ At least one of the groups has a proportion with high SBP (130+ mmHg) tha
 									<p>
 										Using a Chi-Square goodness of fit test, with a 5% level of significance, it appears at least one of the four treatment groups has a higher proportion of subjects with high systolic blood pressure.<br>
 										<br>
-										More investigation would have to be performed in order to determine which treatment group it was and whether the blood pressure, however this could indicate one or more of the treatments was effective. 
+										More investigation would have to be performed in order to determine which treatment group it was and whether the acupuncture treatments were the cause of a change in blood pressure, however these results indicate it's still possible.
 									</p>
 								</section>
 								<section>
@@ -167,8 +167,8 @@ $H_a:$ There is a linear relationship between age and 24hr DBP.<br><br>
 									<p>
 										Using an F test, with a 2.5% level of significance, it appears there is a linear relationship between age and 24 hour diastolic blood pressure.  In the model, the coefficient for age was found to be -0.4067, meaning that a patient who is one year older than another patient will expect to see a 24 hour diastolic blood pressure that is .4067 mmHg lower at the end of the experiment.  This is not surprising as diastolic blood pressure is known to decrease starting at roughly 60 until at least 84. (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2805932/#:~:text=Diastolic%20blood%20pressure%20(DBP)%2C,pressure%20(PP)%20with%20ageing.">source</a>)<br>
 										<br>
-										The scatterplot and line of best fit can be seen below:<br>
-										<img src="images/acupuncture_analysis/lin_reg_age_dbp.png" alt=""/> 
+										The scatterplot, line of best fit, and F-distribution can be seen below:<br>
+										<img src="images/acupuncture_analysis/q3_graph1.png" alt=""/> 
 									</p>
 								</section>
 								<section>
@@ -179,6 +179,8 @@ $H_a:$ There is a linear relationship between age and 24hr DBP.<br><br>
 $H_a:$ There is a linear relationship between age and 24hr SBP.<br><br>
 									<p>
 										Using an F test, with a 5% level of significance, it appears there is NOT a linear relationship between age and 24 hour systolic blood pressure.  In other words, age is a not a good predictor of ones' 24 hour systolic blood pressure.<br>
+										<br>
+										<img src="images/acupuncture_analysis/q4_graph1.png" alt=""/> 
 										<br>
 										While diastolic blood pressure may depend on age, our data indicates that systolic blood pressure does not.  This is also interesting as the source linked earlier stated that systolic blood pressure is supposed to steadily increase with age.
 									</p>
@@ -228,6 +230,7 @@ $H_a:$ There is a linear relationship between age and 24hr SBP.<br><br>
 										$H_0:$ None of our six independent variables explain the variation in 24hr SBP. <br>
 $H_a:$ At least one of our six independent variables explains the variation in 24hr SBP.<br><br>
 										Using an F-test with a 5% level of significance, none of our predictors explain the variation when predicting 24 hour systolic blood pressure after 24 weeks of the experiment.<br>
+										<img src="images/acupuncture_analysis/f_dist_graph2.png" alt=""/> 
 										<br>
 										This could mean that a linear model is not appropriate, but it could also be a problem with the predictors themselves.
 									</p>
