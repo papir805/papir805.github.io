@@ -1,0 +1,786 @@
+<!DOCTYPE HTML>
+<!--
+	Dopetrope by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Project: Part 2 - Mobile App Data Analysis</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&amp;skin=doxy&amp;lang=css" defer=""></script>
+		<script src="https://github.com/googlearchive/code-prettify/blob/master/src/lang-sql.js"></script>
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<section id="header">
+
+					<!-- Logo -->
+						<h1>Using mathematics to solve problems with real world data excites me.</h1>
+
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li>
+									<a href="index.html">Home</a>
+								</li>
+								<li class="current">
+									<a href="portfolio.html">Portfolio</a>
+									<ul>
+										<li>
+											<a href="acupuncture_analysis.html">Acupuncture Analysis</a>
+										</li>
+										<li>
+											<a href="craigslist_EDA.html">Craigslist Tutoring EDA</a>
+										</li>
+										<li>
+											<a href="etl_craigslist_web_scraper.html">ETL Craigslist Web Scraper</a>
+										</li>
+										<li>
+											<a>Mobile App Data: Summary Stats and Correlation</a>
+											<ul>
+												<li>
+													<a href="mobile_app_data_cleaning.html">Part 1: Mobile App Data Cleaning</a>
+												</li>
+												<li>
+													<a href="mobile_app_data_analysis.html">Part 2: Mobile App Data Analysis</a>
+												</li>
+												<li>
+													<a href="mobile_app_correlation.html">Part 3: Correlation Between User Attribute and Performance</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="craigslist_tableau.html">National Tutoring Prices Dashboard</a>
+										</li>
+										<li>
+											<a href="pokemon_classifier.html">Pokémon Classification</a>
+										</li>
+										<li>
+											<a href="islr_python.html">Porting Code From ISLR2e</a>
+										</li>
+										<li>
+											<a href="reddit_accounting_survey_analysis.html">Reddit Accounting Survey Analysis</a>
+										</li>
+										<li>
+											<a href="sql_queries.html">SQL Queries</a>
+										</li>
+										<li>
+											<a href="tv_ad_report.html">TV Advertising Report</a>
+										</li>
+										<li>
+											<a href="us_accounting_viz.html">U.S. Accounting Viz</a>
+										</li>
+									</ul>
+								</li>
+								<li><a href="https://drive.google.com/file/d/1B_CcPaHRbLbAyZ3RoUIeKbmIT0T0Y1l0/view?usp=sharing">Resume</a></li>
+								<li><a href="about.html">About</a></li>
+								<!-- <li><a href="tbd_sidebar.html">tbd</a></li> -->
+							</ul>
+						</nav>
+				</section>
+
+			<!-- Main -->
+				<section id="main">
+					<div class="container">
+
+						<!-- Content -->
+							<article class="box post">
+								<!-- <a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a> -->
+								<header>
+									<h2>
+										<a href="https://github.com/papir805/mobile_app_data_analysis">Part 2: Mobile App Data Analysis</a>
+									</h2>
+									<p>Goal: To summarize one year's worth of mobile gaming data and understand user performance.</p>
+									<i class="icon solid fa-code">
+										 Python, PostgreSQL
+									</i>
+									<br>
+									<i class="icon solid fa-chart-line">
+										 Visualization and Analysis
+									</i>
+								</header>
+									<h3>
+										<u>Section 1: Background</u>
+									</h3>
+									<p>
+										In <a href="mobile_app_data_cleaning.html">part 1</a> of this project, I imported data from a CSV file containing mobile game data into a local PostgreSQL database and cleaned it in preparation for analysis. This part of the project is where the analysis happens.  First, however, some background on the data itself may be helpful before proceeding. 
+									</p>
+									<p>
+										The data comes from a mobile game produced by a gaming company that runs periodic gaming events. Gaming events last several hours and happen at most once a day. During a gaming event, all players play cooperatively as the human team to earn points against an enemy team comprised of a network of AI bots. Individual players on each team win or lose points when certain actions are taken in game; however, the total point score of each team at the end of the gaming event is all that matters for the win condition. If the humans have more points when the event ends, then the humans win; otherwise, the enemy AI team wins.
+									</p>
+									<p>
+										To entice users to continue playing, there are rewards for winning a gaming event, but to keep things interesting, there are also penalties for losing. When the human team wins, users win prizes based on a tiered system where higher tiers earn better prizes and the point total at game's end determines which tier's prizes are won.  On the other hand, should the game end and the human team has a negative score, then all players are forced to take a penalty. Like prizes, penalties have a tiered structure too, which gets progressively more and more severe for worse and worse tiers.
+									</p>
+								
+									<h4>
+										<u>User Table</u>
+									</h4>
+									<p>
+										This table contains a list of all players for the game and some information about user attributes.  <b>Each row in the table represents a unique user.</b>
+									</p>
+									<table>
+									  <!-- <caption style="text-align:left">User Table</caption> -->
+										  <tr>
+										    <th>Field</th>
+										    <th>SQL Data Type</th>
+										    <th>Description</th>
+										  </tr>
+										  <tr>
+										    <td>userid</td>
+										    <td>VARCHAR(36)</td>
+										    <td>A 36 character string that uniquely identifies a player</td>
+										  </tr>
+										  <tr>
+										    <td>attribute1</td>
+										    <td>INT</td>
+										    <td>A binary variable identifying whether a user has attribute1 or not</td>
+										  </tr>
+										  <tr>
+										  	<td>attribute2</td>
+										  	<td>VARCHAR(1)</td>
+										  	<td>A variable that identifies whether a user falls in category 'A', 'B', or 'C'</td>
+										  </tr>
+									</table>
+									<h4>
+										<u>Event Performance Table</u>
+									</h4>
+									<p>
+										This table contains an hour-by-hour breakdown of the points earned for each player during a gaming event.  <b>Each row in the table represents the number of points scored by a userid during a single hour of gameplay of a gaming event.</b>
+									</p>
+									<table>
+									  <!-- <caption style="text-align:left">Gaming Event Performance Table</caption> -->
+									  <tr>
+									    <th>Field</th>
+									    <th>SQL Data Type</th>
+									    <th>Description</th>
+									  </tr>
+									  <tr>
+									    <td>userid</td>
+									    <td>VARCHAR(36)</td>
+									    <td>A 36 character string that uniquely identifies a player</td>
+									  </tr>
+									  <tr>
+									    <td>event_date</td>
+									    <td>DATE</td>
+									    <td>The date the user participated in the gaming event</td>
+									  </tr>
+									  <tr>
+									  	<td>hour</td>
+									  	<td>INT</td>
+									  	<td>The hour of the day in which the user participated in the gaming event</td>
+									  </tr>
+									    <tr>
+									  	<td>points</td>
+									  	<td>INT</td>
+									  	<td>The total number of points scored by a particular user during a single hour of a gaming event</td>
+									  </tr>
+									</table>
+									<p>
+										The full project with the original and cleaned versions of the data can be found on <a href="https://github.com/papir805/mobile_app_data_analysis">my GitHub</a>.  Now for the analysis... 
+									</p>
+									<h3>
+										<u>
+											Section 2: User Profiles and Overall Performance
+										</u>
+									</h3>
+									<i class="icon solid fa-book">
+										PostgreSQL, Pandas, Matplotlib, and Statsmodels
+									</i>
+									<br>
+									<br>
+									<p>
+										With the data cleaned and loaded, I can start querying the users and event_performance tables using SQL and then use Python to store the results and produce visualizations.  
+									</p>
+									<h4>Important Counts</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+													<pre class="prettyprint lang-sql">
+      SELECT 1 AS num
+                     , 'num_gaming_events' AS statistic
+                     , COUNT(DISTINCT event_date) AS value
+          FROM event_performance
+        UNION
+      SELECT 2
+                     , 'gaming_event_yrly_pct'
+                     , ROUND((SELECT COUNT(DISTINCT event_date) 
+                                  FROM event_performance)::NUMERIC / 365, 4) * 100
+        UNION
+      SELECT 3
+                    , 'num_unique_users'
+                    , COUNT(userid)
+        FROM users
+        UNION
+      SELECT 4
+                    , 'participating_users_pct'
+                    , ROUND((SELECT COUNT(DISTINCT userid) 
+                   	 	         FROM event_performance)::NUMERIC / 
+                           (SELECT COUNT(userid) FROM users), 4) * 100
+  )
+      SELECT statistic
+                    , value
+         FROM row_summary_stats
+ORDER BY num;</pre>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<img src="images/mobile_app_data/important_counts.png" alt="" style="width: 65%; display:block; margin-left: auto; margin-right: auto;"/>
+													<br>
+													<p>
+														Each line in the table above needs to be calculated separately in the SQL query and joined together using UNION.  Because multiple rows in the event_performance table correspond to the same gaming event, DISTINCT is needed to identify how many unique dates are in the dataset.  Since there is at most one gaming event per day, the number of unique dates will reveal how many unique gaming events occurred.  Lastly, to prevent integer division when calculating the participating_users_pct, one of the values in the quotient needs to be cast to type NUMERIC. 
+													</p>
+													<p>
+														
+													</p>
+													<p>
+														These summary stats show that over the course of a year, there were 147 gaming events with 89.09% of the 1,100 unique users participating in at least one gaming event.  There appears to be high user participation and because gaming events occur on only 40.27% of the days in the year, <b>there is potential to leverage the high user participation by holding gaming events more frequently.</b>
+													</p>
+												</section>
+											</div>
+										</div>
+									</div>
+									<br>
+									<h4>User Attributes</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+										<pre class="prettyprint lang-sql">
+      SELECT attribute1
+                   , COUNT(userid) AS num_users
+                   , ROUND(COUNT(userid)::numeric / 
+                             SUM(COUNT(userid)) OVER (), 3) AS proportion
+         FROM users
+GROUP BY attribute1
+ORDER BY attribute1;
+
+      SELECT attribute2
+                   , COUNT(userid) AS num_users
+                   , ROUND(COUNT(userid)::numeric / 
+                             SUM(COUNT(userid)) OVER (), 3) AS proportion
+         FROM users
+GROUP BY attribute2
+ORDER BY attribute2;</pre>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<img src="images/mobile_app_data/props_by_user_attribute.png" alt="" style="width: 100%;"/>
+													
+												</section>
+											</div>
+										</div>
+									</div>
+									<p>
+										Two queries, the first grouping by attribute1 and the second grouping by attribute2, are needed to generate the data for the plot.  Using GROUP BY with COUNT(userid) will get the counts of each subgroup, but those will need to be divided by the total number of users in order to calculate the proportion of each subgroup.
+									</p>
+									<p>
+										To do this, SUM(COUNT(userid)) OVER () is used.  Using OVER () tells SQL that the SUM should be performed as a window function and will therefore occur <i>after</i> the counts of each subgroup are calculated from the group by.  This ensures the SUM(COUNT(userid)) will add together the counts of each subgroup, thus giving the necessary total numbers of users needed to calculate the proportions.  Python's Matplotlib library is then used to create the bar chart.
+									</p>
+										<u>The plot reveals what kinds of user profiles are most common:</u>
+										<ul>
+											<li>
+												Attribute1 -  Most common user profile is 0 by a significant majority (81.7%).
+											</li>
+											<li>
+												Attribute2 - Most common user profile is B (40.4%).
+												<ul>
+													<li>
+														Profile A isn't that far behind (37.4%).
+													</li>
+
+												</ul>
+
+											</li>
+											<li>
+												Attribute1 = 1 and attribute2 = C are the least common attributes and have roughly the same proportions, 18% and 22% respectively.
+											</li>
+										</ul>
+									<br>
+									<h4>User Attributes - Digging Deeper</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+										<pre class="prettyprint lang-sql">
+      SELECT attribute1
+                   , attribute2
+                   , ROUND(COUNT(userid)::numeric / 
+                                  SUM(COUNT(userid)) OVER (), 3) AS proportion
+         FROM users
+GROUP BY attribute1, attribute2
+ORDER BY attribute1, attribute2;</pre>
+													<p>
+														Grouping by both attribute1 and attribute2 and using the same SUM(COUNT(userid)) OVER () strategy from earlier, the proportions for each unique user profile can be calculated.  Python's statsmodels library is then used to create a mosaic plot for visualization.
+													</p>
+														<u>The plot reveals more about the relationship between attribute1 and attribute2:</u>
+														<ul>
+															<li>
+																Most Common: 0B
+															</li>
+															<li>
+																Least Common: 1C
+															</li>
+															<li>
+																For both values of attribute1, the most common user profile is B, then A, then C.
+															</li>
+														</ul>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<!-- <img src="images/mobile_app_data/prop_by_attributes.png" alt="" style="width: 100%;"/> -->
+													<img src="images/mobile_app_data/mosaic_plot_attribute_props.png" alt="" style="width: 100%;"/>
+													
+												</section>
+											</div>
+										</div>
+									</div>
+									<br>
+									<br>
+									<h4>User Performance - Yearly Point Totals</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+										<pre class="prettyprint lang-sql">
+WITH user_types AS (
+      SELECT userid
+                   , 'positive_total_pts' AS user_type
+         FROM event_performance
+GROUP BY userid
+      HAVING SUM(points) > 0
+        UNION
+      SELECT userid
+                   , 'negative_total_pts'
+         FROM event_performance
+GROUP BY userid
+      HAVING SUM(points) < 0
+        UNION
+      SELECT userid
+                   , 'zero_total_pts'
+         FROM event_performance
+GROUP BY userid
+      HAVING SUM(points) = 0
+  )
+      SELECT user_type
+                   , COUNT(user_type) AS num_users
+                   , ROUND(COUNT(user_type)::NUMERIC / 
+                       SUM(COUNT(user_type)) OVER (), 3) AS rel_freq
+         FROM user_types
+GROUP BY user_type
+ORDER BY num_users DESC;</pre>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<img src="images/mobile_app_data/point_totals.png" alt="" style="width: 100%;"/>
+													<p>
+														Using GROUP BY and HAVING, I can split up the event_performance table and then join it back together using UNION, labeling users based on user type during the process.  Users with a positive yearly point total, users with a negative yearly point total, or users with a yearly point total of 0 are identified and then I employ the same SUM(COUNT()) OVER () strategy from earlier to get the proportion of each user type and graph using Matplotlib.
+													</p>
+													<p>
+														Since the goal of a gaming event is to earn points for your team, segmenting users by their yearly point totals offers some insight into which players are regularly contributing towards winning a game, versus those who detract from it.  The vast majority of players (71.4%) have yearly point totals that are positive and broadly speaking are successfully helping win games.  
+													</p>
+												</section>
+											</div>
+										</div>
+									</div>
+									<br>
+								<!-- <section> -->
+									<header>
+										<h3>
+											<u>
+												Section 3: Exploring Performance Over Time
+											</u>
+										</h3>
+										<i class="icon solid fa-book">
+											PostgresSQL, Pandas, Matplotlib
+										</i>
+										<br>
+									</header>
+									<h4>Total Points and Users Per Month</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+										<pre class="prettyprint lang-sql">
+     SELECT DATE_TRUNC('month', event_date)::date AS month
+                  , SUM(points) AS total_points
+         FROM event_performance
+GROUP BY DATE_TRUNC('month', event_date)::date
+ORDER BY DATE_TRUNC('month', event_date)::date;
+
+     SELECT DATE_TRUNC('month', event_date)::date AS month
+                  , COUNT(DISTINCT userid) AS total_users
+         FROM event_performance
+GROUP BY DATE_TRUNC('month', event_date)::date
+ORDER BY DATE_TRUNC('month', event_date)::date;</pre>
+												<p>
+													In order to group by month, EXTRACT, DATE_PART, or DATE_TRUNC could be used, however, to preserve the month <i>and</i> year, DATE_TRUNC is necessary. Once DATE_TRUNC has been performed, the results are cast to the DATE type, which cuts off the hour, min, sec, etc., parts of the timestamp. Lastly, the group by is performed, and the total number of points and number of unique users per month are calculated.
+												</p>
+												<p>
+												The first graph shows all months have a sum of points greater than 0, which provides further evidence that overall, most users are successfully contributing to winning gaming events. Late summer and early fall have the only three months that performed better than average: July, August, and September, with August being the best-performing month by a large margin.
+												</p>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<img src="images/mobile_app_data/points_and_users_per_month.png" alt="" style="width: 100%;"/>
+												</section>
+											</div>
+										</div>
+									</div>
+									<p>
+										Looking at the second graph, these late spring and summer months correspond to the 2nd and 3rd largest monthly increases in user participation. While July to August had the largest increase in point performance of the year and the 3rd largest increase in user participation, August to September had a <b>huge</b> drop in point performance despite having the second largest increase in user participation. Additionally, the largest increase in user participation occurs between January and February, which corresponds to the second-largest increase in point performance all year. Unfortunately, this large increase in users early on in the year doesn't do much to improve point performance, as the several months following February all stagnated with below-average point scores.
+									</p>
+									<p>
+										Outside of these best performing months, total points don't show much variation. Points earned between February and July remain fairly consistent, and the number of participating users is fairly consistent over the same time period too. However, this trend doesn't hold true for the entire year, as October, November, and December had the largest number of participating users, yet each of those months had point totals below average.
+									</p>
+									<p>
+										Intuitively, it makes sense that the number of participating users would correlate to the total number of points scored. The graphs above show there is some evidence for this theory; for instance, January had the lowest number of participating users all year and also had the lowest point performance. On the other hand, there are some inconsistencies too; August had the best point performance, yet it was 5th in terms of participating users.
+									</p>
+									<b><u>These findings are important for two main reasons:</u></b>
+									<ol>
+										<li>
+											Total points earned show some seasonality, and identifying ways to increase user performance during the early spring, late fall, and throughout the winter months could be important to fostering growth and generating revenue.
+										</li>
+										<li>
+											Total points earned also shows some connection to number of participating users. Consequently, identifying why the number of users increased rapidly between January and February at the start of the year, or during the late spring and early summer months, could be important to driving future growth and, in turn, additional revenue.
+										</li>
+									</ol>
+									<br>
+									<h4>Total Points Per Month: Users with Positive Yearly Point Totals vs. Users with Negative Yearly Point Totals</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+										<pre class="prettyprint lang-sql">
+WITH users_with_positive_totals AS (
+    SELECT userid
+        FROM event_performance
+GROUP BY userid
+     HAVING SUM(points) > 0
+  )
+    SELECT DATE_TRUNC('month', event_date)::date AS month
+                 , SUM(points) AS total_positive_points
+        FROM event_performance
+     WHERE userid IN (SELECT userid FROM users_with_positive_totals)
+GROUP BY DATE_TRUNC('month', event_date)
+ORDER BY DATE_TRUNC('month', event_date)::date;
+
+WITH users_with_negative_totals AS (
+    SELECT userid
+        FROM event_performance
+GROUP BY userid
+     HAVING SUM(points) < 0
+  )
+    SELECT DATE_TRUNC('month', event_date)::date AS month
+                 , SUM(points) AS total_negative_points
+        FROM event_performance
+     WHERE userid IN (SELECT userid FROM users_with_negative_totals)
+GROUP BY DATE_TRUNC('month', event_date)
+ORDER BY DATE_TRUNC('month', event_date)::date;</pre>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<img src="images/mobile_app_data/positive_vs_negative_points_per_month.png" alt="" style="width: 100%;"/>
+													<p>
+														Using GROUP BY and HAVING I again separate the users into those who have positive yearly point totals and those who have negative yearly point totals and store the results in a CTE.  Afterwards, I can aggregate  the two groups separately by month to find the total monthly points scored.
+													</p>
+													<p>
+														Earlier, in the summary statistics part of this analysis, it was noted that 71% of users had positive yearly point totals, while 29% of users had negative yearly point totals.  The blue line represents users with positive yearly point totals and closely mimics the previous graph, where the strongest performance tended to occur during the late spring and summer months; however, the orange line represents users with negative yearly point totals and tells a new part of the story. 
+													</p>
+												</section>
+											</div>
+										</div>
+									</div>
+									<br>
+									<p>
+										While June and August were the worst months for these users, they're the exception to the rule. In general, for most of the year, there's little variation in the number of points scored by users with negative yearly point totals, and their point scores stay fairly consistent. This could suggest that these users consistently score poorly and are just not very good at the game. They're likely to be the ones at the very bottom of the leaderboards.
+									</p>
+									<p>
+										It's also worth noting that June and August had small spikes in point totals going in opposite directions for each kind of user. For the users with a positive yearly point total, the graph spikes upward, corresponding to the 1st and 2nd largest increases in point totals, while the graph for users with negative yearly point totals moves down, corresponding to the 1st and 2nd most points lost over the year. To summarize, in both of these months, the best users are scoring more AND the worst users are scoring less. It might be worth investigating what was going on during June and August.
+									</p>
+									<h4>Total Points Per Hour By Season</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+										<pre class="prettyprint lang-sql">
+WITH event_performance_seasons AS (
+    SELECT userid 
+                 , event_date
+                 , hour
+                 , points
+                 , CASE
+                        WHEN EXTRACT(MONTH FROM event_date) IN (3, 4, 5) THEN '0_spring'
+                        WHEN EXTRACT(MONTH FROM event_date) IN (6, 7, 8) THEN '1_summer'
+                        WHEN EXTRACT(MONTH FROM event_date) IN (9, 10, 11) THEN '2_fall'
+                        ELSE '3_winter'
+                   END AS season
+        FROM event_performance
+      )
+    SELECT season
+                 , hour
+                 , SUM(points) AS tot_points
+        FROM event_performance_seasons
+GROUP BY season, hour
+ORDER BY season, hour;</pre>
+
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<img src="images/mobile_app_data/points_by_season.png" alt="" style="width: 100%;"/>
+													<p>
+  														Because it was noticed earlier that total points earned per month showed some seasonality, it's worth looking at performance for each season: spring, summer, fall, and winter.  Using a CASE statement and EXTRACT, I can label each row in the event_performance table by season and store the results in a CTE.  I can then perform a group by to find the total number of points per season and per hour. 
+  													</p>
+													
+												</section>
+											</div>
+										</div>
+									</div>
+									<br>
+									<p>
+										The graph shows hourly totals of points earned for each season and reveals a few interesting things. To begin, gaming events only occur in the evening hours, starting as early as hour 16 and going as late as hour 20. In spring and summer, the general trend is that more points are earned in earlier hours, while in fall and winter, more points are earned in later hours. 
+									</p>
+									<p>
+										Furthermore, spring and summer have no points earned during hours 19 and 20, yet in fall and winter, most points are earned in hour 19. Regardless of the season, the trend is that more points are earned hour by hour until reaching a peak, and then points earned steadily decline afterwards.
+									</p>
+									<p>
+										Understanding these trends could be used to target gaming events during times of the day that will see more user engagement and more points earned based on the season. <b>In spring and summer, earlier hours should be preferred, whereas in fall and winter, later hours should be preferred.  Because there is no participation in hours 19 and 20 during spring and summer, it might be worth investigating how to increase user participation during those times of the day.</b>
+									</p>
+									<br>
+									<h4>Total Points Per Gaming Event</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+										<pre class="prettyprint lang-sql">
+      SELECT DATE_TRUNC('day', event_date)::date AS day
+                   , SUM(points) AS total_points
+         FROM event_performance
+GROUP BY DATE_TRUNC('day', event_date)::date
+ORDER BY DATE_TRUNC('day', event_date)::date;</pre>
+													<p>
+														Using DATE_TRUNC, I can truncate the timestamp to the day and then perform a group by to find the total number of points earned per day.  <b>Since there's at most one gaming event per day, this translates to the total number of points per gaming event.</b>
+													</p>
+													<p>
+														The graph shows the total points earned for each of the 147 gaming events present in the dataset. The vast majority of points lie above 0, further confirming what was seen earlier: most gaming events end with the users winning because they have a positive point total. However, despite frequently winning, many of these point totals are below average, and consequently, users earn minimal prizes.
+													</p>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<img src="images/mobile_app_data/points_per_gaming_event.png" alt="" style="width: 100%;"/>
+												</section>
+											</div>
+										</div>
+									</div>
+									<p>
+										On the other hand, virtually all gaming events found during the months of June through September have above average performance, with the most successful day of the year happening on September 13th. This isn't too surprising, as it was found earlier in the analysis that the late spring and summer months had the best performance throughout the year.  Earlier, it was also noted that one day had the worst performance with -257,483 points earned, which appears to correspond to July 11th. Furthermore, the second worst performing day of the year occurs just a day before, on July 10th.  It would be worth spending time to understand what happened on June 10th, June 11th, and September 13th and why user performance was so extreme.
+									</p>
+									<b><u>These observations are important for two reasons:</u></b>
+									<ol>
+										<li>
+											They continue to reinforce the idea that increasing user participation and user performance outside of late spring and summer is important to foster growth and generate revenue.
+										</li>
+										<li>
+											While late spring and summer months consistently perform well, these months also had the two days that performed worst by a large margin.  Understanding why there are such large extremes during these seasons could be helpful.
+										</li>
+									</ol>
+									<h3>
+										<u>
+											Section 4: Next Steps
+										</u>
+									</h3>
+									<p>
+										In <a href="mobile_app_correlation.html">part 3</a> of the project, I perform hypothesis testing and regression to check for and quantify any correlation between user attributes and yearly points earned.
+									</p>
+								</div>
+							</article>
+				</section>
+
+			<!-- Footer -->
+				<section id="footer">
+					<div class="container">
+						<!-- <div class="row">
+							<div class="col-8 col-12-medium">
+								<section>
+									<header>
+										<h2>Blandit nisl adipiscing</h2>
+									</header>
+									<ul class="dates">
+										<li>
+											<span class="date">Jan <strong>27</strong></span>
+											<h3><a href="#">Lorem dolor sit amet veroeros</a></h3>
+											<p>Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat etiam.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>23</strong></span>
+											<h3><a href="#">Ipsum sed blandit nisl consequat</a></h3>
+											<p>Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>15</strong></span>
+											<h3><a href="#">Magna tempus lorem feugiat</a></h3>
+											<p>Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>12</strong></span>
+											<h3><a href="#">Dolore tempus ipsum feugiat nulla</a></h3>
+											<p>Feugiat lorem dolor sed nullam tempus lorem ipsum dolor sit amet nullam consequat.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>10</strong></span>
+											<h3><a href="#">Blandit tempus aliquam?</a></h3>
+											<p>Feugiat sed tempus blandit tempus adipiscing nisl lorem ipsum dolor sit amet dolore.</p>
+										</li>
+									</ul>
+								</section>
+							</div>
+							<div class="col-4 col-12-medium">
+								<section>
+									<center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center>
+								</section>
+							</div> -->
+<!-- 							<div class="col-4 col-6-medium col-12-small">
+								<section>
+									<center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center>
+								</section>
+							</div> -->
+							<div class="col-4 col-6-medium col-12-small">
+								<div class="right">
+									<section>
+										<center>
+											<header>
+												<h2>Socials</h2>
+											</header>
+										</center>
+										<center>
+											<ul class="social">
+												<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+		<!-- 										<li><a class="icon solid fa-envelope" href="mailto:papir805@gmail.com"><span class="label">Email</span></a></li> -->
+												<!-- <li><a class="icon brands fa-dribbble" href="#"><span class="label">Dribbble</span></a></li>
+												<li><a class="icon brands fa-tumblr" href="#"><span class="label">Tumblr</span></a></li> -->
+												<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+											
+											</ul>
+											<ul class="contact">
+											<!-- <li>
+												<h3>Address</h3>
+												<p>
+													Untitled Incorporated<br />
+													1234 Somewhere Road Suite<br />
+													Nashville, TN 00000-0000
+												</p>
+											</li> -->
+											<li>
+												<h3>E-mail:</h3>
+												<p><a href="mailto:papir805@gmail.com">papir805@gmail.com</a></p>
+											</li>
+											<!-- <li>
+												<h3>Phone</h3>
+												<p>(800) 000-0000</p>
+											</li> -->
+										</ul>
+
+										</center>
+									</section>
+								</div>
+							</div>
+<!-- 							<div class="col-4 col-12-medium">
+								<section>
+									<center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center>
+									<ul class="contact">
+										<li>
+											<h3>Address</h3>
+											<p>
+												Untitled Incorporated<br />
+												1234 Somewhere Road Suite<br />
+												Nashville, TN 00000-0000
+											</p>
+										</li>
+										<li>
+											<h3 style="color:black;">E-mail:</h3>
+											<p><a href="mailto:papir805@gmail.com">papir805@gmail.com</a></p>
+										</li>
+										<li>
+											<h3>Phone</h3>
+											<p>(800) 000-0000</p>
+										</li>
+									</ul>
+								</section>
+							</div> -->
+							<div class="col-12">
+
+								<!-- Copyright -->
+									<div id="copyright">
+										<ul class="links">
+											<li>&copy; Jonathan Papir. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+										</ul>
+									</div>
+
+							</div>
+						<!-- </div> -->
+					</div>
+				</section>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
