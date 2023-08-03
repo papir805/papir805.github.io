@@ -114,8 +114,208 @@
 									<i class="icon solid fa-chart-line"> Visualization, Regression, and Hypothesis Testing</i>
 								</header>
 								<h3>
-										<u>Section 1: Coming Soon</u>
-								</h3>
+										<u>Section 1: Background</u>
+									</h3>
+									<p>
+										In <a href="mobile_app_data_analysis.html">part 2</a> of this project, I queried mobile gaming data from a PostgreSQL database and performed an exploratory data analysis trying to understand user performance.  This part of the project explores if there's a correlation between user attributes and user performance, however, some background on the data itself may be helpful before proceeding. 
+									</p>
+									<p>
+										The data comes from a mobile game produced by a gaming company that runs periodic gaming events. Gaming events last several hours and happen at most once a day. During a gaming event, all players play cooperatively as the human team to earn points against an enemy team comprised of a network of AI bots. Individual players on each team win or lose points when certain actions are taken in game; however, the total point score of each team at the end of the gaming event is all that matters for the win condition. If the humans have more points when the event ends, then the humans win; otherwise, the enemy AI team wins.
+									</p>
+									<p>
+										To entice users to continue playing, there are rewards for winning a gaming event, but to keep things interesting, there are also penalties for losing. When the human team wins, users win prizes based on a tiered system where higher tiers earn better prizes and the point total at game's end determines which tier's prizes are won.  On the other hand, should the game end and the human team has a negative score, then all players are forced to take a penalty. Like prizes, penalties have a tiered structure too, which gets progressively more and more severe for worse and worse tiers.
+									</p>
+								
+									<h4>
+										<u>User Table</u>
+									</h4>
+									<p>
+										This table contains a list of all players for the game and some information about user attributes.  <b>Each row in the table represents a unique user.</b>
+									</p>
+									<table>
+									  <!-- <caption style="text-align:left">User Table</caption> -->
+										  <tr>
+										    <th>Field</th>
+										    <th>SQL Data Type</th>
+										    <th>Description</th>
+										  </tr>
+										  <tr>
+										    <td>userid</td>
+										    <td>VARCHAR(36)</td>
+										    <td>A 36 character string that uniquely identifies a player</td>
+										  </tr>
+										  <tr>
+										    <td>attribute1</td>
+										    <td>INT</td>
+										    <td>A binary variable identifying whether a user has attribute1 or not</td>
+										  </tr>
+										  <tr>
+										  	<td>attribute2</td>
+										  	<td>VARCHAR(1)</td>
+										  	<td>A variable that identifies whether a user falls in category 'A', 'B', or 'C'</td>
+										  </tr>
+									</table>
+									<h4>
+										<u>Event Performance Table</u>
+									</h4>
+									<p>
+										This table contains an hour-by-hour breakdown of the points earned for each player during every gaming event of 2019.  <b>Each row in the table represents the number of points scored by a userid during a single hour of gameplay of a gaming event.</b>
+									</p>
+									<table>
+									  <!-- <caption style="text-align:left">Gaming Event Performance Table</caption> -->
+									  <tr>
+									    <th>Field</th>
+									    <th>SQL Data Type</th>
+									    <th>Description</th>
+									  </tr>
+									  <tr>
+									    <td>userid</td>
+									    <td>VARCHAR(36)</td>
+									    <td>A 36 character string that uniquely identifies a player</td>
+									  </tr>
+									  <tr>
+									    <td>event_date</td>
+									    <td>DATE</td>
+									    <td>The date the user participated in the gaming event</td>
+									  </tr>
+									  <tr>
+									  	<td>hour</td>
+									  	<td>INT</td>
+									  	<td>The hour of the day in which the user participated in the gaming event</td>
+									  </tr>
+									    <tr>
+									  	<td>points</td>
+									  	<td>INT</td>
+									  	<td>The number of points scored by a particular user during a single hour of a gaming event</td>
+									  </tr>
+									</table>
+									<p>
+										The full project with the original and cleaned versions of the data can be found on <a href="https://github.com/papir805/mobile_app_data_analysis">my GitHub</a>.  Now to start checking for correlation... 
+									</p>
+									<h3>
+										<u>
+											Section 2: Visualizing Performance, Segmented by User Attributes
+										</u>
+									</h3>
+									<i class="icon solid fa-book">
+										SQLAlchemy, Pandas, Matplotlib, and Seaborn
+									</i>
+									<br>
+									<br>
+									<p>
+										For the purposes of this project, I'll define a user's performance to be their yearly point total and explore if there's any correlation with the value of attribute1 or attribute2.
+									</p>
+									<h4>Joining Tables</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+													<pre class="prettyprint lang-sql">
+WITH total_points_per_user AS (
+   SELECT userid
+        , SUM(points) AS total_points
+     FROM event_performance
+ GROUP BY userid
+  )
+
+   SELECT u.userid
+        , u.attribute1
+        , u.attribute2
+        , COALESCE(tp.total_points, 0) AS total_points
+     FROM users AS u
+LEFT JOIN total_points_per_user AS tp
+       ON u.userid = tp.userid;</pre>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<p>
+														Because information on attribute1 and attribute2 are in the users table, but information on point scores are in the event_performance table, the tables have to be joined before any investigation on correlation can happen. Because there may be users in the users table who have never participated in a gaming event and thus have no entries in the event_performance table, I perform a LEFT JOIN with the users table.  This will ensure all userids from the users table end up in the joined table.  COALESCE will force any NULL values resulting from userids users table with no corresponding entries in the event_performance table to 0.
+													</p>
+												</section>
+											</div>
+
+										</div>
+									</div>
+									<br>
+									<h4>Something</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<img src="images/mobile_app_data/attribute1_attribute2_yearly_points_boxplot.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<p>
+														Put text here
+													</p>
+													
+												</section>
+											</div>
+										</div>
+									</div>
+
+
+
+
+									<h4>Scatter Plots</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<img src="images/mobile_app_data/attribute1_scatterplot.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<p>
+														Put text here
+													</p>
+													
+												</section>
+											</div>
+										</div>
+									</div>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<img src="images/mobile_app_data/attribute2_scatterplot.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<p>
+														Put text here
+													</p>
+													
+												</section>
+											</div>
+										</div>
+									</div>
+									<br>
+									<h4>Something</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<img src="images/mobile_app_data/correlation_heatmap.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<p>
+														Put text here
+													</p>
+													
+												</section>
+											</div>
+										</div>
+									</div>
+
 							</article>
 						</div>
 					</section>
