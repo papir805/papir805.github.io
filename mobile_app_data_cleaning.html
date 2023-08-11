@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Case Study: Part 1 - Mobile App Data Cleaning</title>
+		<title>Case Study - Part 1: Data Cleaning</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -105,7 +105,7 @@
 							<article class="box post">
 								<!-- <a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a> -->
 								<header>
-									<h2><a href="https://github.com/papir805/mobile_app_data_analysis">Case Study Part 1: Data Cleaning</a></h2>
+									<h2><a href="https://github.com/papir805/mobile_app_data_analysis">Case Study - Part 1: Data Cleaning</a></h2>
 									<p>Goal: To clean mobile app gaming data in preparation for analysis.</p>
 									<i class="icon solid fa-code">
 										 PostgreSQL
@@ -120,18 +120,18 @@
 										<u>Section 1: Introduction to the Case Study</u>
 								</h3>
 								<p>
-									This case study was given to me, and I was asked to use gaming data in order to identify which users score highest and whether there's any correlation between user attributes and point scores. I'm unfamiliar with the dataset, though, and don't know whether it's clean or not. Before checking for correlation, I'll need to inspect the dataset, perform cleaning if necessary, and then familiarize myself with the data. I plan to approach the problem in three parts:
+									This case study was given to me, and I was asked to use gaming data in order to identify which users score highest and whether there's any correlation between user attributes and user performance. I'm unfamiliar with the dataset, though, and don't know whether it's clean or not. Before checking for correlation, I'll need to inspect the dataset, perform cleaning if necessary, and then familiarize myself with it. I plan to approach the problem in three parts:
 								</p>
 								<ol>
 									<li>
-										Import the data into a PostgreSQL database and perform cleaning as necessary.
+										<a href="mobile_app_data_cleaning.html">Part 1: </a>Import the data into a PostgreSQL database and perform cleaning as necessary.
 									</li>
 									<li>
-										Use SQL to query the dataset and Python to generate visualizations. Explore the dataset and attempt to understand the game better, focusing on user performance.  
+										<a href="mobile_app_data_analysis.html">Part 2: </a>Import the data into a PostgreSQL database and perform cleaning as necessary.Explore the dataset and attempt to understand the game better, focusing on point totals as a measure of user performance.  Use SQL to query the dataset and Python to generate visualizations. 
 										<!-- Establish user profiles based on performance, if possible. -->
 									</li>
 									<li>
-										Use Python to perform hypothesis testing and identify which user attributes, if any, are correlated to user performance.  Use regression modeling to quantify any correlation found to be significant.
+										<a href="mobile_app_correlation.html">Part 3: </a>Import the data into a PostgreSQL database and perform cleaning as necessary.Use Python to perform hypothesis testing and identify which user attributes, if any, are correlated most strongly with user performance.  Use regression modeling to quantify any correlation found to be statistically significant.
 									</li>
 								</ol>
 								<p>
@@ -144,7 +144,7 @@
 									The data comes from a mobile game produced by a gaming company that runs periodic gaming events. Gaming events last several hours and happen at most once a day. 
 								</p>
 								<p>
-									During a gaming event, all players play cooperatively as the human team to earn points against an enemy team comprised of a network of AI bots. Individual players on each team win or lose points when certain actions are taken in game; however, the total point score of each team at the end of the gaming event is all that matters for the win condition. If the humans have more points when the event ends, then the humans win; otherwise, the enemy AI team wins.
+									During a gaming event, all players play cooperatively as the human team to earn points against an enemy team comprised of a network of AI bots. Players on each team win or lose points when they take certain actions in the game; however, the total point score of each team at the end of the gaming event is all that matters for the win condition. If the humans have more points when the event ends, then the humans win; otherwise, the enemy AI team wins.
 								</p>
 								<p>
 									To entice users to continue playing, there are rewards for winning a gaming event, but to keep things interesting, there are also penalties for losing. When the human team wins, users win prizes based on a tiered system where higher tiers earn better prizes, and the point total at game end determines which tier's prizes are won. On the other hand, should the game end and the human team has a negative score, then all players are forced to take a penalty. Like prizes, penalties have a tiered structure too, which gets progressively more severe for worse and worse tiers.
@@ -179,11 +179,11 @@
 													</tr>
 													<tr>
 												    	<td>subscriber</td>
-												    	<td>A binary variable identifying whether a user is a subscriber or not</td>
+												    	<td>A binary variable identifying whether the userid is a paid subscriber or not</td>
 													</tr>
 													<tr>
 														<td>category</td>
-														<td>A variable that identifies whether a user falls in category 'A', 'B', or 'C'</td>
+														<td>A variable that identifies whether the userid falls in category 'A', 'B', or 'C'</td>
 													</tr>
 												</table>
 											</section>
@@ -196,7 +196,7 @@
 												</h4>
 												<table>
 													<caption style="text-align:left">
-														This file contains the total points scored for every hour of gameplay over the course of 2019 for every participating player.  
+														This file contains the total points scored during every hour of gameplay over the course of 2019 for every participating player.  
 														<br>
 														<b>Each line represents the number of points a user scored during a single hour of gameplay.</b>
 														<br>
@@ -212,15 +212,15 @@
 													</tr>
 													<tr>
 													    <td>event_date</td>
-													    <td>The date corresponding to when a user participated in a gaming event</td>
+													    <td>The date corresponding to when the userid participated in a gaming event</td>
 													</tr>
 													<tr>
 													  	<td>hour</td>
-													  	<td>The hour of the day in which the user participated in the gaming event</td>
+													  	<td>The hour of the day in which the userid participated in the gaming event</td>
 													</tr>
 													<tr>
 													  	<td>points</td>
-													  	<td>The number of points scored by a user during a single hour of gameplay</td>
+													  	<td>The number of points scored by the userid during a single hour of gameplay</td>
 													</tr>
 												</table>
 											</section>
@@ -228,7 +228,7 @@
 									</div>
 								</div>
 								<br>
-									Because the data may need cleaning, I create two staging tables with each field as <i>text</i>.  Using the <i>text</i> data type is the safest as the data is coming from a CSV file.  This will hopefully help the data get ingested into the database without any errors so I can begin inspecting it.  After creating the tables, the data is ingested into them from the CSV files.
+									Because the data may need cleaning, I create two staging tables with each field as <i>text</i>.  Using the <i>text</i> data type is the safest as the data is coming from a CSV file.  This will hopefully help the data get ingested into the database without any errors, so I can begin inspecting it.  After creating the tables, the data is ingested into them from the CSV files.
 								<div class="split left">
 									<div class="row">
 										<div class="col-6 col-12-medium">
@@ -356,7 +356,7 @@
 										</div>
 									</div>
 									<p>
-										This query checks to see if userids have a standardized length.  All userids are 36 characters long and a visual inspection of the CSV file shows they contain a mixture of alphanumeric characters.  I'll make them <i>VARCHAR(36)</i> when moving the cleaned data to the new table.
+										This query checks to see if userids have a standardized length and reveals all userids are 36 characters long.  A visual inspection of the CSV file shows userids contain a mixture of alphanumeric characters.  I'll make them <i>VARCHAR(36)</i> when moving the cleaned data to the new table.
 									</p>
 								</div>
 								<h4>
@@ -380,7 +380,7 @@
 										</div>
 									</div>
 									<p>
-										It converts to <i>int</i> with no problems and all values in the dataset are either 0 or 1, as they're supposed to be.  Everything looks good here.
+										It converts to <i>int</i> with no problems, and all values in the dataset are either 0 or 1, as they're supposed to be.  A value of 0 means the user isn't a subscriber, while a value of 1 means they are a subscriber.  Everything looks good here.
 									</p>
 								</div>
 								<h4>
@@ -405,7 +405,7 @@
 										</div>
 									</div>
 									<p>
-										It converts to <i>VARCHAR(1)</i> with no problems and all values in the dataset are either 'A', 'B', or 'C', as they're supposed to be.  Everything looks good here too.
+										It converts to <i>VARCHAR(1)</i> with no problems, and all values in the dataset are either 'A', 'B', or 'C', as they're supposed to be.  Everything looks good here too.
 									</p>
 								</div>
 								<h3>
@@ -434,7 +434,7 @@
 										</div>
 									</div>
 									<p>
-										However, two userids in the events_performance_staging table have 37 characters.  This has to be a mistake and I isolate those rows to figure out why.
+										However, two userids in the events_performance_staging table have 37 characters.  This has to be a mistake, and I isolated those rows to figure out why.
 									</p>
 								</div>
 								<div class="split left">
@@ -460,19 +460,16 @@
 										It appears one userid had a whitespace character at the end (denoted by "\s") and the other had a double quotation mark.  Later, I'll use REGEX to trim both of those characters when importing to the new tables.
 									</p>
 								</div>
-								<br>
 								<h4>
 									event_date
 								</h4>
-								The event_date field has the most obstacles to overcome.  It contains several different forms of dates that aren't valid as well as inconsistent date formats.
+								The event_date field has the most obstacles to overcome.  It contains several different forms of dates that aren't valid, as well as inconsistent date formats.
 								<br>
 								<br>
 								<div class="split left">
 									<div class="row">
 										<div class="col-6 col-12-medium">
 											<section class="first">
-												<p>
-													One of the dates is 19/24/2019.  Since there's no way to identify whether this date is meant to be 1/24/2019 or 9/24/2019 or perhaps something else entirely, the safest option is to drop it.  Dropping one entry in a dataset this size shouldn't make much of a difference.
 												<pre class="prettyprint lang-sql">
 DELETE FROM event_performance_staging
             WHERE event_date = '19/24/2019';	</pre>
@@ -481,13 +478,29 @@ DELETE FROM event_performance_staging
 										<div class="col-6 col-12-medium">
 											<section class="middle">
 												<p>
-													Because some event_dates use a 2 digit year format (MM/DD/YY) while other event_dates use a different 4 digit year format (YYYY/MM/DD), I'm also going to use the to_date function to convert any dates from the MM/DD/YY format to the more standard YYYY/MM/DD format.
+													One of the dates is 19/24/2019.  Since there's no way to identify whether this date is meant to be 1/24/2019, 9/24/2019, or perhaps something else entirely, the safest option is to drop it.  Dropping one entry in a dataset this size shouldn't make much of a difference.
 												</p>
+											</section>
+										</div>
+									</div>
+								</div>
+								<br>
+								<div class="split left">
+									<div class="row">
+										<div class="col-6 col-12-medium">
+											<section class="first">
 												<pre class="prettyprint lang-sql">
 ALTER TABLE event_performance_staging
 	ALTER COLUMN event_date
 	        TYPE DATE
 	                USING (to_date(event_date, 'MM/DD/YY'));</pre>
+											</section>
+										</div>
+										<div class="col-6 col-12-medium">
+											<section class="middle">
+												<p>
+													Because some event_dates use a 2 digit year format (MM/DD/YY) while other event_dates use a different 4 digit year format (YYYY/MM/DD), I'm also going to use the to_date function to convert any dates from the MM/DD/YY format to the more standard YYYY/MM/DD format.
+												</p>
 											</section>
 										</div>
 									</div>
@@ -553,7 +566,7 @@ SELECT event_date
 											</section>
 										</div>
 										<p>
-											It converts just fine and the values appear to be using military time, ranging from 16:00-20:00, or 4:00pm-8:00pm.
+											It converts just fine, and the values appear to be using military time, ranging from 16:00 to 20:00 or 4:00 to 8:00 p.m.
 										</p>
 									</div>
 								</div>
@@ -561,7 +574,7 @@ SELECT event_date
 								<h4>
 									points
 								</h4>
-								Attempting to cast points to <i>int</i> results in an error and indicates one of the point scores has a quotation mark in it.  Other point scores could also have letters or special characters, so let's if there are any others with issues.
+								Attempting to cast points to <i>int</i> results in an error and indicates one of the point scores has a quotation mark in it.  Other point scores could also have letters or special characters, so let's see if there are any others with issues.
 								<div class="split left">
 									<div class="row">
 										<div class="col-6 col-12-medium">
@@ -723,7 +736,7 @@ INSERT INTO event_performance(userid, event_date, hour, points)
 																	Constraints: Must be a non-null date from after the company was formed (2013-01-01) and before the current date.
 																</li>
 																<li>
-																	Note: I filter the dates that were identified to be problematic from earlier.  The dates from before the company was formed (1999-03-22) and from after the analysis was performed (2039-08-02) are excluded
+																	Note: I filter the dates that were identified to be invalid from earlier.  
 																</li>
 															</ul>
 														</li>
@@ -756,7 +769,7 @@ INSERT INTO event_performance(userid, event_date, hour, points)
 									</div>
 								</div>
 								<p>
-									Once the new table is created, the query then copies the data from event_performance_staging table to the new event_performance table.
+									Once the new table is created, the query then copies the data from the event_performance_staging table to the new event_performance table.
 								</p>
 								<h3>
 									<u>Section 9: Next Steps</u>

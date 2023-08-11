@@ -6,12 +6,25 @@
 -->
 <html>
 	<head>
-		<title>Project: Part 3 - Correlation Between User Attributes and Yearly Point Totals</title>
+		<title>Case Study - Part 3: Correlation Between User Attributes and Yearly Point Totals</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&amp;skin=doxy&amp;lang=css" defer=""></script>
 		<script src="https://github.com/googlearchive/code-prettify/blob/master/src/lang-sql.js"></script>
+		<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.0.0/es5/latest?tex-mml-chtml.js">
+		</script>
+		<script>
+		MathJax = {
+		  tex: {
+		    inlineMath: [['$', '$'], ['\\(', '\\)']]
+		  }
+		};
+		</script>
+		<script id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+		</script>
 	</head>
 	<body class="no-sidebar is-preload">
 		<div id="page-wrapper">
@@ -20,81 +33,81 @@
 				<section id="header">
 
 					<!-- Logo -->
-						<h1>
-							Using mathematics to solve problems with real world data excites me.
-						</h1>
+					<h1>
+						Using mathematics to solve problems with real world data excites me.
+					</h1>
 
-					<!-- Nav -->
-						<nav id="nav">
-							<ul>
-								<li>
-									<a href="index.html">Home</a>
-								</li>
-								<li class="current">
-									<a href="portfolio.html">Portfolio</a>
-									<ul>
-										<li>
-											<a href="acupuncture_analysis.html">Acupuncture Analysis</a>
-										</li>
-										<li>
-											<a href="craigslist_EDA.html">Craigslist Tutoring EDA</a>
-										</li>
-										<li>
-											<a href="etl_craigslist_web_scraper.html">ETL Craigslist Web Scraper</a>
-										</li>
-										<li>
-											<a href="mobile_app_data_summary_stats_and_correlation.html">Mobile App Gaming Data</a>
-											<ul>
-												<li>
-													<a href="mobile_app_data_cleaning.html">Part 1: Data Cleaning</a>
-												</li>
-												<li>
-													<a href="mobile_app_data_analysis.html">Part 2: Data Analysis</a>
-												</li>
-												<li>
-													<a href="mobile_app_correlation.html">Part 3: Correlation</a>
-												</li>
-											</ul>
-										</li>
-										<li>
-											<a href="craigslist_tableau.html">National Tutoring Prices Dashboard</a>
-										</li>
-										<li>
-											<a href="pokemon_classifier.html">Pokémon Classification</a>
-										</li>
-										<li>
-											<a href="islr_python.html">Porting Code From ISLR2e</a>
-										</li>
-										<li>
-											<a href="reddit_accounting_survey_analysis.html">Reddit Accounting Survey Analysis</a>
-										</li>
-										<li>
-											<a href="sql_queries.html">SQL Queries</a>
-													<!-- <ul>
-														<li><a href="#">Magna phasellus</a></li>
-														<li><a href="#">Etiam dolore nisl</a></li>
-														<li><a href="#">Veroeros feugiat</a></li>
-														<li><a href="#">Nisl sed aliquam</a></li>
-														<li><a href="#">Dolore adipiscing</a></li>
-													</ul> -->
-										</li>
-										<li>
-											<a href="tv_ad_report.html">TV Advertising Report</a>
-										</li>
-										<li>
-											<a href="us_accounting_viz.html">U.S. Accounting Viz</a>
-										</li>
-									</ul>
-								</li>
-								<li>
-									<a href="https://drive.google.com/file/d/1RAcaKhw9TIj3sL1ute5pMXsO_pgfHx5R/view?usp=sharing">Resume</a>
-								</li>
-								<li>
-									<a href="about.html">About</a>
-								</li>
-									<!-- <li><a href="tbd_sidebar.html">tbd</a></li> -->
-							</ul>
-						</nav>
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li>
+								<a href="index.html">Home</a>
+							</li>
+							<li class="current">
+								<a href="portfolio.html">Portfolio</a>
+								<ul>
+									<li>
+										<a href="acupuncture_analysis.html">Acupuncture Analysis</a>
+									</li>
+									<li>
+										<a href="craigslist_EDA.html">Craigslist Tutoring EDA</a>
+									</li>
+									<li>
+										<a href="etl_craigslist_web_scraper.html">ETL Craigslist Web Scraper</a>
+									</li>
+									<li>
+										<a href="mobile_app_data_summary_stats_and_correlation.html">Mobile App Gaming Data</a>
+										<ul>
+											<li>
+												<a href="mobile_app_data_cleaning.html">Part 1: Data Cleaning</a>
+											</li>
+											<li>
+												<a href="mobile_app_data_analysis.html">Part 2: Data Analysis</a>
+											</li>
+											<li>
+												<a href="mobile_app_correlation.html">Part 3: Correlation</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<a href="craigslist_tableau.html">National Tutoring Prices Dashboard</a>
+									</li>
+									<li>
+										<a href="pokemon_classifier.html">Pokémon Classification</a>
+									</li>
+									<li>
+										<a href="islr_python.html">Porting Code From ISLR2e</a>
+									</li>
+									<li>
+										<a href="reddit_accounting_survey_analysis.html">Reddit Accounting Survey Analysis</a>
+									</li>
+									<li>
+										<a href="sql_queries.html">SQL Queries</a>
+														<!-- <ul>
+															<li><a href="#">Magna phasellus</a></li>
+															<li><a href="#">Etiam dolore nisl</a></li>
+															<li><a href="#">Veroeros feugiat</a></li>
+															<li><a href="#">Nisl sed aliquam</a></li>
+															<li><a href="#">Dolore adipiscing</a></li>
+														</ul> -->
+									</li>
+									<li>
+										<a href="tv_ad_report.html">TV Advertising Report</a>
+									</li>
+									<li>
+										<a href="us_accounting_viz.html">U.S. Accounting Viz</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="https://drive.google.com/file/d/1RAcaKhw9TIj3sL1ute5pMXsO_pgfHx5R/view?usp=sharing">Resume</a>
+							</li>
+							<li>
+								<a href="about.html">About</a>
+							</li>
+								<!-- <li><a href="tbd_sidebar.html">tbd</a></li> -->
+						</ul>
+					</nav>
 				</section>
 
 			<!-- Main -->
@@ -105,17 +118,399 @@
 							<article class="box post">
 								<!-- <a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a> -->
 								<header>
-									<h2><a href="https://github.com/papir805/mobile_app_data_analysis">Part 3: Correlation Between User Attributes and Yearly Point Totals</a></h2>
-									<p>Goal: To explore and quantify correlation between user attributes and yearly point totals through regression and hypothesis testing.  </p>
+									<h2><a href="https://github.com/papir805/mobile_app_data_analysis">Case Study - Part 3: Correlation Between User Attributes and Performance</a></h2>
+									<p>Goal: To identify which user attributes, if any, correlate most strongly with performance  </p>
 									<i class="icon solid fa-code">
 										 Python, PostgreSQL
 									</i>
 									<br>
 									<i class="icon solid fa-chart-line"> Visualization, Regression, and Hypothesis Testing</i>
 								</header>
+								<p>
+									The full project containing the code and both the original and cleaned versions of the data can be found on <a href="https://github.com/papir805/mobile_app_data_analysis">my GitHub</a>.
+								</p>
 								<h3>
-										<u>Section 1: Coming Soon</u>
+										<u>Section 1: Introduction to the Case Study</u>
 								</h3>
+								<p>
+									This case study was given to me, and I was asked to use gaming data in order to identify which users score highest and whether there's any correlation between user attributes and user performance. I'm unfamiliar with the dataset, though, and don't know whether it's clean or not. Before checking for correlation, I'll need to inspect the dataset, perform cleaning if necessary, and then familiarize myself with it. I plan to approach the problem in three parts:
+								</p>
+								<ol>
+									<li>
+										<a href="mobile_app_data_cleaning.html">Part 1: </a>Import the data into a PostgreSQL database and perform cleaning as necessary.
+									</li>
+									<li>
+										<a href="mobile_app_data_analysis.html">Part 2: </a>Import the data into a PostgreSQL database and perform cleaning as necessary.Explore the dataset and attempt to understand the game better, focusing on point totals as a measure of user performance.  Use SQL to query the dataset and Python to generate visualizations. 
+										<!-- Establish user profiles based on performance, if possible. -->
+									</li>
+									<li>
+										<a href="mobile_app_correlation.html">Part 3: </a>Import the data into a PostgreSQL database and perform cleaning as necessary.Use Python to perform hypothesis testing and identify which user attributes, if any, are correlated most strongly with user performance.  Use regression modeling to quantify any correlation found to be statistically significant.
+									</li>
+								</ol>
+								<p>
+									This article covers part 3 of the case study and is meant to detail my process as I check for a correlation between user attributes and user performance.  I'll create visualizations to check for signs of correlation and will use hypothesis testing to identify which user attributes, if any, are statistically significant predictors of a user's performance.  For those attributes, I'll quantify the size of the correlation using regression modeling.
+								</p>
+								<h3>
+									<u>Section 2: Introduction to the Game</u>
+								</h3>
+								<p>
+									The data comes from a mobile game produced by a gaming company that runs periodic gaming events. Gaming events last several hours and happen at most once a day. 
+								</p>
+								<p>
+									During a gaming event, all players play cooperatively as the human team to earn points against an enemy team comprised of a network of AI bots. Players on each team win or lose points when they take certain actions in the game; however, the total point score of each team at the end of the gaming event is all that matters for the win condition. If the humans have more points when the event ends, then the humans win; otherwise, the enemy AI team wins.
+								</p>
+								<p>
+									To entice users to continue playing, there are rewards for winning a gaming event, but to keep things interesting, there are also penalties for losing. When the human team wins, users win prizes based on a tiered system where higher tiers earn better prizes, and the point total at game end determines which tier's prizes are won. On the other hand, should the game end and the human team has a negative score, then all players are forced to take a penalty. Like prizes, penalties have a tiered structure too, which gets progressively more severe for worse and worse tiers.
+								</p>			
+								<h3>
+									<u>Section 3: Introduction to the Dataset</u>
+								</h3>
+								<br>
+									<h4>
+										User Table
+									</h4>
+									<p>
+										This table contains a list of all players for the game and some information about user attributes.  <b>Each row in the table represents a unique user.</b>
+									</p>
+									<table>
+									  <!-- <caption style="text-align:left">User Table</caption> -->
+										  <tr>
+										    <th>Field</th>
+										    <th>SQL Data Type</th>
+										    <th>Description</th>
+										  </tr>
+										  <tr>
+										    <td>userid</td>
+										    <td>VARCHAR(36)</td>
+										    <td>A 36 character string that uniquely identifies a player</td>
+										  </tr>
+										  <tr>
+										    <td>subscriber</td>
+										    <td>INT</td>
+										    <td>A binary variable identifying whether the userid is a paid subscriber or not</td>
+										  </tr>
+										  <tr>
+										  	<td>category</td>
+										  	<td>VARCHAR(1)</td>
+										  	<td>A variable that identifies whether the userid falls in category 'A', 'B', or 'C'</td>
+										  </tr>
+									</table>
+									<h4>
+										Event Performance Table
+									</h4>
+									<p>
+										This table contains an hour-by-hour breakdown of the points earned for each player during every gaming event of 2019.  <b>Each row in the table represents the number of points scored by a userid during a single hour of gameplay during a gaming event.</b>
+									</p>
+									<table>
+									  <!-- <caption style="text-align:left">Gaming Event Performance Table</caption> -->
+									  <tr>
+									    <th>Field</th>
+									    <th>SQL Data Type</th>
+									    <th>Description</th>
+									  </tr>
+									  <tr>
+									    <td>userid</td>
+									    <td>VARCHAR(36)</td>
+									    <td>A 36 character string that uniquely identifies a player</td>
+									  </tr>
+									  <tr>
+									    <td>event_date</td>
+									    <td>DATE</td>
+									    <td>The date the userid participated in the gaming event</td>
+									  </tr>
+									  <tr>
+									  	<td>hour</td>
+									  	<td>INT</td>
+									  	<td>The hour of the day in which the userid participated in the gaming event</td>
+									  </tr>
+									    <tr>
+									  	<td>points</td>
+									  	<td>INT</td>
+									  	<td>The number of points scored by the userid during a single hour of a gaming event</td>
+									  </tr>
+									</table>
+									<h3>
+										<u>
+											Section 2: Breaking Down Performance by User Attributes
+										</u>
+									</h3>
+									<i class="icon solid fa-book">
+										SQLAlchemy, Pandas, Matplotlib, and Seaborn
+									</i>
+									<br>
+									<br>
+									<p>
+										For the purposes of this project, I'll define a user's performance as their yearly point total and explore if there's any correlation with the value of subscriber or category.
+									</p>
+									<h4>Joining Tables</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+													<pre class="prettyprint lang-sql">
+WITH total_points_per_user AS (
+   SELECT userid
+        , SUM(points) AS total_points
+     FROM event_performance
+ GROUP BY userid
+  )
+
+   SELECT u.userid
+        , u.subscriber
+        , u.category
+        , COALESCE(tp.total_points, 0) AS total_points
+     FROM users AS u
+LEFT JOIN total_points_per_user AS tp
+       ON u.userid = tp.userid;</pre>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<p>
+														Information on whether a user is a subscriber and which category they fall in is in the users table, but information on point scores is in the event_performance table, so the two tables have to be joined before any investigation into correlation can happen. Because there may be userids in the users table who have never participated in a gaming event and thus have no entries in the event_performance table, a LEFT JOIN is needed to ensure all userids from the users table make it into the joined table. 
+													</p>
+													<p>
+														 Any userids that aren't found in the event_performance table would normally be assigned NULL values, but these users have no matching entries because they've never played in a gaming event.  If they've never played in a gaming event, then their yearly point total should be 0, and COALESCE is used to make this happen.  
+													</p>
+												</section>
+											</div>
+
+										</div>
+									</div>
+									<br>
+									<h4>
+										Visualizing Yearly Point Distribution
+									</h4>
+									<p>
+										These boxplots compare the yearly point totals for subscribers against non-subscribers, as well as users in category A against those in category B against those in category C.  Userids that had yearly point totals less than $Q_1 - 1.5 \cdot \text{IQR}$ or more than $Q_3 + 1.5 \cdot \text{IQR}$ are considered outliers and are represented by the circles that lay beyond the whiskers.  Pay extra close attention to these, as they'll become important soon. 
+									</p>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<img src="images/mobile_app_data/subscriber_category_yearly_points_boxplot.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<p>
+														The first boxplot shows roughly the same spread of point totals regardless of whether a user is a subscriber or not. The medians are close, and the overall distribution of point totals is pretty similar. My initial impression is that there's either no correlation or a weak correlation between whether a user is a subscriber and their yearly point totals.
+													</p>
+													<p>
+														On the other hand, the second boxplot shows more noticeable differences between the three categories: A, B, and C. Category A and B have fairly similar performance, although category A has a little less variability than category B. However, category C is quite different and is the most interesting.
+													</p>
+													<p>
+														The plot reveals point totals for category C are skewed right and look to be the strongest performing group.  Very few users in this category have yearly point totals that are negative, and therefore these users must be consistently contributing to the human team's bottom line.
+													</p>
+													<p>
+														Additionally, category C contains the users with the 9 highest point totals of the year, and it seems unlikely for that to be a coincidence.  This can be seen in the graph, where the red line represents the 9th highest point total of the year.  The nine players who scored at least that many points are represented by the colored circles to the right.
+													</p>
+												</section>
+											</div>
+										</div>
+										<br>
+											
+										<p>
+											While nothing is definitive yet, it's starting to look like there could be some correlation between a user's attributes and yearly point totals.  Category seems like it would have the strongest correlation, but subscriber may be important too.
+										</p>
+									</div>
+									<h4>Scatter Plots</h4>
+									<p>
+										The following scatter plots take the boxplots from above and add more granularity.  Now, the point scores for every single one of the 1,100 users in the dataset can be seen.
+									</p>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<img src="images/mobile_app_data/subscriber_scatterplot.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<p>
+														Subscriber looks about the same as before.  There are similar spreads of point totals regardless of whether a user is a subscriber or not, and there doesn't appear to be much, if any, correlation.
+													</p>
+													<p>
+														Pearson's correlation coefficient is calculated at 0.1551, indicating a weak positive correlation.  While the correlation shouldn't be discounted yet, it may still be worthwhile. Hypothesis testing will be performed later to check for statistical significance.
+													</p>
+												</section>
+											</div>
+										</div>
+									</div>
+									<br>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<img src="images/mobile_app_data/category_scatterplot.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<p>
+														This scatterplot tells the same story as before but makes it even clearer.  Category C has by far the highest yearly point totals, while categories A and B are pretty similar to each other. Occasionally, there are those in category B who score highly too, but it's heavily dominated by users in category C.
+													</p>
+													<p>
+														Pearson's correlation coefficient would be nice to measure the strength of the correlation here, but it can't be calculated on categorical data.  However, it can be calculated after encoding the categorical data using dummy variables.
+													</p>
+												</section>
+											</div>
+										</div>
+									</div>
+									<br>
+									<h4>Dummy Variables and the Correlation Heatmap</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<img src="images/mobile_app_data/correlation_heatmap.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<p>
+														Using pandas, I encoded category as a dummy variable and calculated the correlation with yearly point totals.  Category C has a correlation of 0.5365, indicating a moderately positive correlation, and is the strongest correlation out of all the user attributes.  Category A and category B both have similar correlations of -0.2429 and -0.2147, respectively, indicating weak negative correlations.
+													</p>
+													<p>
+														Everything observed so far is promising evidence of some correlation between user attributes and user performance; however, the relationship that's observed in the dataset could simply be the result of a fluke and not necessarily because a correlation truly exists.  To be certain beyond a reasonable doubt, hypothesis testing can be used.
+													</p>
+												</section>
+											</div>
+										</div>
+									</div>
+									<br>
+									<h3>
+										<u>
+											Section 3: Hypothesis Testing
+										</u>
+									</h3>
+									<i class="icon solid fa-book">
+										Pandas, Statsmodels, and Scipy
+									</i>
+									<br>
+									<br>
+									<h4>Linear Regression Modeling: Performing a t-test</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+
+														<center>
+															$H_0:$ There is no significant linear correlation between subscriber and total_points<br>
+															$H_a:$ There is a significant linear correlation between subscriber and total_points
+														</center>
+														<br>
+													<img src="images/mobile_app_data/t_test_graph.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<p>
+													At the $\alpha=0.05$ level of significance, a t-test is performed, and the results are shown.  The P-value is ~0, and the test statistic of 5.203 is in the rejection region, indicating the null hypothesis should be rejected.  Although the correlation was noted to be weak earlier, rejecting the null hypothesis indicates there is sufficient evidence to conclude that a user's subscriber status is a statistically significant predictor of yearly point totals.
+												</p>
+												
+												</section>
+											</div>
+
+										</div>
+									</div>
+									<br>
+									<h4>Performing a One-Way ANOVA Test</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+													<p>
+														<center>
+															$H_0$: category and total yearly points are not correlated<br>
+															$H_a$: category and total yearly points are correlated<br>
+														</center>
+													</p>
+													<img src="images/mobile_app_data/f_test_graph.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<p>
+														At the $\alpha=0.05$ level of significance, a F-test is performed, and the results are shown.  The P-value is ~0, and the test statistics of 222.330 is so far into the rejection region that it can't be pictured in the graph.  The null hypothesis should be rejected, and there's sufficient evidence to conclude that category is a statistically significant predictor of yearly point totals.
+													</p>
+													<p>
+														Now that hypothesis testing has indicated both subscriber and category are statistically significant, regression modeling can be performed to quantify these relationships.
+													</p>
+												</section>
+											</div>
+
+										</div>
+									</div>
+									<br>
+									<h4>Building a Regression Model</h4>
+									<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+													<img src="images/mobile_app_data/all_lin_reg_summary.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<p>
+														In order to avoid the dummy variable trap, regression has to be performed using all but one level of the dummy variable, which acts as the baseline level for comparison.  In this model, category A represents the baseline level for the dummy variable, and any coefficients of the model must be interpreted relative to that category.
+													</p>
+													
+												</section>
+											</div>
+
+										</div>
+										<br>
+										<p>
+											The model will have the following form: $\hat{y} = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_3$, where $x_1$, $x_2$, and $x_3$ correspond to the coding scheme:
+										</p>
+										<ul>
+											<li>
+												$x_1 = \left\{\begin{aligned} 
+													1 &\text{ if userid is a paid subscriber} \\
+													0 &\text{ if userid is not a paid subscriber}
+												\end{aligned} \right.$
+											</li><br>
+											<li>
+												$x_2 = \left\{\begin{aligned} 
+													1 &\text{ if userid is in category B} \\
+													0 &\text{ if userid is not in category B}
+												\end{aligned} \right.$
+											</li><br>
+											<li>
+												$x_3 = \left\{\begin{aligned} 
+													1 &\text{ if userid is in category C} \\
+													0 &\text{ if userid is not in category C}
+												\end{aligned} \right.$
+											</li><br>
+										</ul>
+									<p>
+										After plugging in the coefficients generated by the summary output, the model looks like this: $\hat{y}=114.4202+7258.8017x_1+617.8321x_2+22002.3214x_3$.
+									</p>
+									<h4>
+										Interpreting the Model
+									</h4>
+									<p>
+										Understanding how to interpret the model will help understand the relationship between user attributes and user performance.  When $x_1, x_2$, and $x_3$ are all set to 0, you have your baseline user, a non-subscriber, who is neither in category B nor in category C; therefore, they must be in category A.  For this kind of user, the model's predicted yearly point total would simply be the constant 114.4202.  
+									</p>
+									<p>
+										If $x_2$ is set to 1 and all other variables remain 0, then this would represent a non-subscriber in category B.  For this kind of user, the predicted yearly point total would increase by the coefficient of 617.8321 points.  This indicates that, on average, non-subscribers in category B earn 617.8321 points more than non-subscribers in category A.  This echoes what was seen earlier regarding there not being much difference in point scores between users in these categories.
+									</p>
+									<p>
+										When $x_3$ is set to 1 and all other variables remain 0, the user is a non-subscriber in category C.  For this kind of user, the model would predict a yearly point total of 22,002.314 points higher than the baseline user.  This is the largest coefficient of the model and emphasizes just how strong the performance of users in category C really is.
+									</p>
+									<p>
+										When $x_1 = 1$, this indicates the user is a subscriber.  Users of any category can be subscribers; therefore, regardless of the values of $x_2$ or $x_3$, $x_1$ could be set to one and "turned on".  Turning on $x_1$ would increase the model's prediction of yearly point totals by its coefficient of 7258.8017, meaning that a subscribing user is predicted to earn that many points more than a non-subscribing user from the same category.  Despite earlier identifying subscriber as having a weak correlation, it produces the second largest effect on predicted yearly point totals in this model and looks to be more important than was initially thought.
+									</p>
+									<h4>
+										Conclusions
+									</h4>
+									<p>
+										In summary, it seems as though the question of whether there's any correlation between user attributes and user performance has been answered.  Both subscriber and category are statistically significant predictors of a user's performance as measured through their yearly point totals.  The single best predictor is which category a user falls into, with category C being the most important; however, knowing whether a user is a subscriber or not is pretty important too.
+									</p>
+									</div>
 							</article>
 						</div>
 					</section>

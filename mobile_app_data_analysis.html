@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Project: Part 2 - Mobile App Data Analysis</title>
+		<title>Case Study - Part 2: Data Analysis</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -106,9 +106,9 @@
 								<!-- <a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a> -->
 								<header>
 									<h2>
-										<a href="https://github.com/papir805/mobile_app_data_analysis">Part 2: Mobile App Data Analysis</a>
+										<a href="https://github.com/papir805/mobile_app_data_analysis">Case Study - Part 2: Data Analysis</a>
 									</h2>
-									<p>Goal: To summarize one year's worth of mobile gaming data and understand user performance.</p>
+									<p>Goal: To summarize one year's worth of mobile gaming data and understand user performance through point scores.</p>
 									<i class="icon solid fa-code">
 										 Python, PostgreSQL
 									</i>
@@ -117,21 +117,48 @@
 										 Visualization and Analysis
 									</i>
 								</header>
-									<h3>
-										<u>Section 1: Background</u>
-									</h3>
-									<p>
-										In <a href="mobile_app_data_cleaning.html">part 1</a> of this project, I imported data from a CSV file containing mobile game data into a local PostgreSQL database and cleaned it in preparation for analysis. This part of the project is where the analysis happens.  First, however, some background on the data itself may be helpful before proceeding. 
-									</p>
-									<p>
-										The data comes from a mobile game produced by a gaming company that runs periodic gaming events. Gaming events last several hours and happen at most once a day. During a gaming event, all players play cooperatively as the human team to earn points against an enemy team comprised of a network of AI bots. Individual players on each team win or lose points when certain actions are taken in game; however, the total point score of each team at the end of the gaming event is all that matters for the win condition. If the humans have more points when the event ends, then the humans win; otherwise, the enemy AI team wins.
-									</p>
-									<p>
-										To entice users to continue playing, there are rewards for winning a gaming event, but to keep things interesting, there are also penalties for losing. When the human team wins, users win prizes based on a tiered system where higher tiers earn better prizes, and the point total at game end determines which tier's prizes are won. On the other hand, should the game end and the human team have a negative score, then all players are forced to take a penalty. Like prizes, penalties have a tiered structure too, which gets progressively more severe for worse and worse tiers.
-									</p>
-								
+								<p>
+									The full project containing the code and both the original and cleaned versions of the data can be found on <a href="https://github.com/papir805/mobile_app_data_analysis">my GitHub</a>.
+								</p>
+								<h3>
+										<u>Section 1: Introduction to the Case Study</u>
+								</h3>
+								<p>
+									This case study was given to me, and I was asked to use gaming data in order to identify which users score highest and whether there's any correlation between user attributes and user performance. I'm unfamiliar with the dataset, though, and don't know whether it's clean or not. Before checking for correlation, I'll need to inspect the dataset, perform cleaning if necessary, and then familiarize myself with it. I plan to approach the problem in three parts:
+								</p>
+								<ol>
+									<li>
+										<a href="mobile_app_data_cleaning.html">Part 1: </a>Import the data into a PostgreSQL database and perform cleaning as necessary.
+									</li>
+									<li>
+										<a href="mobile_app_data_analysis.html">Part 2: </a>Import the data into a PostgreSQL database and perform cleaning as necessary.Explore the dataset and attempt to understand the game better, focusing on point totals as a measure of user performance.  Use SQL to query the dataset and Python to generate visualizations. 
+										<!-- Establish user profiles based on performance, if possible. -->
+									</li>
+									<li>
+										<a href="mobile_app_correlation.html">Part 3: </a>Import the data into a PostgreSQL database and perform cleaning as necessary.Use Python to perform hypothesis testing and identify which user attributes, if any, are correlated most strongly with user performance.  Use regression modeling to quantify any correlation found to be statistically significant.
+									</li>
+								</ol>
+								<p>
+									This article covers part 2 of the case study and is meant to detail my process as I perform an exploratory data analysis.  I'll familiarize myself with the dataset so that I can better look for correlation between user attributes and performance in part 3 of the case study.  I'll use point scores as a measure of user performance and hope to understand the dataset better by generating summary statistics and visualizations.
+								</p>
+								<h3>
+									<u>Section 2: Introduction to the Game</u>
+								</h3>
+								<p>
+									The data comes from a mobile game produced by a gaming company that runs periodic gaming events. Gaming events last several hours and happen at most once a day. 
+								</p>
+								<p>
+									During a gaming event, all players play cooperatively as the human team to earn points against an enemy team comprised of a network of AI bots. Players on each team win or lose points when they take certain actions in the game; however, the total point score of each team at the end of the gaming event is all that matters for the win condition. If the humans have more points when the event ends, then the humans win; otherwise, the enemy AI team wins.
+								</p>
+								<p>
+									To entice users to continue playing, there are rewards for winning a gaming event, but to keep things interesting, there are also penalties for losing. When the human team wins, users win prizes based on a tiered system where higher tiers earn better prizes, and the point total at game end determines which tier's prizes are won. On the other hand, should the game end and the human team has a negative score, then all players are forced to take a penalty. Like prizes, penalties have a tiered structure too, which gets progressively more severe for worse and worse tiers.
+								</p>			
+								<h3>
+									<u>Section 3: Introduction to the Dataset</u>
+								</h3>
+								<br>
 									<h4>
-										<u>User Table</u>
+										User Table
 									</h4>
 									<p>
 										This table contains a list of all players for the game and some information about user attributes.  <b>Each row in the table represents a unique user.</b>
@@ -149,21 +176,21 @@
 										    <td>A 36 character string that uniquely identifies a player</td>
 										  </tr>
 										  <tr>
-										    <td>attribute1</td>
+										    <td>subscriber</td>
 										    <td>INT</td>
-										    <td>A binary variable identifying whether a user has attribute1 or not</td>
+										    <td>A binary variable identifying whether the userid is a paid subscriber or not</td>
 										  </tr>
 										  <tr>
-										  	<td>attribute2</td>
+										  	<td>category</td>
 										  	<td>VARCHAR(1)</td>
-										  	<td>A variable that identifies whether a user falls in category 'A', 'B', or 'C'</td>
+										  	<td>A variable that identifies whether the userid falls in category 'A', 'B', or 'C'</td>
 										  </tr>
 									</table>
 									<h4>
-										<u>Event Performance Table</u>
+										Event Performance Table
 									</h4>
 									<p>
-										This table contains an hour-by-hour breakdown of the points earned for each player during every gaming event of 2019.  <b>Each row in the table represents the number of points scored by a userid during a single hour of gameplay of a gaming event.</b>
+										This table contains an hour-by-hour breakdown of the points earned for each player during every gaming event of 2019.  <b>Each row in the table represents the number of points scored by a userid during a single hour of gameplay during a gaming event.</b>
 									</p>
 									<table>
 									  <!-- <caption style="text-align:left">Gaming Event Performance Table</caption> -->
@@ -180,25 +207,22 @@
 									  <tr>
 									    <td>event_date</td>
 									    <td>DATE</td>
-									    <td>The date the user participated in the gaming event</td>
+									    <td>The date the userid participated in the gaming event</td>
 									  </tr>
 									  <tr>
 									  	<td>hour</td>
 									  	<td>INT</td>
-									  	<td>The hour of the day in which the user participated in the gaming event</td>
+									  	<td>The hour of the day in which the userid participated in the gaming event</td>
 									  </tr>
 									    <tr>
 									  	<td>points</td>
 									  	<td>INT</td>
-									  	<td>The number of points scored by a particular user during a single hour of a gaming event</td>
+									  	<td>The number of points scored by the userid during a single hour of a gaming event</td>
 									  </tr>
 									</table>
-									<p>
-										The full project with the original and cleaned versions of the data can be found on <a href="https://github.com/papir805/mobile_app_data_analysis">my GitHub</a>.  Now for the analysis... 
-									</p>
 									<h3>
 										<u>
-											Section 2: User Profiles and Overall Performance
+											Section 4: User Profiles and Overall Performance
 										</u>
 									</h3>
 									<i class="icon solid fa-book">
@@ -248,13 +272,13 @@ ORDER BY num;</pre>
 													<img src="images/mobile_app_data/important_counts.png" alt="" style="width: 65%; display:block; margin-left: auto; margin-right: auto;"/>
 													<br>
 													<p>
-														Each line in the table above needs to be calculated separately in the SQL query and joined together using UNION.  Because multiple rows in the event_performance table correspond to the same gaming event, DISTINCT is needed to identify how many unique dates are in the dataset.  Since there is at most one gaming event per day, the number of unique dates will reveal how many gaming events occurred over the year.  Lastly, to prevent integer division when calculating the participating_users_pct, one of the values in the quotient needs to be cast to type NUMERIC. 
+														Each line in the table above needs to be calculated separately in the SQL query and joined together using UNION.  Because multiple rows in the event_performance table correspond to the same gaming event, DISTINCT is needed to identify how many unique dates are in the dataset.  Since there is at most one gaming event per day, the number of unique dates will reveal how many gaming events occurred over the year.  Lastly, to prevent integer division when calculating the participating_users_pct, one of the values in the quotient needs to be cast to type <i>NUMERIC</i>. 
 													</p>
 													<p>
 														
 													</p>
 													<p>
-														These summary stats show that over the course of a year, there were 147 gaming events with 89.09% of the 1,100 unique users participating in at least one gaming event.  There appears to be high user participation and because gaming events occur on only 40.27% of the days in the year, <b>there is potential to leverage the high user participation by holding gaming events more frequently.</b>
+														These summary stats show that over the course of a year, there were 147 gaming events, with 89.09% of the 1,100 unique users participating in at least one gaming event.  With user participation so high and because gaming events occur on only 40.27% of the days in the year, <b> there is potential to hold additional gaming events throughout the year that will also see high user participation and are likely to be profitable as a result. </b>
 													</p>
 												</section>
 											</div>
@@ -268,19 +292,19 @@ ORDER BY num;</pre>
 												<section class="first">
 													<!-- <h4>SQL Code</h4> -->
 										<pre class="prettyprint lang-sql">
-      SELECT attribute1
+      SELECT subscriber
                    , ROUND(COUNT(userid)::numeric / 
                              SUM(COUNT(userid)) OVER (), 3) AS proportion
          FROM users
-GROUP BY attribute1
-ORDER BY attribute1;
+GROUP BY subscriber
+ORDER BY subscriber;
 
-      SELECT attribute2
+      SELECT category
                    , ROUND(COUNT(userid)::numeric / 
                              SUM(COUNT(userid)) OVER (), 3) AS proportion
          FROM users
-GROUP BY attribute2
-ORDER BY attribute2;</pre>
+GROUP BY category
+ORDER BY category;</pre>
 												</section>
 											</div>
 											<div class="col-6 col-12-medium">
@@ -292,21 +316,21 @@ ORDER BY attribute2;</pre>
 										</div>
 									</div>
 									<p>
-										Two queries, the first grouping by attribute1 and the second grouping by attribute2, are needed to generate the data for the plot.  Using GROUP BY with COUNT(userid) will get the counts of each subgroup, but those will need to be divided by the total number of users in order to calculate the proportion of each subgroup.
+										Two queries, the first grouping by subscriber and the second grouping by category, are needed to generate the data for the plot.  Using GROUP BY with COUNT(userid) will get the counts of each subgroup, but those will need to be divided by the total number of users in order to calculate the proportion of each subgroup.
 									</p>
 									<p>
 										To do this, SUM(COUNT(userid)) OVER () is used.  Using OVER () tells SQL that the SUM should be performed as a window function and will therefore occur <i>after</i> the counts of each subgroup are calculated from the GROUP BY.  This ensures the SUM(COUNT(userid)) will add together the counts of each subgroup, thus giving the total count of all users that is needed to calculate the proportions.  Python's Matplotlib library is then used to create the bar chart.
 									</p>
-										<b><u>The plot reveals what kinds of user profiles are most common:</u></b>
+										<b><u>The bar chart reveals what kinds of user attributes are most common:</u></b>
 										<ul>
 											<li>
-												Attribute1 -  Most common user profile is 0 by a significant majority (81.7%).
+												Subscriber -  Most common value is 0, a non-subscriber, by a significant majority (81.7%).
 											</li>
 											<li>
-												Attribute2 - Most common user profile is B (40.4%), but Profile A isn't that far behind (37.4%).
+												Category - Most common value is B (40.4%), but A isn't that far behind (37.4%).
 											</li>
 											<li>
-												Attribute1 = 1 and attribute2 = C are the least common attributes and have roughly the same proportions, 18% and 22% respectively.
+												subscriber = 1 and category = C are the least common and have roughly the same proportions, 18% and 22% respectively.
 											</li>
 										</ul>
 	
@@ -317,28 +341,19 @@ ORDER BY attribute2;</pre>
 												<section class="first">
 													<!-- <h4>SQL Code</h4> -->
 										<pre class="prettyprint lang-sql">
-      SELECT attribute1
-                   , attribute2
+      SELECT subscriber
+                   , category
                    , ROUND(COUNT(userid)::numeric / 
                                   SUM(COUNT(userid)) OVER (), 3) AS proportion
          FROM users
-GROUP BY attribute1, attribute2
-ORDER BY attribute1, attribute2;</pre>
+GROUP BY subscriber, category
+ORDER BY subscriber, category;</pre>
 													<p>
-														Grouping by both attribute1 and attribute2 and using the same SUM(COUNT(userid)) OVER () strategy from earlier, the proportions for each unique user profile can be calculated.  Python's statsmodels library is then used to create a mosaic plot for visualization.
+														Grouping by both subscriber and category and using the same SUM(COUNT(userid)) OVER () strategy from earlier, the proportions for each unique user profile can be calculated.  Python's statsmodels library is then used to create a mosaic plot for visualization.  
 													</p>
-														<b><u>The plot reveals more about the relationship between attribute1 and attribute2:</u></b>
-														<ul>
-															<li>
-																Most Common: 0B
-															</li>
-															<li>
-																Least Common: 1C
-															</li>
-															<li>
-																For both values of attribute1, the most common user profile is B, then A, then C.
-															</li>
-														</ul>
+													<p>
+														In the mosaic plot, the proportion between the area of each of the six smaller rectangles and the area of the larger rectangle corresponds to the proportions of each of the subgroups 0A, 0B, 0C, 1A, 1B, and 1C to all users.  
+													</p>
 												</section>
 											</div>
 											<div class="col-6 col-12-medium">
@@ -351,7 +366,18 @@ ORDER BY attribute1, attribute2;</pre>
 										</div>
 									</div>
 									<br>
-									<br>
+									<b><u>The plot reveals more about the relationship between subscriber and category:</u></b>
+														<ul>
+															<li>
+																Most Common: 0B (with 0A not far behind)
+															</li>
+															<li>
+																Least Common: 1C
+															</li>
+															<li>
+																Regardless of whether a user is a subscriber, the most common category is B, then A, then C.
+															</li>
+														</ul>
 									<h4>User Performance - Yearly Point Totals</h4>
 									<div class="split left">
 										<div class="row">
@@ -390,10 +416,10 @@ ORDER BY num_users DESC;</pre>
 												<section class="middle">
 													<img src="images/mobile_app_data/point_totals.png" alt="" style="width: 100%;"/>
 													<p>
-														Using GROUP BY and HAVING, I can split up the event_performance table and then join it back together using UNION, labeling users based on user type during the process.  Users with a positive yearly point total, users with a negative yearly point total, or users with a yearly point total of 0 are identified and then I employ the same SUM(COUNT()) OVER () strategy from earlier to get the proportion of each user type and graph using Matplotlib.
+														Using GROUP BY and HAVING, I can split up the event_performance table and then join it back together using UNION, labeling users based on user type during the process.  Users with a positive yearly point total, users with a negative yearly point total, or users with a yearly point total of 0 are identified, and then I employ the same SUM(COUNT()) OVER () strategy from earlier to get the proportion of each user type and graph using Matplotlib.
 													</p>
 													<p>
-														Since the goal of a gaming event is to earn points for your team, segmenting users by their yearly point totals offers some insight into which players are regularly contributing towards winning a game, versus those who detract from it.  The vast majority of players (71.4%) have yearly point totals that are positive and broadly speaking are successfully helping win games.  
+														Since the goal of a gaming event is to earn points for your team, segmenting users by their yearly point totals offers some insight into which players are regularly contributing towards winning a game, versus those who detract from it.  The vast majority of players (71.4%) have yearly point totals that are positive and, broadly speaking, are successfully helping win games.  
 													</p>
 												</section>
 											</div>
@@ -403,7 +429,7 @@ ORDER BY num_users DESC;</pre>
 									<header>
 										<h3>
 											<u>
-												Section 3: Exploring Performance Over Time
+												Section 5: Exploring Performance Over Time
 											</u>
 										</h3>
 										<i class="icon solid fa-book">
@@ -433,11 +459,9 @@ ORDER BY DATE_TRUNC('month', event_date)::date;</pre>
 													In order to group by month, EXTRACT, DATE_PART, or DATE_TRUNC could be used, however, to preserve the month <i>and</i> year, DATE_TRUNC is necessary. Once DATE_TRUNC has been performed, the results are cast to the DATE type, which cuts off the hour, min, sec, etc., parts of the timestamp. Lastly, the GROUP BY is performed, and the total number of points and number of unique users per month are calculated.
 												</p>
 												<p>
-												The first graph shows all months have a sum of points greater than 0, which provides further evidence that overall, most users are successfully contributing to winning gaming events. Late summer and early fall have the only three months that performed better than average: July, August, and September, with August being the best-performing month by a large margin.
+													The first graph shows all months have a sum of points greater than 0, which provides further evidence that overall, most users are successfully contributing to winning gaming events. Late summer and early fall have the only three months that performed better than average: July, August, and September, with August being the best-performing month by a large margin.
 												</p>
-												<p>
-													Looking at the second graph, these late spring and summer months tell an interesting story. While July to August had the largest increase in point performance of the year and the 3rd largest increase in user participation, August to September had a <b>huge</b> drop in point performance despite having the second largest increase in user participation. 
-												</p>
+												
 												</section>
 											</div>
 											<div class="col-6 col-12-medium">
@@ -447,9 +471,12 @@ ORDER BY DATE_TRUNC('month', event_date)::date;</pre>
 											</div>
 										</div>
 									</div>
-<br>
+									<br>
 									<p>
-										Additionally, the largest increase in user participation occurs between January and February, corresponding to the second-largest increase in point performance all year. Unfortunately, this large influx of users early on in the year doesn't do much to improve point performance, as the several months following February all stagnated with below-average point scores.
+										Looking at the second graph, these late spring and summer months tell an interesting story. While July to August had the largest increase in point performance of the year and the 3rd largest increase in user participation, August to September had a <b>huge</b> drop in point performance despite having the second largest increase in user participation. 
+									</p>
+									<p>
+										Additionally, the largest increase in user participation occurs between January and February, corresponding to the second-largest increase in point performance all year. This large influx of users early on in the year improves point performance initially, but the several months following February dropped and then stagnated with below-average point scores.
 									</p>
 									<p>
 										Outside of these best performing late spring and summer months, total points don't show much variation and tend to hover slightly below average. Points earned between February and July remain fairly consistent, and the number of participating users is fairly consistent too. However, despite October, November, and December having the largest number of participating users all year, each of those months performed worse than average.
@@ -457,13 +484,13 @@ ORDER BY DATE_TRUNC('month', event_date)::date;</pre>
 									<p>
 										Intuitively, it makes sense that the number of participating users would correlate to the total number of points scored. The graphs above show there is some evidence for this theory; for instance, January had the lowest number of participating users all year and also had the lowest point performance. On the other hand, there are some inconsistencies too; August had the best point performance, yet it was 5th in terms of participating users.
 									</p>
-									<b><u>These findings are important for two main reasons:</u></b>
+									<b><u>What are the biggest takeaways?</u></b>
 									<ol>
 										<li>
 											Total points earned show some seasonality, and identifying ways to increase user performance during early spring, late fall, and throughout the winter months could be important to fostering growth and generating revenue.
 										</li>
 										<li>
-											Total points earned also shows some connection to number of participating users. Consequently, identifying why the number of users increased rapidly between January and February at the start of the year, or during the late spring and early summer months, could be important to driving future growth and, in turn, additional revenue.
+											Total points earned also show some connection to the number of participating users. Consequently, identifying why the number of users increased rapidly between January and February at the start of the year, or during the late spring and early summer months, could be important to driving future growth and, in turn, additional revenue.
 										</li>
 									</ol>
 									<br>
@@ -505,7 +532,7 @@ ORDER BY DATE_TRUNC('month', event_date)::date;</pre>
 												<section class="middle">
 													<img src="images/mobile_app_data/positive_vs_negative_points_per_month.png" alt="" style="width: 100%;"/>
 													<p>
-														Using GROUP BY and HAVING again, I separate the users into those who have positive yearly point totals and those who have negative yearly point totals and store the results in a CTE.  Afterwards, I can aggregate  the two groups separately by month to find the total monthly points scored for each group.
+														Using GROUP BY and HAVING again, I separate the users into those who have positive yearly point totals and those who have negative yearly point totals and store the results in a CTE.  Afterwards, I can aggregate the two groups separately by month to find the total monthly points scored for each group.
 													</p>
 													<p>
 														Earlier, in the summary statistics part of this analysis, it was noted that 71% of users had positive yearly point totals, while 29% of users had negative yearly point totals.  In the graph above, the blue line represents users with positive yearly point totals and closely mimics the previous graph, where the strongest performance tended to occur during the late spring and summer months; however, the orange line represents users with negative yearly point totals and tells a new part of the story. 
@@ -519,7 +546,7 @@ ORDER BY DATE_TRUNC('month', event_date)::date;</pre>
 										While June and August were the worst months for these users, they're the exception to the rule. In general, for most of the year, there's little variation in the number of points scored by users with negative yearly point totals, and their point scores stay fairly consistent. This could suggest that these users consistently score poorly and are just not very good at the game. They're likely to be the ones at the very bottom of the leaderboards.
 									</p>
 									<p>
-										It's also worth noting that June and August had small spikes in point totals going in opposite directions for each kind of user. For the users with a positive yearly point total, the graph spikes upward, corresponding to the 1st and 3rd largest increases in point totals, while the graph for users with negative yearly point totals moves down, corresponding to the 1st and 2nd most points lost over the year. It seems unusual that both the best users would score more AND the worst users would score less at the same time and might be worth investigating to better understand if there was a cause.
+										It's also worth noting that June and August had small spikes in point totals going in opposite directions for each kind of user. For users with a positive yearly point total, the graph spikes upward, corresponding to the 1st and 3rd largest increases in point totals, while the graph for users with negative yearly point totals moves down, corresponding to the 1st and 2nd most points lost over the year. It seems unusual that both the best users would score more AND the worst users would score less at the same time, and it might be worth investigating to better understand if there was a cause.
 									</p>
 									<h4>Total Points Per Hour By Season</h4>
 									<div class="split left">
@@ -585,7 +612,7 @@ ORDER BY season, hour;</pre>
 GROUP BY DATE_TRUNC('day', event_date)::date
 ORDER BY DATE_TRUNC('day', event_date)::date;</pre>
 													<p>
-														Using DATE_TRUNC, I can truncate the timestamp to the day and then perform a GROUP BY to find the total number of points earned per day.  <b>Since there's at most one gaming event per day, this translates to the total number of points per gaming event.</b>
+														Using DATE_TRUNC, I can truncate the timestamp to the day and then perform a GROUP BY to find the total number of points earned per day.  <b>Since there's at most one gaming event per day, this translates to the total number of points per gaming event. </b>
 													</p>
 													<p>
 														The graph shows the total points earned for each of the 147 gaming events present in the dataset. The vast majority of point totals lie above 0, further confirming what was seen earlier: most gaming events end with the users winning. However, despite frequently winning, many of these point totals are below average, and consequently, users would have earned minimal prizes.
@@ -602,22 +629,25 @@ ORDER BY DATE_TRUNC('day', event_date)::date;</pre>
 									<p>
 										On the other hand, virtually all gaming events found during the months of June through September have above-average performance, with the most successful day of the year happening on September 13th. This isn't too surprising, as it was found earlier in the analysis that the late spring and summer months had the best performance throughout the year. Earlier, it was also noted that one day had the worst performance with -257,483 points earned, which appears to correspond to July 11th. The plot reveals that the second-worst-performing day of the year occurs just a day before, on July 10th. It would be worth spending time to understand what happened on June 10th, June 11th, and September 13th and why user performance was so extreme.
 									</p>
-									<b><u>These observations are important for two reasons:</u></b>
+									<b><u>What are the biggest takeaways?</u></b>
 									<ol>
 										<li>
 											They continue to reinforce the idea that increasing user participation and user performance outside of late spring and summer is important to foster growth and generate revenue.
 										</li>
 										<li>
-											While the late spring and summer months consistently perform well, these months also had the two days that performed worst by a large margin.  Understanding why there are such large extremes during these seasons could be helpful.
+											While the late spring and summer months consistently performed well, these months also had the two days that performed worst by a large margin.  Understanding why there are such large extremes during these seasons could be helpful.
 										</li>
 									</ol>
 									<h3>
 										<u>
-											Section 4: Next Steps
+											Section 6: Next Steps
 										</u>
 									</h3>
 									<p>
-										In <a href="mobile_app_correlation.html">part 3</a> of the project, I perform hypothesis testing and regression to check for and quantify any correlation between user attributes and yearly points earned.
+										Now that I have a better understanding of the event_performance dataset and how users are performing in general, I'll start exploring how user attributes affect performance by incorporating the users dataset. 
+									</p>
+									<p>
+										In <a href="mobile_app_correlation.html">part 3</a> of the project, I join these tables together to produce visualizations, perform hypothesis testing, and build regression models to check for and quantify any correlation between user attributes and user performance.
 									</p>
 								</div>
 							</article>
