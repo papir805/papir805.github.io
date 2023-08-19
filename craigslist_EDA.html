@@ -98,7 +98,7 @@
 							<article class="box post">
 								<header>
 									<h2>Analyzing Craigslist Tutoring Prices</a></h2>
-									<p>Goal: To analyze the dataset of tutoring prices I built and understand my local and national competition as a math tutor.</p>
+									<p>Goal: To analyze the dataset of tutoring prices I built and understand my local and national competition for the math tutoring service I run.</p>
 									<i class="icon solid fa-code">
 										 Python, PostgreSQL
 										</i>
@@ -106,22 +106,41 @@
 										<i class="icon solid fa-chart-line"> Data Analysis, Visualization</i>
 								</header>
 								<p>
-									<h3><u>Background</u></h3>
-									As a math tutor, a majority of my business comes from word-of-mouth recommendations or Craigslist (CL) and I wanted to understand my competition on CL better.<br><br>
-									<a href="etl_craigslist_web_scraper.html">In another project</a>, I built a tool that mined tutoring prices from Craigslist postings and stored them in a local PostgreSQL database.  In order to analyze the dataset, I queried it from the database using SQL and then created visualizations using Python.  These are the results.
+									<h3><u>Background and Impact</u></h3>
+									Outside of my day job, I also run a math tutoring service.  A majority of my business comes from Craigslist (CL) and I wanted to understand my competition on CL better.<br><br>
+									<a href="etl_craigslist_web_scraper.html">In another project</a>, I built a tool that mined tutoring prices from Craigslist postings and stored them in a local PostgreSQL database.  In order to analyze the dataset, I queried it from the database using SQL and then created visualizations using Python.
 								</p>
 								<p>
 									<h5>The process:</h5>
 									<ol>
-										<li>Create table in database for United States Census data to aid visualizations.</li>
-										<li>Query information from local PostgreSQL database segmented by various geographic locations and visualize using Python.</li>
-											<ul>
-												<li>US Census Region</li>
-												<li>US Divisions: Coming Soon</li>
-												<li>State</li>
-												<li>SF Bay Area</li>
+										<li>
+											Create table in database for United States Census data to aid visualizations.
+										</li>
+										<li>
+											Query Craigslist data from local PostgreSQL database and join to the US census data.  Segment by various geographic locations, then visualize using Python:
+										</li>
+											<ul style='margin:0';>
+												<li>
+													US Census Region
+												</li>
+												<li>
+													US Divisions: Coming Soon
+												</li>
+												<li>
+													State
+												</li>
+												<li>
+													SF Bay Area
+												</li>
 											</ul>
+											<li>
+												State any important conclusions.
+											</li>
 									</ol>
+								</p>
+								<h5>Impact</h5>
+								<p>
+									Based on the findings, I was able to see that my hourly rates were below average relative to not just the South Bay, where I predominately operate, but also lower than the average for the state of California and lower than the average for the entire West Coast of the United States.  As such, I was able to increase my hourly rates to a level where I felt I'd still be able to remain competitive.
 								</p>
 								<section>
 									<header>
@@ -131,7 +150,7 @@
 										</i>
 									</header>
 									<p>
-										Craigslist postings aren't segmented by US Census regions such as North, West, South, and East, or by the more granular US divisions such as New England, Middle Atlantic, South Atlantic, etc.  Because I wanted to be able to segment my analysis based on these dimensions, I downloaded publicly available data from the US Census.
+										Craigslist postings aren't segmented by US Census regions such as North, West, South, and East, or by the more granular US divisions such as New England, Middle Atlantic, South Atlantic, etc.  Because I wanted to be able to segment my analysis based on dimensions not found in the Craigslist data itself, I downloaded publicly available data from the US Census to supplement the analysis.
 									</p>
 									<p>
 										After using Psycopg2 to initalize a connection to my local PostgreSQL database, I created a table called us_census_regions and loaded the data from the US census onto it.
@@ -307,7 +326,7 @@ ORDER BY COUNT(id) DESC;
 								</section>
 								<section>
 										<h3>Part 3: Conclusion(s)</h3>
-										The South Bay, has one of the highest cost of living in the nation and is certainly one of the highest in regards to tutoring costs.  That being said, the average hourly tutoring rate in the South Bay ($40.93 / hr) is below the average for the West ($44.79 / hr) and below the average for the state ($48.21 / hr), as well as being the lowest in the SF Bay Area too. 
+										The South Bay has one of the highest costs of living in the nation and is certainly one of the highest in regards to tutoring costs, with an average hourly tutoring rate of $40.93/hr.  The average for the West Coast was $44.79/hr, and the average for the state was $48.21/hr; however, all three of these hourly rates are higher than what my tutoring service charges. As such, I feel a rate increase is reasonable and that I'd still likely be able to remain competitive and retain the same level of business.
 								</section>
 								
 							</article>
