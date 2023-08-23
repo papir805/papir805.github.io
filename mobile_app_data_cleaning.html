@@ -269,7 +269,7 @@
 								</div>
 								<br>
 								<h3>
-									<u>Section 5: Checking for Duplicate Values</u>
+									<u>Section 3: Checking for Duplicate Values</u>
 								</h3>
 								<div class="split left">
 									<div class="row">
@@ -296,7 +296,7 @@
 								</div>
 								<br>
 								<h3>
-									<u>Section 3: Cleaning the users_staging Table</u>
+									<u>Section 4: Cleaning the users_staging Table</u>
 								</h3>
 								<br>
 								<h4>
@@ -375,7 +375,7 @@
 									</p>
 								</div>
 								<h3>
-									<u>Section 4: Cleaning the events_performance_staging Table</u>
+									<u>Section 5: Cleaning the events_performance_staging Table</u>
 								</h3>
 								<br>
 								<h4>
@@ -563,7 +563,7 @@ WHERE points ~ '^.*[^A-Za-z0-9 .-].*$';			</pre>
 									</p>
 								</div>
 								<h3>
-									<u>Section 5: Moving Cleaned Data to New Tables</u>
+									<u>Section 6: Moving Cleaned Data to New Tables</u>
 								</h3>
 								<br>
 								<h4>
@@ -738,7 +738,7 @@ INSERT INTO event_performance(userid, event_date, hour, points)
 									Once the new table is created, the query then copies the data from the event_performance_staging table to the new event_performance table.
 								</p>
 								<h3>
-									<u>Section 6: Next Steps</u>
+									<u>Section 7: Next Steps</u>
 								</h3>
 								<p>
 									Now that the data has been cleaned and moved to new tables in the database, I begin exploring the dataset in <a href="mobile_app_data_analysis.html">part 2</a> of the case study.
