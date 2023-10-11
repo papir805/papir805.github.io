@@ -106,25 +106,35 @@
 										<br>
 										<i class="icon solid fa-chart-line"> Web Scraping, Vectorstores</i>
 								</header>
+								<h3>
+									<u>Background</u>
+								</h3>
 								<p>
-									<h3><u>Background</u></h3>
-									In late 2022 and throughout 2023, ChatGPT made waves when the general public became aware of large language models and how effective they could be at a wide variety of tasks. Like many others, I explored their capabilities; however, when a friend of mine introduced me to a relatively new Python library called Langchain, which facilitates many tasks related to working with LLMs, it opened a door to much more than I could have ever imagined. In particular, I became interested in using it to generate answers to questions by extracting and synthesizing information from a corpus of documents that act as a knowledge base, and thus, this project was born.
+									In late 2022 and throughout 2023, ChatGPT made waves when the general public became aware of large language models (LLMs) and how effective they could be at a wide variety of tasks. Like many others, I explored their capabilities; however, when a friend of mine introduced me to a relatively new Python library called Langchain, it opened a door to much more than I could have ever imagined. 
 								</p>
 								<p>
-									Combining Langchain with other Python libraries enabled me to build a question-answering tool that is extremely versatile because it can quickly answer questions about anything when the answer is contained in some kind of document. While the final incarnation of my QA tool focuses specifically on Cisco data sheets, which are PDF files the tool accesses through Cisco's website, it was initially intended to be used on video game walkthroughs contained in .txt files stored on a local drive. Depending on the use case, the tool could be adapted to work with other common data types, such as .csv, .html, and many others, and can be adapted to handle data stored anywhere, whether it be hosted on the web, stored locally, accessed from a database, etc.
+									Langchain facilitates many tasks related to working with LLMs and I became interested in using it to generate answers to questions that come up while playing through video games.  I was hoping the LLM could quickly answer questions like, “where is X item located?” or, “what strategy should I use to defeat boss Y?” without my usual approach of having to perform a Google search and skim through the results for an answer.  Having grown up playing video games, I knew of several websites that host video game walkthroughs, which contain detailed information about every aspect of a game, and I was hoping that harnessing the power of LLMs would allow me to extract and synthesize information from these walkthroughs to act as a knowledge base.  From there, I could ask the LLM my questions, and thus, this project was born.
 								</p>
+								<p>
+									Unfortunately, the walkthroughs found on these sites are considered intellectual property and I wanted to be able to host my project on my website without worry of any potential ethical or legal quandaries.  The knowledge gained from building my first question answering (QA) tool in Langchain was helpful though as the same QA tool can be adapted to answer questions about information coming in many other forms.  I shifted the focus away from video game walkthroughs and the current QA tool uses Cisco product data sheets for the knowledge base instead.
+								</p>
+								<p>
+									Great for Cisco, you say, but what's the benefit for myself? Well, because Langchain and LLMs are so versatile, they can be adapted to work with pretty much any information that’s stored as text.  You could ask questions about websites, books, emails, or even the documentation you find yourself using at work.  Just think: how powerful would it be if you had ChatGPT by your side but could focus its attention on specific information.  What if you could depend on it to use that information to correctly answer questions, even citing sources for where the answer came from in the text? The possibilities are endless…
+								</p>
+								<h3>
+									<u>For the Future</u>
+								</h3>
 								<p>
 									With the QA tool built, I'm currently in the process of verifying its accuracy and the quality of the answers. Because LLMs are prone to <a href="https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)">hallucination</a>, any answers they provide should be taken with a grain of salt, and there may be ways to improve the quality of the answers they provide, such as through prompt engineering or search re-ranking. To aid in my testing, the tool currently returns the source documents it used in generating an answer, which helps verify the accuracy of its answers.  The initial tests I've performed are promising, and the QA tool has been generating correct answers as long as it's asked a question it was intended to answer—a question about a Cisco product that has a data sheet in PDF form accessible online.
 								</p>
 								<p>
-									Once the QA tool's accuracy can be assessed further, should it be found to provide accurate, high-quality answers, it has the potential to increase the productivity of Cisco support engineers. In its current form, the QA tool would help them answer technical product questions from customers more efficiently. However, with some development, the QA tool could automatically generate and send email responses to customer questions, further increasing productivity by removing a portion of the workload for these engineers entirely.
+									Once the QA tool's accuracy can be assessed further, should it be found to provide accurate, high-quality answers, it has the potential to increase the productivity of Cisco support engineers. In its current form, the QA tool would help them answer technical product questions from customers more efficiently. However, with some development, the QA tool could automatically generate and send email responses to customer questions, further increasing productivity by removing a portion of their workload entirely.
 								</p>
+								<h3>
+									<u>Using the Tool</u>
+								</h3>
 								<p>
-									Great for Cisco, you say, but what's the benefit for myself or for my company? Well, because the QA tool is so versatile, it can be adapted to work with pretty much any of the documentation you find yourself using at your company. Just think: how powerful would it be if you had ChatGPT by your side and could depend on it to correctly answer questions over the course of a workday, even citing sources for where the answer came from in the documentation? The possibilities are too numerous to count...
-								</p>
-								<p>
-									<h3><u>Using the Tool</u></h3>
-									To use the tool, simply type the name of a Cisco product, such as a switch, WebEx, etc., and a question about that product, then click submit.  If you aren't a Cisco engineer, it might be tough to think of a question to ask, so here are some you can try in order to see what the tool is capable of:
+									To use the tool, simply type the name of a Cisco product, such as a network switch, WebEx, etc., and a question about that product, then click submit.  If you aren't a Cisco engineer, it might be tough to think of a question to ask, so here are some you can try in order to see what the tool is capable of:
 								</p>
 								<ul>Product: Catalyst 9300
 											<ul>
@@ -157,7 +167,7 @@
 											</ul>
 									</ul>
 								<p>
-									By default, the tool searches through the datasheets for the 8 pages most likely to contain an answer, however the number of pages can be adjusted by using the slider.  Whichever pages are found act as source material and are fed to the LLM to use in answering the question.  Once an answer has been generated, the tool returns the answer and provides links to the pages it used, which aid in verifying the accuracy of the answer.  If on the other hand you prefer to only see the answer, uncheck the box that says "Print sources?"
+									By default, the tool searches through the datasheets for the 8 pages most likely to contain an answer, however the number of pages can be adjusted by using the slider.  Whichever pages are found act as source material and are fed to the LLM to use in answering the question.  Once an answer has been generated, the tool returns the answer and provides links to the pages it used, which aid in verifying the accuracy of the answer.  If on the other hand you prefer to only see the answer, uncheck the box that says "Print sources"
 								</p>
 								<p>
 									If you'd like to see the code behind the implementation of this tool, the full project can be found on <a href="https://github.com/papir805/cisco_qa_tool">my GitHub</a>.
