@@ -120,9 +120,10 @@
 									<u>Background</u>
 								</h3>
 								<p>
-									Because my wife was preparing to enter into the field of accounting and I was looking to develop projects to demonstrate proficiency with data analysis, I combined the two ideas together to create this project. 
+									Because my wife was preparing to enter the field of accounting and I was looking to develop projects to demonstrate proficiency with data analysis, I combined the two ideas together to create this project. 
 								</p>
-									My wife had done her own research on the field in regards to maximizing long term salary earning potential.  She stated that accountants with their CPA license earn more, as do accountants who start at a public accounting firm, then transition into working as an accountant in industry at a private company. 
+								<p>
+									My wife had done her own research on the field in regards to maximizing long-term salary earning potential.  She stated that accountants with their CPA license earn more, as do accountants who start at a public accounting firm and then transition into working as an accountant in industry at a private company. 
 								</p>
 									I used this data to better understand if those statements are true, as well as what a typical accountant looks like, by breaking the analysis into three Jupyter notebooks:
 									<ol>
@@ -138,7 +139,7 @@
 									</ol>
 								</p>
 								<p>
-									I've summarized my methodology and the results below, however the full project goes into much more detail.  It can be found on 
+									I've summarized my methodology and the results below; however, the full project goes into much more detail.  It can be found on 
 									<a href="https://github.com/papir805/accounting_analysis">
 										my GitHub
 									</a>.
@@ -172,7 +173,7 @@
 										<h4>
 											1.2 Cleaning strings:
 										</h4>
-										Since the survey responses came from Google Forms, which prompts users to type in their responses to the survey questions, all data in our CSV file are strings.  Fields that related to numerical entries, such as salary, or hours per week, needed to be manipulated.
+										Since the survey responses came from Google Forms, which prompts users to type in their responses to the survey questions, all the data in our CSV file are strings.  Fields that related to numerical entries, such as salary or hours per week, needed to be manipulated.
 										<br>
 										<br>
 										<ul>
@@ -183,7 +184,7 @@
 												Commas and dollar signs needed to be removed
 											</li>
 										</ul>
-										Other fields such as "Line of Service" needed their entries standardized.  Survey respondants were allowed to type in their line of service and consequently entries such as Tax and Audit, Tax & Audit, Audit and Tax, Audit/Tax, etc., all describe the same line of service.  I was able to distill 36 unique strings down to just 9 distinct lines of service.
+										Other fields, such as "Line of Service," needed their entries standardized.  Survey respondents were allowed to type in their line of service, and consequently, entries such as Tax and Audit, Tax & Audit, Audit and Tax, Audit/Tax, etc., all describe the same line of service.  I was able to distill 36 unique strings down to just nine distinct lines of service.
 										<br>
 										<br> 
 										Additionally, I was able to distill 2 distinct entries for "Gender" down to 1 by renaming the "Prefer not to say" and "Other" categories into "Undisclosed".
@@ -192,22 +193,22 @@
 										<h4>
 											1.3 Converting columns to appropriate types
 										</h4>
-										Fields like "Current Salary + Bonus", "Years of Experience", "Average Hours Per Week", or "Years Public Before Exit" all needed to be re-cast from string to float.
+										Fields like "Current Salary + Bonus," "Years of Experience," "Average Hours Per Week," or "Years Public Before Exit" all needed to be re-cast from string to float.
 									</p>
 									<p>
 										<h4>
 											1.4 Replacing/Imputing Null values
 										</h4>
-										Gender: Replaced Null values with Undisclosed
+										Gender: replaced Null values with Undisclosed
 										<br>
-										Line of Service: Replaced Null values with Other<br>
-										Current Industry: Replaced Null values with Other
+										Line of Service: replaced Null values with Other<br>
+										Current Industry: replaced Null values with Other
 										<br>
 										Distribution of salaries was right-skewed, imputed Null values with the median.
 										<br>
 										Distribution of years of experience was right-skewed, imputed Null values with the median.
 										<br>
-										Cost of living: Imputed Null Values with the mode.
+										Cost of living: imputed Null Values with the mode.
 										<br>
 									</p>
 								</section>
@@ -286,23 +287,23 @@
 										</table>
 									</p>
 									<p>
-										The purpose of the EDA is to begin analyzing the quantitative data to better understand the typical US accountant.  What's the typical salary, typical years of experience, hours worked per week, etc.
+										The purpose of the EDA is to begin analyzing the quantitative data to better understand the typical US accountant.  What's the typical salary, typical years of experience, hours worked per week, etc.?
 									</p>
 									<p>
-										Once a baseline for the typical accountant is established, then I began to use the qualitative data to understand different segments of the accounting population.  For instance, what is the typical salary for male vs. female accountants, or for accountants that have their CPA license vs. those who don't.
+										Once a baseline for the typical accountant was established, I began to use the qualitative data to understand different segments of the accounting population.  For instance, what is the typical salary for male vs. female accountants, or for accountants who have their CPA license vs. those who don't?
 									</p>
 									<p>
 										While performing the EDA, I'm also looking for data that will support my wife's research regarding which factors will increase an accountant's long-term salary earning potential.  Namely:
 										<br>
 										<ol>
 											<li>
-												What impact does having a CPA license have on annual salary?
+												What impact does having a CPA license have on your annual salary?
 											</li>
 											<li>
-												What impact does beginning one's career as an accountant for a public accounting firm vs. beginning a career as an accountant for a company in private industry?
+												What impact does beginning one's career as an accountant for a public accounting firm have compared to beginning a career as an accountant for a company in the private industry?
 											</li>
 											<li>
-												Are there any accountants in the survey who are considered outliers and can they provide any insight to the field?
+												Are there any accountants in the survey who are considered outliers, and can they provide any insight into the field?
 											</li>
 										</ol>
 									</p>
@@ -321,13 +322,13 @@
 												Has between 2-5 years of experience.
 											</li>
 											<li>
-												Most accountants who began at a public accounting firm have spent 2-4 years working there before transitioning to work as an accountant in private industry.
+												Has spent 2-4 years working at a public accounting firm before transitioning to work as an accountant in a private industry.
 											</li>
 											<li>
-												Has an average workweek between 40-50 hours per week.
+												Has an average workweek between 40 and 50 hours per week.
 											</li>
 											<li>
-												Earns between $60,000-$95,000 annually, with median earnings around $73,000.
+												Earns between $60,000 and $95,000 annually, with median earnings around $73,000.
 											</li>
 										</ul>
 										<img src="images/accounting_analysis/reddit_accounting_analysis/gender_boxplot_and_proportions.png" alt="" style="width: 70%;"/>
@@ -339,7 +340,7 @@
 										
 										<ul>
 											<li>
-												An overwhelming majority of respondents to the survey are male (roughly 3.5:1) and there is some evidence to indicate a pay gap between male and female accountants exists.  These differences are visualized in a Tableau story in another project of mine, the 
+												An overwhelming majority of respondents to the survey are male (roughly 3.5:1), and there is some evidence to indicate a pay gap between male and female accountants exists.  These differences are visualized in a Tableau story in another project of mine, the 
 												<a href="us_accounting_viz.html">
 													US Accounting Viz
 												</a>.
@@ -352,11 +353,11 @@
 										</h5>
 										<ul>
 											<li>
-												Roughly half of US accountants have their CPA, however those who have their license realize a very tangible increase in their average annual salary.
+												Roughly half of US accountants have their CPA; however, those who have their license realize a very tangible increase in their average annual salary.
 											</li>
 											<ul>
 												<li>
-													Accountants with their CPA license have mean annual salary that is $24,000 higher (denoted by the black star in the boxplots) and a median annual salary that is $22,000 more than accountants who don't have their CPA license.
+													Accountants with their CPA license have a mean annual salary that is $24,000 higher (denoted by the black star in the boxplots) and a median annual salary that is $22,000 more than accountants who don't have their CPA license.
 												</li>
 											</ul>
 										</ul>
@@ -367,7 +368,7 @@
 										</h5>
 										<ul>
 											<li>
-												Accountants who spent several years working in a public accounting firm before transitioning to work in private industry had a mean and median annual salary that was $25,000 higher than their counterparts who had only ever worked in private industry.  (The mean is denoted by the black star in the boxplots)
+												Accountants who spent several years working in a public accounting firm before transitioning to work in private industry had a mean and median annual salary that was $25,000 higher than their counterparts who had only ever worked in private industry.  (The mean is denoted by the black star in the boxplots.)
 											</li>
 										</ul>
 										<h5>
@@ -378,7 +379,7 @@
 												An accountant was considered an outlier if their annual salary was greater than two standard deviations from the mean.  These accountants tended to have much more work experience and have probably been in the industry long enough to reach senior positions that pay large salaries.
 											</li>
 											<li>
-												The pay gap among genders is very pronounced here with some male accountants earning as much as $100,000 more than their female counterparts who have just as much, if not more, years of work experience.
+												The pay gap among genders is very pronounced here, with some male accountants earning as much as $100,000 more than their female counterparts, who have just as many, if not more, years of work experience.
 											</li>
 										</ul>
 									</p>
@@ -386,7 +387,7 @@
 										<h4>
 											2.2 Conclusion(s):
 										</h4>
-										The research my wife had done on her own seems to agree with the data in the survey.  If one's primary goal is to maximize long-term earning potential, one should get their CPA license as early as possible and begin their career by spending several years at a public firm, then transition into private industry.
+										The research my wife had done on her own seems to agree with the data in the survey.  If one's primary goal is to maximize long-term earning potential, one should get their CPA license as early as possible and begin their career by spending several years at a public firm, then transition into a private industry.
 									</p>
 								</section>
 								<section>
@@ -404,7 +405,7 @@
 										<br>
 									</header>
 									<p>
-										The purpose of the regression analysis is to quantify the extent to which factors such as years of experience, having one's CPA license or not, etc., have on changes in yearly salary.
+										The purpose of the regression analysis is to quantify the extent to which changing factors such as years of experience, having one's CPA license or not, etc., have on yearly salary.
 									</p>
 									<p>
 										<h4>
