@@ -19,7 +19,7 @@
 
 					<!-- Logo -->
 					<h1>
-						Using mathematics to solve problems with real world data excites me.
+						Using mathematics to solve problems with real-world data excites me.
 					</h1>
 
 				<!-- Nav -->
@@ -100,46 +100,81 @@
 							<article class="box post">
 <!-- 								<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a> -->
 								<header>
-									<h2> <a href="https://github.com/papir805/accounting_analysis">Reddit Accounting Survey Analysis</a></h2>
-									<p>Goal: To understand the typical accountant and the accounting field.</p>
-										<i class="icon solid fa-code">
+									<h2>
+										<a href="https://github.com/papir805/accounting_analysis">
+											Reddit Accounting Survey Analysis
+										</a>
+									</h2>
+									<p>
+										Goal: To understand the typical accountant and the accounting field.
+									</p>
+									<i class="icon solid fa-code">
 										 Python, Excel
-										</i><br>
-										<i class="icon solid fa-chart-line"> Data Cleaning, Exploratory Data Analysis, Visualization, Linear Regression</i>
+									</i>
+									<br>
+									<i class="icon solid fa-chart-line">
+										 Data Cleaning, Exploratory Data Analysis, Visualization, Linear Regression
+									</i>
 								</header>
-								<h3><u>Background</u></h3>
+								<h3>
+									<u>Background</u>
+								</h3>
 								<p>
 									Because my wife was preparing to enter into the field of accounting and I was looking to develop projects to demonstrate proficiency with data analysis, I combined the two ideas together to create this project. 
 								</p>
 									My wife had done her own research on the field in regards to maximizing long term salary earning potential.  She stated that accountants with their CPA license earn more, as do accountants who start at a public accounting firm, then transition into working as an accountant in industry at a private company. 
 								</p>
-									I used this data to better understand if those statements are true, as well as what a typical accountant looks like, by breaking the analysis into three Jupyter notebooks:<br><br>
-
-									1) Data Cleaning<br>
-									2) Exploratory Data Analysis<br>
-									3) Regression Analysis<br>
+									I used this data to better understand if those statements are true, as well as what a typical accountant looks like, by breaking the analysis into three Jupyter notebooks:
+									<ol>
+										<li>
+											Data Cleaning
+										</li>
+										<li>
+											Exploratory Data Analysis
+										</li>
+										<li>
+											Regression Analysis
+										</li>
+									</ol>
 								</p>
 								<p>
-									I've summarized my methodology and the results below, however the full project goes into much more detail.  It can be found on <a href="https://github.com/papir805/accounting_analysis">my GitHub</a>.
+									I've summarized my methodology and the results below, however the full project goes into much more detail.  It can be found on 
+									<a href="https://github.com/papir805/accounting_analysis">
+										my GitHub
+									</a>.
 								</p>
 								<section>
 									<header>
-										<h3> <u><a href="https://github.com/papir805/accounting_analysis/tree/main/cleaning">Part 1: Data Cleaning</a></u></h3>
+										<h3>
+											<u>
+												<a href="https://github.com/papir805/accounting_analysis/tree/main/cleaning">
+													Part 1: Data Cleaning
+												</a>
+											</u>
+										</h3>
 										<i class="icon solid fa-book">
-										 Pandas, NumPy, Matplotlib
+											 Pandas, NumPy, Matplotlib
 										</i>
 									</header>
 									<p>
 										The data came from a yearly Google Forms survey collected from users of the r/Accounting section of Reddit.  The data was downloaded as an Excel CSV file and imported into a Pandas DataFrame object for cleaning and manipulation.
 									</p>
 									<p>
-										<h4>1.1 Remove unncessary data: </h4>
-										Information regarding when a survey response was collected was removed as it isn't helpful in understanding the accounting field.<br><br>
+										<h4>
+											1.1 Remove unncessary data: 
+										</h4>
+										Information regarding when a survey response was collected was removed as it isn't helpful in understanding the accounting field.
+										<br>
+										<br>
 										Furthermore, although the survey was global, 87% of respondents indicated living in the US.  Given that my wife will be an accountant in the US, I dropped survey responses coming from other countries.  After dropping non-US accountants, there were still 1201 survey responses. 
 									</p>
 									<p>
-										<h4>1.2 Cleaning strings:</h4>
-										Since the survey responses came from Google Forms, which prompts users to type in their responses to the survey questions, all data in our CSV file are strings.  Fields that related to numerical entries, such as salary, or hours per week, needed to be manipulated.<br><br>
+										<h4>
+											1.2 Cleaning strings:
+										</h4>
+										Since the survey responses came from Google Forms, which prompts users to type in their responses to the survey questions, all data in our CSV file are strings.  Fields that related to numerical entries, such as salary, or hours per week, needed to be manipulated.
+										<br>
+										<br>
 										<ul>
 											<li>
 												Values like "73k" needed to be changed to 73000
@@ -148,60 +183,106 @@
 												Commas and dollar signs needed to be removed
 											</li>
 										</ul>
-										Other fields such as "Line of Service" needed their entries standardized.  Survey respondants were allowed to type in their line of service and consequently entries such as Tax and Audit, Tax & Audit, Audit and Tax, Audit/Tax, etc., all describe the same line of service.  I was able to distill 36 unique strings down to just 9 distinct lines of service.<br><br> 
+										Other fields such as "Line of Service" needed their entries standardized.  Survey respondants were allowed to type in their line of service and consequently entries such as Tax and Audit, Tax & Audit, Audit and Tax, Audit/Tax, etc., all describe the same line of service.  I was able to distill 36 unique strings down to just 9 distinct lines of service.
+										<br>
+										<br> 
 										Additionally, I was able to distill 2 distinct entries for "Gender" down to 1 by renaming the "Prefer not to say" and "Other" categories into "Undisclosed".
-										</p>
+									</p>
 									<p>
-										<h4>1.3 Converting columns to appropriate types</h4>
+										<h4>
+											1.3 Converting columns to appropriate types
+										</h4>
 										Fields like "Current Salary + Bonus", "Years of Experience", "Average Hours Per Week", or "Years Public Before Exit" all needed to be re-cast from string to float.
 									</p>
 									<p>
-										 <h4>1.4 Replacing/Imputing Null values</h4>
-										   Gender: Replaced Null values with Undisclosed<br>
-										   Line of Service: Replaced Null values with Other<br>
-										   Current Industry: Replaced Null values with Other<br>
-										   Distribution of salaries was right-skewed, imputed Null values with the median.<br>
-										   Distribution of years of experience was right-skewed, imputed Null values with the median.<br>
-										   Cost of living: Imputed Null Values with the mode.<br>
+										<h4>
+											1.4 Replacing/Imputing Null values
+										</h4>
+										Gender: Replaced Null values with Undisclosed
+										<br>
+										Line of Service: Replaced Null values with Other<br>
+										Current Industry: Replaced Null values with Other
+										<br>
+										Distribution of salaries was right-skewed, imputed Null values with the median.
+										<br>
+										Distribution of years of experience was right-skewed, imputed Null values with the median.
+										<br>
+										Cost of living: Imputed Null Values with the mode.
+										<br>
 									</p>
 								</section>
 								<section>
 									<header>
-										<h3><u><a href="https://github.com/papir805/accounting_analysis/tree/main/exploratory_data_analysis">Part 2: Exploratory Data Analysis (EDA)</a></u></h3>
+										<h3>
+											<u>
+												<a href="https://github.com/papir805/accounting_analysis/tree/main/exploratory_data_analysis">
+													Part 2: Exploratory Data Analysis (EDA)
+												</a>
+											</u>
+										</h3>
 										<i class="icon solid fa-book">
-										 Pandas, NumPy, Matplotlib, and Seaborn
-										</i><br>
+											 Pandas, NumPy, Matplotlib, and Seaborn
+										</i>
+										<br>
 									</header>
 									<p>
 										<table>
-										  <tr>
-										    <th>Qualitative Data</th>
-										    <th>Quantitative Data</th>
-										  </tr>
-										  <tr>
-										    <td>Exit Status</td>
-										    <td>Years Experience</td>
-										  </tr>
-										  <tr>
-										    <td>Has CPA</td>
-										    <td>Current Salary + Bonus</td>
-										  </tr>
-										  <tr>
-										    <td>Current Industry</td>
-										    <td>Years Public Before Exit</td>
-										  </tr>
-										  <tr>
-										    <td>Cost of Living</td>
-										    <td>Average Hours Per Week</td>
-										  </tr>
-										  <tr>
-										    <td>Gender</td>
-										    <td></td>
-										  </tr>
-										  <tr>
-										    <td>Line of Service</td>
-										    <td></td>
-										  </tr>
+										<tr>
+											<th>
+												Qualitative Data
+											</th>
+											<th>
+												Quantitative Data
+											</th>
+										</tr>
+										<tr>
+											<td>
+												Exit Status
+											</td>
+											<td>
+												Years Experience
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Has CPA
+											</td>
+											<td>
+												Current Salary + Bonus
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Current Industry
+											</td>
+											<td>
+												Years Public Before Exit
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Cost of Living
+											</td>
+											<td>
+												Average Hours Per Week
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Gender
+											</td>
+											<td>
+												<!-- keep this blank -->
+											</td>
+										</tr>
+										<tr>
+											<td>
+												Line of Service
+											</td>
+											<td>
+												<!-- keep this blank -->
+											</td>
+										</tr>
 										</table>
 									</p>
 									<p>
@@ -211,77 +292,128 @@
 										Once a baseline for the typical accountant is established, then I began to use the qualitative data to understand different segments of the accounting population.  For instance, what is the typical salary for male vs. female accountants, or for accountants that have their CPA license vs. those who don't.
 									</p>
 									<p>
-										While performing the EDA, I'm also looking for data that will support my wife's research regarding which factors will increase an accountant's long-term salary earning potential.  Namely:<br>
+										While performing the EDA, I'm also looking for data that will support my wife's research regarding which factors will increase an accountant's long-term salary earning potential.  Namely:
+										<br>
 										<ol>
-											<li>What impact does having a CPA license have on annual salary?</li>
-											<li>What impact does beginning one's career as an accountant for a public accounting firm vs. beginning a career as an accountant for a company in private industry?</li>
-											<li>Are there any accountants in the survey who are considered outliers and can they provide any insight to the field?</li>
+											<li>
+												What impact does having a CPA license have on annual salary?
+											</li>
+											<li>
+												What impact does beginning one's career as an accountant for a public accounting firm vs. beginning a career as an accountant for a company in private industry?
+											</li>
+											<li>
+												Are there any accountants in the survey who are considered outliers and can they provide any insight to the field?
+											</li>
 										</ol>
 									</p>
 									<p>
-										<h4>2.1 Key Findings</h4>
+										<h4>
+											2.1 Key Findings
+										</h4>
 										<img src="images/accounting_analysis/reddit_accounting_analysis/accounting_boxplots.png" alt="" style="width: 70%;"/>
+										<br>
+										<br>
 										<h5>
-											<br>The typical US accountant:<br>
+											The typical US accountant:
 										</h5>
 										<ul>
-											<li>Has between 2-5 years of experience.
-											<li>Most accountants who began at a public accounting firm have spent 2-4 years working there before transitioning to work as an accountant in private industry.</li>
-											<li>Has an average workweek between 40-50 hours per week.</li>
-											<li>Earns between $60,000-$95,000 annually, with median earnings around $73,000.</li>
+											<li>
+												Has between 2-5 years of experience.
+											</li>
+											<li>
+												Most accountants who began at a public accounting firm have spent 2-4 years working there before transitioning to work as an accountant in private industry.
+											</li>
+											<li>
+												Has an average workweek between 40-50 hours per week.
+											</li>
+											<li>
+												Earns between $60,000-$95,000 annually, with median earnings around $73,000.
+											</li>
 										</ul>
 										<img src="images/accounting_analysis/reddit_accounting_analysis/gender_boxplot_and_proportions.png" alt="" style="width: 70%;"/>
+										<br>
+										<br>
 										<h5>
-											<br>Segmenting based on Gender:<br>
+											Segmenting based on Gender:
 										</h5>
 										
 										<ul>
-											<li>An overwhelming majority of respondents to the survey are male (roughly 3.5:1) and there is some evidence to indicate a pay gap between male and female accountants exists.  These differences are visualized in a Tableau story in another project of mine, the <a href="us_accounting_viz.html">US Accounting Viz</a>.</li>
+											<li>
+												An overwhelming majority of respondents to the survey are male (roughly 3.5:1) and there is some evidence to indicate a pay gap between male and female accountants exists.  These differences are visualized in a Tableau story in another project of mine, the 
+												<a href="us_accounting_viz.html">
+													US Accounting Viz
+												</a>.
+											</li>
 										</ul>
 										<img src="images/accounting_analysis/reddit_accounting_analysis/has_cpa_boxplot.png" alt="" style="width: 70%;"/>
+										<br>
 										<h5>
-											Segmenting based on Has CPA:<br>
+											Segmenting based on Has CPA:
 										</h5>
 										<ul>
-											<li>Roughly half of US accountants have their CPA, however those who have their license realize a very tangible increase in their average annual salary.  </li>
+											<li>
+												Roughly half of US accountants have their CPA, however those who have their license realize a very tangible increase in their average annual salary.
+											</li>
 											<ul>
-												<li>Accountants with their CPA license have mean annual salary that is $24,000 higher (denoted by the black star in the boxplots) and a median annual salary that is $22,000 more than accountants who don't have their CPA license.</li>
+												<li>
+													Accountants with their CPA license have mean annual salary that is $24,000 higher (denoted by the black star in the boxplots) and a median annual salary that is $22,000 more than accountants who don't have their CPA license.
+												</li>
 											</ul>
 										</ul>
 										<img src="images/accounting_analysis/reddit_accounting_analysis/exit_status_boxplot1.png" alt="" style="width: 70%;"/>
+										<br>
 										<h5>
-											Segmenting based on Years Public Before Exit:<br>
+											Segmenting based on Years Public Before Exit:
 										</h5>
 										<ul>
-											<li>Accountants who spent several years working in a public accounting firm before transitioning to work in private industry had a mean and median annual salary that was $25,000 higher than their counterparts who had only ever worked in private industry.  (The mean is denoted by the black star in the boxplots)</li>
+											<li>
+												Accountants who spent several years working in a public accounting firm before transitioning to work in private industry had a mean and median annual salary that was $25,000 higher than their counterparts who had only ever worked in private industry.  (The mean is denoted by the black star in the boxplots)
+											</li>
 										</ul>
 										<h5>
-											Outliers:<br>
+											Outliers:
 										</h5>
 										<ul>
-											<li>An accountant was considered an outlier if their annual salary was greater than two standard deviations from the mean.  These accountants tended to have much more work experience and have probably been in the industry long enough to reach senior positions that pay large salaries.</li>
-											<li>The pay gap among genders is very pronounced here with some male accountants earning as much as $100,000 more than their female counterparts who have just as much, if not more, years of work experience.</li>
+											<li>
+												An accountant was considered an outlier if their annual salary was greater than two standard deviations from the mean.  These accountants tended to have much more work experience and have probably been in the industry long enough to reach senior positions that pay large salaries.
+											</li>
+											<li>
+												The pay gap among genders is very pronounced here with some male accountants earning as much as $100,000 more than their female counterparts who have just as much, if not more, years of work experience.
+											</li>
 										</ul>
 									</p>
 									<p>
-										<h4>2.2 Conclusion(s):</h4>
+										<h4>
+											2.2 Conclusion(s):
+										</h4>
 										The research my wife had done on her own seems to agree with the data in the survey.  If one's primary goal is to maximize long-term earning potential, one should get their CPA license as early as possible and begin their career by spending several years at a public firm, then transition into private industry.
 									</p>
 								</section>
 								<section>
 									<header>
-										<h3><u><a href="https://github.com/papir805/accounting_analysis/tree/main/regression_analysis">Part 3: Regression Analysis</a></u></h3>
+										<h3>
+											<u>
+												<a href="https://github.com/papir805/accounting_analysis/tree/main/regression_analysis">
+													Part 3: Regression Analysis
+												</a>
+											</u>
+										</h3>
 										<i class="icon solid fa-book">
-										 Pandas, NumPy, Matplotlib, Seaborn, SciPy, Sklearn, and Statsmodels
-										</i><br>
+											 Pandas, NumPy, Matplotlib, Seaborn, SciPy, Sklearn, and Statsmodels
+										</i>
+										<br>
 									</header>
 									<p>
 										The purpose of the regression analysis is to quantify the extent to which factors such as years of experience, having one's CPA license or not, etc., have on changes in yearly salary.
 									</p>
 									<p>
-										<h4>3.1 Method:</h4>
+										<h4>
+											3.1 Method:
+										</h4>
 										<ol>
-											<li>Use heatmaps to visualize the correlation between all of our variables and annual salary.</li>
+											<li>
+												Use heatmaps to visualize the correlation between all of our variables and annual salary.
+											</li>
 											<img src="images/accounting_analysis/reddit_accounting_analysis/heatmap1.png"style="width:40%">
 											<ul>
 												<li>
@@ -291,17 +423,27 @@
 													Has CPA also showed moderate correlation with Current Salary + Bonus 
 												</li>
 											</ul>
-											<li>Construct various simple, polynomial, and multi-variate linear regression models and check if conditions for linear regression are present.</li>
-												<ul>
-													<li>Check residual plots.</li>
-													<li>Check QQ normal probability plots.</li>
-													<img src="images/accounting_analysis/reddit_accounting_analysis/residual_and_qq_plot1.png" style="width:60%">
-												</ul>
-											<li>Construct models using training data and verify performance against testing data.</li>
+											<li>
+												Construct various simple, polynomial, and multi-variate linear regression models and check if conditions for linear regression are present.
+											</li>
+											<ul>
+												<li>
+													Check residual plots.
+												</li>
+												<li>
+													Check QQ normal probability plots.
+												</li>
+												<img src="images/accounting_analysis/reddit_accounting_analysis/residual_and_qq_plot1.png" style="width:60%">
+											</ul>
+											<li>
+												Construct models using training data and verify performance against testing data.
+											</li>
 										</ol>
 									</p>
 									<p>
-										<h4>3.2 Conclusion(s):</h4>
+										<h4>
+											3.2 Conclusion(s):
+										</h4>
 										<div class="row">
 										  <div class="column">
 										    <img src="images/accounting_analysis/reddit_accounting_analysis/summary_output1.png"style="width:100%">
@@ -323,7 +465,6 @@
 									</ul>
 								</section>
 							</article>
-
 					</div>
 				</section>
 
