@@ -34,7 +34,7 @@
 
 					<!-- Logo -->
 					<h1>
-						Using mathematics to solve problems with real world data excites me.
+						Using mathematics to solve problems with real-world data excites me.
 					</h1>
 
 				<!-- Nav -->
@@ -115,13 +115,21 @@
 							<article class="box post">
 								<!-- <a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a> -->
 								<header>
-									<h2><a href="https://github.com/papir805/mobile_app_data_analysis">Case Study - Part 3: Correlation Between User Attributes and Performance</a></h2>
-									<p>Goal: To identify which user attributes, if any, correlate most strongly with performance  </p>
+									<h2>
+										<a href="https://github.com/papir805/mobile_app_data_analysis">
+											Case Study - Part 3: Correlation Between User Attributes and Performance
+										</a>
+									</h2>
+									<p>
+										Goal: To identify which user attributes, if any, correlate most strongly with performance  
+									</p>
 									<i class="icon solid fa-code">
 										 Python, PostgreSQL
 									</i>
 									<br>
-									<i class="icon solid fa-chart-line"> Visualization, Regression, and Hypothesis Testing</i>
+									<i class="icon solid fa-chart-line">
+										 Visualization, Regression, and Hypothesis Testing
+									</i>
 								</header>
 								<h3>
 									<u>Background</u>
@@ -130,7 +138,14 @@
 									This article covers part 3 of the case study and is meant to detail my process as I check for a correlation between user attributes and user performance.  I'll create visualizations to check for signs of correlation and will use hypothesis testing to identify which user attributes, if any, are statistically significant predictors of a user's performance.  For those attributes, I'll quantify the size of the correlation using regression modeling.
 								</p>
 								<p>
-									Information on the game and the case study can be found <a href="mobile_app_data_case_study.html">here</a>.  The full project containing the code and both the original and cleaned versions of the data can be found on <a href="https://github.com/papir805/mobile_app_data_analysis">my GitHub</a>.
+									Information on the game and the case study can be found 
+									<a href="mobile_app_data_case_study.html">
+										here
+									</a>.  
+									The full project containing the code and both the original and cleaned versions of the data can be found on 
+									<a href="https://github.com/papir805/mobile_app_data_analysis">
+										my GitHub
+									</a>.
 								</p>
 								<h3>
 									<u>Section 1: Introduction to the Dataset</u>
@@ -140,64 +155,118 @@
 										User Table
 									</h4>
 									<p>
-										This table contains a list of all players for the game and some information about user attributes.  <b>Each row in the table represents a unique user.</b>
+										This table contains a list of all players in the game and some information about user attributes.  <b>Each row in the table represents a unique user.</b>
 									</p>
 									<table>
 									  <!-- <caption style="text-align:left">User Table</caption> -->
-										  <tr>
-										    <th>Field</th>
-										    <th>SQL Data Type</th>
-										    <th>Description</th>
-										  </tr>
-										  <tr>
-										    <td>userid</td>
-										    <td>VARCHAR(36)</td>
-										    <td>A 36 character string that uniquely identifies a player</td>
-										  </tr>
-										  <tr>
-										    <td>subscriber</td>
-										    <td>INT</td>
-										    <td>A binary variable identifying whether the userid is a paid subscriber or not</td>
-										  </tr>
-										  <tr>
-										  	<td>category</td>
-										  	<td>VARCHAR(1)</td>
-										  	<td>A variable that identifies whether the userid falls in category 'A', 'B', or 'C'</td>
-										  </tr>
+										<tr>
+											<th>
+												Field
+											</th>
+											<th>
+												SQL Data Type
+											</th>
+											<th>
+												Description
+											</th>
+										</tr>
+										<tr>
+											<td>
+												userid
+											</td>
+											<td>
+												VARCHAR(36)
+											</td>
+											<td>
+												A 36 character string that uniquely identifies a player
+											</td>
+										</tr>
+										<tr>
+											<td>
+												subscriber
+											</td>
+											<td>
+												INT
+											</td>
+											<td>
+												A binary variable identifying whether the userid is a paid subscriber or not
+											</td>
+										</tr>
+										<tr>
+											<td>
+												category
+											</td>
+											<td>
+												VARCHAR(1)
+											</td>
+											<td>
+												A variable that identifies whether the userid falls in category 'A', 'B', or 'C'
+											</td>
+										</tr>
 									</table>
 									<h4>
 										Event Performance Table
 									</h4>
 									<p>
-										This table contains an hour-by-hour breakdown of the points earned for each player during every gaming event of 2019.  <b>Each row in the table represents the number of points scored by a userid during a single hour of gameplay during a gaming event.</b>
+										This table contains an hour-by-hour breakdown of the points earned for each player during every gaming event in 2019.  <b>Each row in the table represents the number of points scored by a userid during a single hour of gameplay during a gaming event.</b>
 									</p>
 									<table>
 									  <!-- <caption style="text-align:left">Gaming Event Performance Table</caption> -->
-									  <tr>
-									    <th>Field</th>
-									    <th>SQL Data Type</th>
-									    <th>Description</th>
-									  </tr>
-									  <tr>
-									    <td>userid</td>
-									    <td>VARCHAR(36)</td>
-									    <td>A 36 character string that uniquely identifies a player</td>
-									  </tr>
-									  <tr>
-									    <td>event_date</td>
-									    <td>DATE</td>
-									    <td>The date the userid participated in the gaming event</td>
-									  </tr>
-									  <tr>
-									  	<td>hour</td>
-									  	<td>INT</td>
-									  	<td>The hour of the day in which the userid participated in the gaming event</td>
-									  </tr>
-									    <tr>
-									  	<td>points</td>
-									  	<td>INT</td>
-									  	<td>The number of points scored by the userid during a single hour of a gaming event</td>
-									  </tr>
+									<tr>
+										<th>
+											Field
+										</th>
+										<th>
+											SQL Data Type
+										</th>
+										<th>
+											Description
+										</th>
+									</tr>
+									<tr>
+										<td>
+											userid
+										</td>
+										<td>
+											VARCHAR(36)
+										</td>
+										<td>
+											A 36 character string that uniquely identifies a player
+										</td>
+									</tr>
+									<tr>
+										<td>
+											event_date
+										</td>
+										<td>
+											DATE
+										</td>
+										<td>
+											The date the userid participated in the gaming event
+										</td>
+									</tr>
+									<tr>
+										<td>
+											hour
+										</td>
+										<td>
+											INT
+										</td>
+										<td>
+											The hour of the day in which the userid participated in the gaming event
+										</td>
+									</tr>
+									<tr>
+										<td>
+											points
+										</td>
+										<td>
+											INT
+										</td>
+										<td>
+											The number of points scored by the userid during a single hour of a gaming event
+										</td>
+									</tr>
 									</table>
 									<h3>
 										<u>
@@ -212,7 +281,9 @@
 									<p>
 										For the purposes of this project, I'll define a user's performance as their yearly point total and explore if there's any correlation with the value of subscriber or category.
 									</p>
-									<h4>Joining Tables</h4>
+									<h4>
+										Joining Tables
+									</h4>
 									<div class="split left">
 										<div class="row">
 											<div class="col-6 col-12-medium">
@@ -241,16 +312,15 @@ LEFT JOIN total_points_per_user AS tp
 														Information on whether a user is a subscriber and which category they fall in is in the users table, but information on point scores is in the event_performance table, so the two tables have to be joined before any investigation into correlation can happen. Because there may be userids in the users table who have never participated in a gaming event and thus have no entries in the event_performance table, a LEFT JOIN is needed to ensure all userids from the users table make it into the joined table. 
 													</p>
 													<p>
-														 Any userids that aren't found in the event_performance table would normally be assigned NULL values, but these users have no matching entries because they've never played in a gaming event.  If they've never played in a gaming event, then their yearly point total should be 0, and COALESCE is used to make this happen.  
+														Any userids that aren't found in the event_performance table would normally be assigned NULL values, but these users have no matching entries because they've never played in a gaming event.  If they've never played in a gaming event, then their yearly point total should be 0, and COALESCE is used to make this happen.  
 													</p>
 												</section>
 											</div>
-
 										</div>
 									</div>
 									<br>
 									<h4>
-										Visualizing Yearly Point Distribution
+										Visualizing the Yearly Point Distribution
 									</h4>
 									<p>
 										These boxplots compare the yearly point totals for subscribers against non-subscribers, as well as users in category A against those in category B against those in category C.  Userids that had yearly point totals less than $Q_1 - 1.5 \cdot \text{IQR}$ or more than $Q_3 + 1.5 \cdot \text{IQR}$ are considered outliers and are represented by the circles that lay beyond the whiskers.  Pay extra close attention to these, as they'll become important soon. 
@@ -280,12 +350,13 @@ LEFT JOIN total_points_per_user AS tp
 											</div>
 										</div>
 										<br>
-											
 										<p>
 											While nothing is definitive yet, it's starting to look like there could be some correlation between a user's attributes and yearly point totals.  Category seems like it would have the strongest correlation, but subscriber may be important too.
 										</p>
 									</div>
-									<h4>Scatter Plots</h4>
+									<h4>
+										Scatter Plots
+									</h4>
 									<p>
 										The following scatter plots take the boxplots from above and add more granularity.  Now, the point scores for every single one of the 1,100 users in the dataset can be seen.
 									</p>
@@ -329,7 +400,9 @@ LEFT JOIN total_points_per_user AS tp
 										</div>
 									</div>
 									<br>
-									<h4>Dummy Variables and the Correlation Heatmap</h4>
+									<h4>
+										Dummy Variables and the Correlation Heatmap
+									</h4>
 									<div class="split left">
 										<div class="row">
 											<div class="col-6 col-12-medium">
@@ -340,7 +413,7 @@ LEFT JOIN total_points_per_user AS tp
 											<div class="col-6 col-12-medium">
 												<section class="middle">
 													<p>
-														Using pandas, I encoded category as a dummy variable and calculated the correlation with yearly point totals.  Category C has a correlation of 0.5365, indicating a moderately positive correlation, and is the strongest correlation out of all the user attributes.  Category A and category B both have similar correlations of -0.2429 and -0.2147, respectively, indicating weak negative correlations.
+														Using Pandas, I encoded category as a dummy variable and calculated the correlation with yearly point totals.  Category C has a correlation of 0.5365, indicating a moderately positive correlation, and is the strongest correlation out of all the user attributes.  Category A and category B both have similar correlations of -0.2429 and -0.2147, respectively, indicating weak negative correlations.
 													</p>
 													<p>
 														Everything observed so far is promising evidence of some correlation between user attributes and user performance; however, the relationship that's observed in the dataset could simply be the result of a fluke and not necessarily because a correlation truly exists.  To be certain beyond a reasonable doubt, hypothesis testing can be used.
@@ -360,45 +433,52 @@ LEFT JOIN total_points_per_user AS tp
 									</i>
 									<br>
 									<br>
-									<h4>Linear Regression Modeling: Performing a t-test</h4>
+									<h4>
+										Linear Regression Modeling: Performing a t-test
+									</h4>
 									<div class="split left">
 										<div class="row">
 											<div class="col-6 col-12-medium">
 												<section class="first">
 													<!-- <h4>SQL Code</h4> -->
-
-														<center>
-															$H_0:$ There is no significant linear correlation between subscriber and total_points<br>
-															$H_a:$ There is a significant linear correlation between subscriber and total_points
-														</center>
+													<left>
+														$H_0:$ There is no significant linear correlation between subscriber and total_points
 														<br>
+														$H_a:$ There is a significant linear correlation between subscriber and total_points
+													</left>
+													<br>
+													<br>
 													<img src="images/mobile_app_data/t_test_graph.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+												</section>
 											</div>
 											<div class="col-6 col-12-medium">
 												<section class="middle">
 													<p>
-													At the $\alpha=0.05$ level of significance, a t-test is performed, and the results are shown.  The P-value is ~0, and the test statistic of 5.203 is in the rejection region, indicating the null hypothesis should be rejected.  Although the correlation was noted to be weak earlier, rejecting the null hypothesis indicates there is sufficient evidence to conclude that a user's subscriber status is a statistically significant predictor of yearly point totals.
-												</p>
-												
+														At the $\alpha=0.05$ level of significance, a t-test is performed, and the results are shown.  The P-value is ~0, and the test statistic of 5.203 is in the rejection region, indicating the null hypothesis should be rejected.  Although the correlation was noted to be weak earlier, rejecting the null hypothesis indicates there is sufficient evidence to conclude that a user's subscriber status is a statistically significant predictor of yearly point totals.
+													</p>
 												</section>
 											</div>
-
 										</div>
 									</div>
 									<br>
-									<h4>Performing a One-Way ANOVA Test</h4>
+									<h4>
+										Performing a One-Way ANOVA Test
+									</h4>
 									<div class="split left">
 										<div class="row">
 											<div class="col-6 col-12-medium">
 												<section class="first">
 													<!-- <h4>SQL Code</h4> -->
 													<p>
-														<center>
-															$H_0$: category and total yearly points are not correlated<br>
-															$H_a$: category and total yearly points are correlated<br>
-														</center>
+														<left>
+															$H_0$: category and total yearly points are not correlated
+															<br>
+															$H_a$: category and total yearly points are correlated
+															<br>
+														</left>
 													</p>
 													<img src="images/mobile_app_data/f_test_graph.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+												</section>
 											</div>
 											<div class="col-6 col-12-medium">
 												<section class="middle">
@@ -410,27 +490,27 @@ LEFT JOIN total_points_per_user AS tp
 													</p>
 												</section>
 											</div>
-
 										</div>
 									</div>
 									<br>
-									<h4>Building a Regression Model</h4>
+									<h4>
+										Building a Regression Model
+									</h4>
 									<div class="split left">
 										<div class="row">
 											<div class="col-6 col-12-medium">
 												<section class="first">
 													<!-- <h4>SQL Code</h4> -->
 													<img src="images/mobile_app_data/all_lin_reg_summary.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+												</section>
 											</div>
 											<div class="col-6 col-12-medium">
 												<section class="middle">
 													<p>
 														In order to avoid the dummy variable trap, regression has to be performed using all but one level of the dummy variable, which acts as the baseline level for comparison.  In this model, category A represents the baseline level for the dummy variable, and any coefficients of the model must be interpreted relative to that category.
 													</p>
-													
 												</section>
 											</div>
-
 										</div>
 										<br>
 										<p>
@@ -442,19 +522,22 @@ LEFT JOIN total_points_per_user AS tp
 													1 &\text{ if userid is a paid subscriber} \\
 													0 &\text{ if userid is not a paid subscriber}
 												\end{aligned} \right.$
-											</li><br>
+											</li>
+											<br>
 											<li>
 												$x_2 = \left\{\begin{aligned} 
 													1 &\text{ if userid is in category B} \\
 													0 &\text{ if userid is not in category B}
 												\end{aligned} \right.$
-											</li><br>
+											</li>
+											<br>
 											<li>
 												$x_3 = \left\{\begin{aligned} 
 													1 &\text{ if userid is in category C} \\
 													0 &\text{ if userid is not in category C}
 												\end{aligned} \right.$
-											</li><br>
+											</li>
+											<br>
 										</ul>
 									<p>
 										After plugging in the coefficients generated by the summary output, the model looks like this: $\hat{y}=114.4202+7258.8017x_1+617.8321x_2+22002.3214x_3$.
@@ -480,7 +563,7 @@ LEFT JOIN total_points_per_user AS tp
 									<p>
 										In summary, it seems as though the question of whether there's any correlation between user attributes and user performance has been answered.  Both subscriber and category are statistically significant predictors of a user's performance as measured through their yearly point totals.  The single best predictor is which category a user falls into, with category C being the most important; however, knowing whether a user is a subscriber or not is pretty important too.
 									</p>
-									</div>
+								
 							</article>
 						</div>
 					</section>
