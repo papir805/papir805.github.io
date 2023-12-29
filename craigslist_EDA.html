@@ -21,7 +21,7 @@
 
 					<!-- Logo -->
 					<h1>
-						Using mathematics to solve problems with real world data excites me.
+						Using mathematics to solve problems with real-world data excites me.
 					</h1>
 
 				<!-- Nav -->
@@ -111,17 +111,17 @@
 								</header>
 								<p>
 									<h3><u>Background and Impact</u></h3>
-									Outside of my day job, I also run a math tutoring service.  A majority of my business comes from Craigslist (CL) and I wanted to understand my competition on CL better.<br><br>
+									Outside of my day job, I also run a math tutoring service.  A majority of my business comes from Craigslist (CL), and I wanted to understand my competition on CL better.<br><br>
 									<a href="etl_craigslist_web_scraper.html">In another project</a>, I built a tool that mined tutoring prices from Craigslist postings and stored them in a local PostgreSQL database.  In order to analyze the dataset, I queried it from the database using SQL and then created visualizations using Python.
 								</p>
 								<p>
 									<h5>The process:</h5>
 									<ol>
 										<li>
-											Create table in database for United States Census data to aid visualizations.
+											Create a table in the database for United States Census data to aid visualizations.
 										</li>
 										<li>
-											Query Craigslist data from local PostgreSQL database and join to the US census data.  Segment by various geographic locations, then visualize using Python:
+											Query Craigslist data from the local PostgreSQL database and join it to the US census data.  Segment by various geographic locations, then visualize using Python:
 										</li>
 											<ul style='margin:0';>
 												<li>
@@ -151,10 +151,10 @@
 										</i>
 									</header>
 									<p>
-										Craigslist postings aren't segmented by US Census regions such as North, West, South, and East, or by the more granular US divisions such as New England, Middle Atlantic, South Atlantic, etc.  Because I wanted to be able to segment my analysis based on dimensions not found in the Craigslist data itself, I downloaded publicly available data from the US Census to supplement the analysis.
+										Craigslist postings aren't segmented by US Census regions such as North, West, South, and East, or by the more granular US divisions such as New England, the Middle Atlantic, the South Atlantic, etc.  Because I wanted to be able to segment my analysis based on dimensions not found in the Craigslist data itself, I downloaded publicly available data from the US Census to supplement the analysis.
 									</p>
 									<p>
-										After using Psycopg2 to initalize a connection to my local PostgreSQL database, I created a table called us_census_regions and loaded the data from the US census onto it.
+										After using Psycopg2 to initialize a connection to my local PostgreSQL database, I created a table called us_census_regions and loaded the data from the US census onto it.
 									</p>
 								</section>
 								<section>
@@ -211,9 +211,9 @@ ORDER BY state_code;</pre>
 												<section class="middle">
 													<p>
 											Because Craigslist postings stay up for extended periods of time and can be reposted once expired, my database has multiple instances of the same posts due to the web scraper being run multiple times over many days.<br>
-											<br>The first block of the SQL query below creates a common table expression (CTE), which limits the scope of my analysis to just data from a recent run of the web scraper, on 2022-02-03, using a WHERE clause.  Furthermore, since the main purpose of the analysis is to understand pricing of my competition, the WHERE clause limits the CTE to inlude only observations that have a price.<br>
-											<br>The second block joins the CTE to the US Census data, so that we can categorize a post as belonging to one of four regions: West, Midwest, South, and Northeast.  Because some states on Craigslist have no postings for tutoring, our dataset doesn't contain information for all 50 states.  We need to use a left join on the US Census data in order to ensure the names of all 50 states end up in our final table.<br>
-											<br>The third block uses window functions to calculate the average hourly price and count of the number of postings when partitioned by US Census region.  Because of the way plotly works, it needs state level granularity in order to plot correctly, which is why I use a window function as opposed to the standard GROUP BY.  If I were to use GROUP BY, we'd lose the state level granularity and Plotly couldn't produce the graph I want.  Unfortunately, because of the way window functions work, this means that many of the rows become duplicates, so I also use the ROW_NUMBER window function, which will help me filter out duplicates in the final block of the query.<br>
+											<br>The first block of the SQL query below creates a common table expression (CTE), which limits the scope of my analysis to just data from a recent run of the web scraper on 2022-02-03, using a WHERE clause.  Furthermore, since the main purpose of the analysis is to understand the pricing of my competition, the WHERE clause limits the CTE to include only observations that have a price.<br>
+											<br>The second block joins the CTE to the US Census data so that we can categorize a post as belonging to one of four regions: West, Midwest, South, or Northeast.  Because some states on Craigslist have no postings for tutoring, our dataset doesn't contain information for all 50 states.  We need to use a left join on the US Census data in order to ensure the names of all 50 states end up in our final table.<br>
+											<br>The third block uses window functions to calculate the average hourly price and count of the number of postings when partitioned by US Census region.  Because of the way plotly works, it needs state-level granularity in order to plot correctly, which is why I use a window function as opposed to the standard GROUP BY.  If I were to use GROUP BY, we'd lose the state-level granularity and Plotly couldn't produce the graph I wanted. Unfortunately, because of the way window functions work, this means that many of the rows become duplicates, so I also use the ROW_NUMBER window function, which will help me filter out duplicates in the final block of the query.<br>
 											<br>The final block filters out the duplicates using a condition on ROW_NUMBER.
 										</p>
 												</section>
@@ -258,10 +258,13 @@ LEFT JOIN mean_price_size_by_state AS mp
 											<div class="col-6 col-12-medium">
 												<section class="middle">
 													<p>
-										The first block of the query below creates a common table expression (CTE) containing the average hourly tutoring cost, as well as the number of postings, broken down by state.<br>
+										The first block of the query below creates a common table expression (CTE) containing the average hourly tutoring cost as well as the number of postings, broken down by state.
 										<br>
-										As discussed before, I filter the data to only include postings from 2022-02-03 and that have a non-null entry for price.<br>
-										<br>The last block uses another left join between the US Census table and the CTE in order to get the state abbreviations (ex: CA, NY, etc.), which is necessary for visualizing the data using Plotly Express in the next step.
+										<br>
+										As discussed before, I filter the data to only include postings from 2022-02-03 that have a non-null entry for price.
+										<br>
+										<br>
+										The last block uses another left join between the US Census table and the CTE in order to get the state abbreviations (ex: CA, NY, etc.), which is necessary for visualizing the data using Plotly Express in the next step.
 									</p>
 												</section>
 											</div>
@@ -276,9 +279,13 @@ LEFT JOIN mean_price_size_by_state AS mp
 										<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="https://papir805.github.io/mean_price_by_state_plotly.html" height="525" width="100%"></iframe>
 									</p>
 									<p>
-										Paying attention to the colorbar in the graph above, the darker the green color, the higher the average hourly rate for tutoring.<br>
-										<br>Idaho, Tennessee, Massachusets, and the District of Columbia have the darkest green coloring and the highest mean hourly price, however these states only have 2, 2, 5, and 8 posts, respectively.  With so few data points on tutors from these states, I'd be skeptical regarding if they're truly the costliest states for tutoring.  By the way, District of Columbia is there, but is hard to see...zoom in and you'll see it.<br>
-										<br>Focusing on the remaining states that are darker green, the following states are the five costliest and have at least 10 postings:
+										Paying attention to the colorbar in the graph above, the darker the green color, the higher the average hourly rate for tutoring.
+										<br>
+										<br>
+										Idaho, Tennessee, Massachusetts, and the District of Columbia have the darkest green coloring and the highest mean hourly price; however, these states only have 2, 2, 5, and 8 posts, respectively.  With so few data points on tutors from these states, I'd be skeptical regarding whether they're truly the costliest states for tutoring.  By the way, the District of Columbia is there but is hard to see...zoom in and you'll see it.
+										<br>
+										<br>
+										Focusing on the remaining states that are darker green, the following states are the five costliest and have at least 10 postings:
 										<ol>
 											<li>New YorK: $50.37 / hr</li>
 											<li>California: $48.21 / hr</li>
@@ -321,7 +328,7 @@ ORDER BY COUNT(id) DESC;
 									<img src="images/craigslist_EDA/mean_price_and_num_posts_sfbayarea.png" alt="" style="width: 70%;"/>
 										<br> 
 										<p>
-											San Francisco is by far the costliest, with an average price of $79.81 / hr and also had the greatest number of tutoring postings at 13.  To my suprise, the South Bay was the cheapest at $40.93 / hr, with the third highest number of postings at 7.  The rest of the SF Bay Area subregions were all fairly close in price, although the only one of these subregions with a respectable amount of posts was the East Bay.
+											San Francisco is by far the costliest, with an average price of $79.81 / hr, and also has the greatest number of tutoring postings at 13.  To my surprise, the South Bay was the cheapest at $40.93 / hr, with the third highest number of postings at 7.  The rest of the SF Bay Area subregions were all fairly close in price, although the only one of these subregions with a respectable amount of posts was the East Bay.
 										</p>
 									
 								</section>
