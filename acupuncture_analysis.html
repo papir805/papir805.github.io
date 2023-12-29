@@ -114,89 +114,132 @@
 <!-- 								<a href="#" class="image featured"><img src="images/acupuncture_analysis/acupuncture.jpeg" alt="" style="height: 400px;"/></a> -->
 								<header>
 									<h2><a href="https://github.com/papir805/acupuncture_scholarly_analysis">Acupuncture Analysis</a></h2>
-									<p>Goal: To learn how to apply my knowledge of hypothesis testing, confidence intervals, and linear regression using Python statistical packages.</p>
-									<i class="icon solid fa-code">
-													 Python</i>
+									<p>
+									Goal: To learn how to apply my knowledge of hypothesis testing, confidence intervals, and linear regression using Python statistical packages.</p>
+									<i class="icon solid fa-code"> Python</i>
 									<br>
 									<i class="icon solid fa-chart-line"> A/B Testing, Confidence Intervals, Linear Regression</i>
 								</header>
 								<p>
 								The full project can be found on <a href="https://github.com/papir805/acupuncture_scholarly_analysis">my GitHub</a>.
-							</p>
+								</p>
 								<p>
-									<h3><u>Background</u></h3><br>
-									The study was designed to determine the effect of acupuncture, with needle manipulation at different frequencies, on patients with hypertension at two pressure points, ST9 and LR3 (see picture below).<br>
-									<img src="images/acupuncture_analysis/pressure_points.png" alt=""/><br>
+									<h3><u>Background</u></h3>
+									<br>
+									The study was designed to determine the effect of acupuncture, with needle manipulation at different frequencies, on patients with hypertension at two pressure points, ST9 and LR3 (see picture below).
+									<br>
+									<img src="images/acupuncture_analysis/pressure_points.png" alt=""/>
+									<br>
 									Patients were divided into four treatment groups:
 									<ol>
-										<li>ST9 High-Frequency Group (ST9-H)</li>
-										<li>ST9 Low-Frequency Group (ST9-L)</li>
-										<li>LR3 High-Frequency Group (LR3-H)</li>
-										<li>LR3 Low-Frequency Group (LR3-L)</li>
+										<li>
+											ST9 High-Frequency Group (ST9-H)
+										</li>
+										<li>
+											ST9 Low-Frequency Group (ST9-L)
+										</li>
+										<li>
+											LR3 High-Frequency Group (LR3-H)
+										</li>
+										<li>
+											LR3 Low-Frequency Group (LR3-L)
+										</li>
 									</ol>
 									High-frequency groups received acupuncture treatments where the needle was twirled on the pressure point 120 times within one minute, whereas low-frequency groups received acupuncture treatments that were twirled 60 times within one minute. Each patient received five acupuncture sessions per week for a period of 12 weeks, and patients were monitored for another 12 weeks following their last acupuncture session.
-									</p>
-									<p>
+								</p>
+								<p>
 									Systolic Blood Pressure (SBP) and Diastolic Blood Pressure (DBP) for each patient were recorded at baseline, 6 weeks, 12 weeks, 16 weeks, 20 weeks, and 24 weeks of the experiment.  Daytime blood pressures (6am-10:59pm) were measured once every 30 minutes, and nighttime blood pressures (11pm-5:59am) were measured once an hour, with the first 2 hours of the day (6am-8am) also being classified as morning.  These measurements were then used to calculate the mean of the following at each of the time intervals listed above:
 									<ul>
-										<li>24-hr DBP</li>
-										<li>24-hr SBP</li>
-										<li>Daytime DBP</li>
-										<li>Daytime SBP</li>
-										<li>Nighttime DBP</li>
-										<li>Nighttime SBP</li>
-										<li>Morning DBP</li>
-										<li>Morning SBP</li>
+										<li>
+											24-hr DBP
+										</li>
+										<li>
+											24-hr SBP
+										</li>
+										<li>
+											Daytime DBP
+										</li>
+										<li>
+											Daytime SBP
+										</li>
+										<li>
+											Nighttime DBP
+										</li>
+										<li>
+											Nighttime SBP
+										</li>
+										<li>
+											Morning DBP
+										</li>
+										<li>
+											Morning SBP
+										</li>
 									</ul>
 									Using this data, I was able to pose a bunch of different hypotheses and test them.
+								</p>
 								<section>
-									<header>
-										<h3><u>Question 1</u>: Is there a significant difference in the proportion of patients above or below age 60 who have high 24-hour systolic blood pressure at the end of the experiment (24 weeks)?</h3>
-									</header>
-									
-$H_0:$ There is no difference in the proportion of high 24-hour SBP values (130+ mmHg) at 24 weeks between individuals less than 60 years of age and greater than or equal to 60 years.  <br>
-$H_a:$ There is a difference in the proportion of high 24-hour SBP values (130+ mmHg) at 24 weeks between individuals less than 60 years and greater than or equal to 60 years. <br>
-<br>							<img src="images/acupuncture_analysis/z_dist_graph1.png" alt=""/><br>
+									<h3>
+										<u>Question 1</u>: Is there a significant difference in the proportion of patients above or below age 60 who have high 24-hour systolic blood pressure at the end of the experiment (24 weeks)?
+									</h3>
+									<br>
 									<p>
+										$H_0:$ There is no difference in the proportion of high 24-hour SBP values (130+ mmHg) at 24 weeks between individuals less than 60 years of age and greater than or equal to 60 years.  
+										<br>
+										$H_a:$ There is a difference in the proportion of high 24-hour SBP values (130+ mmHg) at 24 weeks between individuals less than 60 years and greater than or equal to 60 years. 
+										<img src="images/acupuncture_analysis/z_dist_graph1.png" alt=""/>
+										<br>
 										Using a Z-test for the difference between two population proportions, with a 5% level of significance, it appears that the proportion of those below age 60 with high systolic blood pressure is the same as it is for those age 60+.  This is interesting because systolic blood pressure is supposed to increase from age 30 onward, so it would be reasonable to expect a higher proportion of those over age 60 to have higher blood pressures. (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2805932/">source</a>)
 									</p>
 									<!-- <img src="images/acupuncture_analysis/chi_square_graph1.png" alt=""/><br> -->
 								</section>
 								<section>
-									<header>
-										<h3><u>Question 2</u>: Is there a significant difference in the proportion of patients with high systolic blood pressure across the four treatment groups at the end of the experiment?</h3>
-									</header>
-									$H_0:$ The proportion with high SBP (130+ mmHg) across all four treatment groups is the same
-<br>
-$H_a:$ At least one of the groups has a proportion with high SBP (130+ mmHg) that is different than the other groups.<br><br>
-									<img src="images/acupuncture_analysis/chi_square_graph2.png" alt=""/><br>
+									<h3>
+										<u>Question 2</u>: Is there a significant difference in the proportion of patients with high systolic blood pressure across the four treatment groups at the end of the experiment?
+									</h3>
+									<br>
 									<p>
-										Using a Chi-Square goodness of fit test with a 5% level of significance, it appears at least one of the four treatment groups has a higher proportion of subjects with high systolic blood pressure.<br>
+										$H_0:$ The proportion with high SBP (130+ mmHg) across all four treatment groups is the same
+										<br>
+										$H_a:$ At least one of the groups has a proportion with high SBP (130+ mmHg) that is different than the other groups.
+										<img src="images/acupuncture_analysis/chi_square_graph2.png" alt=""/>
+										<br>
+										Using a Chi-Square goodness of fit test with a 5% level of significance, it appears at least one of the four treatment groups has a higher proportion of subjects with high systolic blood pressure.
+										<br>
 										<br>
 										More investigation would have to be performed in order to determine which treatment group it was and whether the acupuncture treatments were the cause of a change in blood pressure; however, these results indicate it's still possible.
 									</p>
 								</section>
 								<section>
-									<header>
-										<h3><u>Question 3</u>: Is there a linear relationship between age and 24 hour diastolic blood pressure at the end of the experiment?</h3>
-									</header>
-									$H_0:$ There is no linear relationship between age and 24hr DBP. <br>
-$H_a:$ There is a linear relationship between age and 24hr DBP.<br><br>
+									<h3>
+										<u>Question 3</u>: Is there a linear relationship between age and 24 hour diastolic blood pressure at the end of the experiment?
+									</h3>
+									<br>
 									<p>
-										Using an F test with a 2.5% level of significance, it appears there is a linear relationship between age and 24-hour diastolic blood pressure. In the model, the coefficient for age was found to be -0.4067, meaning that a patient who is one year older than another patient will expect to see a 24-hour diastolic blood pressure that is .4067 mmHg lower at the end of the experiment. This is not surprising, as diastolic blood pressure is known to decrease from roughly 60 to at least 84. (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2805932/#:~:text=Diastolic%20blood%20pressure%20(DBP)%2C,pressure%20(PP)%20with%20ageing.">source</a>)<br>
+										$H_0:$ There is no linear relationship between age and 24hr DBP. 
 										<br>
-										The scatterplot, line of best fit, and F-distribution can be seen below:<br>
+										$H_a:$ There is a linear relationship between age and 24hr DBP.
+									</p>
+									<p>
+										Using an F test with a 2.5% level of significance, it appears there is a linear relationship between age and 24-hour diastolic blood pressure. In the model, the coefficient for age was found to be -0.4067, meaning that a patient who is one year older than another patient will expect to see a 24-hour diastolic blood pressure that is .4067 mmHg lower at the end of the experiment. This is not surprising, as diastolic blood pressure is known to decrease from roughly 60 to at least 84. (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2805932/#:~:text=Diastolic%20blood%20pressure%20(DBP)%2C,pressure%20(PP)%20with%20ageing.">source</a>)
+										<br>
+										<br>
+										The scatterplot, line of best fit, and F-distribution can be seen below:
+										<br>
 										<img src="images/acupuncture_analysis/q3_graph1.png" alt=""/> 
 									</p>
 								</section>
 								<section>
-									<header>
-										<h3><u>Question 4</u>: Is there a linear relationship between age and 24-hour systolic blood pressure at the end of the experiment?</h3>
-									</header>
-									$H_0:$ There is no linear relationship between age and 24hr SBP. <br>
-$H_a:$ There is a linear relationship between age and 24hr SBP.<br><br>
+									<h3>
+										<u>Question 4</u>: Is there a linear relationship between age and 24-hour systolic blood pressure at the end of the experiment?
+									</h3>
+									<br>
 									<p>
-										Using an F test with a 5% level of significance, it appears there is NO linear relationship between age and 24-hour systolic blood pressure.  In other words, age is not a good predictor of one's 24-hour systolic blood pressure.<br>
+										$H_0:$ There is no linear relationship between age and 24hr SBP. 
+										<br>
+										$H_a:$ There is a linear relationship between age and 24hr SBP.
+										<br>
+										<br>
+										Using an F test with a 5% level of significance, it appears there is NO linear relationship between age and 24-hour systolic blood pressure.  In other words, age is not a good predictor of one's 24-hour systolic blood pressure.
 										<br>
 										<img src="images/acupuncture_analysis/q4_graph1.png" alt=""/> 
 										<br>
@@ -204,12 +247,13 @@ $H_a:$ There is a linear relationship between age and 24hr SBP.<br><br>
 									</p>
 								</section>
 								<section>
-									<header>
-										<h3><u>Question 5</u>: Can we make a better linear regression model for predicting 24-hour systolic blood pressure by adjusting for other factors?</h3>
-									</header>
+									<h3>
+										<u>Question 5</u>: Can we make a better linear regression model for predicting 24-hour systolic blood pressure by adjusting for other factors?
+									</h3>
 									<p>
 										<h4>5.1 Constructing the model</h4>
-										Given that the point of the experiment was to test the efficacy of different kinds of acupuncture treatments, I would like to incorporate this information into the model.  Furthermore, many medical studies adjust for gender, and because we've already shown age is correlated with systolic blood pressure, I'll include both of those variables too.<br>
+										Given that the point of the experiment was to test the efficacy of different kinds of acupuncture treatments, I would like to incorporate this information into the model.  Furthermore, many medical studies adjust for gender, and because we've already shown age is correlated with systolic blood pressure, I'll include both of those variables too.
+										<br>
 										<br>
 										Using dummy variables for the treatment groups, we have the following coding scheme:
 										<ul>
@@ -218,61 +262,68 @@ $H_a:$ There is a linear relationship between age and 24hr SBP.<br><br>
 													1 &\text{ if patient in ST9-H} \\
 													0 &\text{ if patient not in ST9-H}
 												\end{aligned} \right.$
-											</li><br>
+											</li>
+											<br>
 											<li>
 												$x_2 = \left\{\begin{aligned} 
 													1 &\text{ if patient in ST9-L} \\
 													0 &\text{ if patient not in ST9-L}
 												\end{aligned} \right.$
-											</li><br>
+											</li>
+											<br>
 											<li>
 												$x_3 = \left\{\begin{aligned} 
 													1 &\text{ if patient in LR3-H} \\
 													0 &\text{ if patient not in LR3-H}
 												\end{aligned} \right.$
-											</li><br>
+											</li>
+											<br>
 											<li>
 												$x_4 = \text{age in years}$
-											</li><br>
+											</li>
+											<br>
 											<li>
 												$x_5 = \left\{\begin{aligned} 
 													1 &\text{ if patient is male} \\
 													0 &\text{ if patient is female}
 												\end{aligned} \right.$
-											</li><br>
+											</li>
 										</ul>
 										Using these variables, I constructed a multi-variate linear regression model of the form: $\hat{y} = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_3 + \beta_4x_4 + \beta_5x_5$
 									</p>
 									<p>
 										<h4>5.2 Checking for statistical significance in our predictors</h4> 
-										$H_0:$ None of our six independent variables explain the variation in 24hr SBP. <br>
-$H_a:$ At least one of our six independent variables explains the variation in 24hr SBP.<br><br>
-										Using an F-test with a 5% level of significance, none of our predictors explain the variation when predicting 24-hour systolic blood pressure after 24 weeks of the experiment.<br>
+										<p>	
+											<br>
+											$H_0:$ None of our six independent variables explain the variation in 24hr SBP. 
+											<br>
+											$H_a:$ At least one of our six independent variables explains the variation in 24hr SBP.
+										</p>
+										Using an F-test with a 5% level of significance, none of our predictors explain the variation when predicting 24-hour systolic blood pressure after 24 weeks of the experiment.
 										<img src="images/acupuncture_analysis/f_dist_graph2.png" alt=""/> 
 										<br>
 										This could mean that a linear model is not appropriate, but it could also be a problem with the predictors themselves.
-									</p>
-									<p>
+										<br>
 										<h4>5.3 Investigating treatment group, age, and gender</h4>
-										<img src="images/acupuncture_analysis/mult_lin_reg_q5_summary.png" alt=""/> <br>
-										After inspecting the regression summary, a t-test indicates the group_2 predictor as being statistically significant, with a p-value of 0.020.  The coefficient of -8.1426 shows that patients who are in group_2 have a 24-hour systolic blood pressure that is 8.1426 lower than the baseline group, group 4.  Perhaps this indicates that the ST9-L acupuncture treatment was effective.<br>
+										<img src="images/acupuncture_analysis/mult_lin_reg_q5_summary.png" alt=""/> 
+										<br>
+										After inspecting the regression summary, a t-test indicates the group_2 predictor as being statistically significant, with a p-value of 0.020.  The coefficient of -8.1426 shows that patients who are in group_2 have a 24-hour systolic blood pressure that is 8.1426 lower than the baseline group, group 4.  Perhaps this indicates that the ST9-L acupuncture treatment was effective.
 									</p>
 								</section>
 								<section>
-									<header>
-										<h3><u>Conclusion(s)</u></h3>
-									</header>
+									<h3>
+										<u>Conclusion(s)</u>
+									</h3>
 									<p>
-										Unfortunately, no conclusive evidence has been found so far that any of the treatments are effective at combating hypertension.  However, there was some evidence that adjusting the twirling frequency of an acupuncture treatment could produce different effects when applied to the same acupuncture site.<br>
-										<br>
+										Unfortunately, no conclusive evidence has been found so far that any of the treatments are effective at combating hypertension.  However, there was some evidence that adjusting the twirling frequency of an acupuncture treatment could produce different effects when applied to the same acupuncture site.
+									</p>
+									<p>
 										As a result, the article notes that in future clinical trials, close attention needs to be paid to an acupuncture treatment's parameters, such as twirling frequency, in order to more accurately compare one treatment against another.
 									</p>
 								</section>
 							</article>
-
 					</div>
 				</section>
-
 			<!-- Footer -->
 				<section id="footer">
 					<div class="container">
