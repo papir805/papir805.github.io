@@ -21,7 +21,7 @@
 
 					<!-- Logo -->
 						<h1>
-							Using mathematics to solve problems with real world data excites me.
+							Using mathematics to solve problems with real-world data excites me.
 						</h1>
 
 					<!-- Nav -->
@@ -102,13 +102,21 @@
 							<article class="box post">
 								<!-- <a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a> -->
 								<header>
-									<h2><a href="https://github.com/papir805/mobile_app_data_analysis">Case Study - Part 1: Data Cleaning</a></h2>
-									<p>Goal: To clean mobile app gaming data in preparation for analysis.</p>
+									<h2>
+										<a href="https://github.com/papir805/mobile_app_data_analysis">
+											Case Study - Part 1: Data Cleaning
+										</a>
+									</h2>
+									<p>
+										Goal: To clean mobile app gaming data in preparation for analysis.
+									</p>
 									<i class="icon solid fa-code">
 										 PostgreSQL
 									</i>
 									<br>
-									<i class="icon solid fa-chart-line"> Data Cleaning</i>
+									<i class="icon solid fa-chart-line">
+										 Data Cleaning
+										</i>
 								</header>
 								<h3>
 									<u>Background</u>
@@ -117,7 +125,14 @@
 									This article covers part 1 and is meant to detail my process as I progress through the cleaning part of the case study.  I'll discuss the obstacles that I encounter, how I overcome them, and my overall logic in general.  
 								</p>
 								<p>
-									Information on the game and the case study can be found <a href="mobile_app_data_case_study.html">here</a>.  The full project containing the code and both the original and cleaned versions of the data can be found on <a href="https://github.com/papir805/mobile_app_data_analysis">my GitHub</a>.
+									Information on the game and the case study can be found 
+									<a href="mobile_app_data_case_study.html">
+										here
+									</a>.  
+									The full project containing the code and both the original and cleaned versions of the data can be found on 
+									<a href="https://github.com/papir805/mobile_app_data_analysis">
+										my GitHub
+									</a>.
 								</p>
 								<h3>
 									<u>Section 1: Loading the Dataset</u>
@@ -140,20 +155,36 @@
 														<br>
 													</caption>
 													<tr>
-														<th>Field</th>
-														<th>Description</th>
+														<th>
+															Field
+														</th>
+														<th>
+															Description
+														</th>
 													</tr>
 													<tr>
-														<td>userid</td>
-														<td>A string that uniquely identifies a player</td>
+														<td>
+															userid
+														</td>
+														<td>
+															A string that uniquely identifies a player
+														</td>
 													</tr>
 													<tr>
-												    	<td>subscriber</td>
-												    	<td>A binary variable identifying whether the userid is a paid subscriber or not</td>
+														<td>
+															subscriber
+														</td>
+														<td>
+															A binary variable identifying whether the userid is a paid subscriber or not
+														</td>
 													</tr>
 													<tr>
-														<td>category</td>
-														<td>A variable that identifies whether the userid falls in category 'A', 'B', or 'C'</td>
+														<td>
+															category
+														</td>
+														<td>
+															A variable that identifies whether the userid falls in category 'A', 'B', or 'C'
+														</td>
 													</tr>
 												</table>
 											</section>
@@ -173,24 +204,44 @@
 														<br>
 													</caption>
 													<tr>
-													    <th>Field</th>
-													    <th>Description</th>
+														<th>
+															Field
+														</th>
+														<th>
+															Description
+														</th>
 													</tr>
 													<tr>
-													    <td>userid</td>
-													    <td>A string that uniquely identifies a player</td>
+														<td>
+															userid
+														</td>
+														<td>
+															A string that uniquely identifies a player
+														</td>
 													</tr>
 													<tr>
-													    <td>event_date</td>
-													    <td>The date corresponding to when the userid participated in a gaming event</td>
+														<td>
+															event_date
+														</td>
+														<td>
+															The date corresponding to when the userid participated in a gaming event
+														</td>
 													</tr>
 													<tr>
-													  	<td>hour</td>
-													  	<td>The hour of the day in which the userid participated in the gaming event</td>
+														<td>
+															hour
+														</td>
+														<td>
+															The hour of the day in which the userid participated in the gaming event
+														</td>
 													</tr>
 													<tr>
-													  	<td>points</td>
-													  	<td>The number of points scored by the userid during a single hour of gameplay</td>
+														<td>
+															points
+														</td>
+														<td>
+															The number of points scored by the userid during a single hour of gameplay
+														</td>
 													</tr>
 												</table>
 											</section>
@@ -198,7 +249,7 @@
 									</div>
 								</div>
 								<br>
-									Because the data may need cleaning, I create two staging tables with each field as <i>text</i>.  Using the <i>text</i> data type is the safest as the data is coming from a CSV file.  This will hopefully help the data get ingested into the database without any errors, so I can begin inspecting it.  After creating the tables, the data is ingested into them from the CSV files.
+								Because the data may need cleaning, I create two staging tables with each field as <i>text</i>.  Using the <i>text</i> data type is the safest as the data is coming from a CSV file.  This will hopefully help the data get ingested into the database without any errors, so I can begin inspecting it.  After creating the tables, the data is ingested into them from the CSV files.
 								<div class="split left">
 									<div class="row">
 										<div class="col-6 col-12-medium">
@@ -225,7 +276,7 @@
 										</div>
 									</div>
 								</div>
-								Now to start inspecting and cleaning.  After the data is cleaned, I'll create new tables with more explicit data types and populate them with it.
+								Now to start inspecting and cleaning.  After the data is cleaned, I'll create new tables with more explicit data types and populate them.
 								<br>
 <!-- 								<div class="split left">
 									<div class="row">
@@ -332,7 +383,7 @@
 								<h4>
 									subscriber
 								</h4>
-									Because subscriber is a binary variable, I would like it to be the <i>int</i> data type.
+								Because subscriber is a binary variable, I would like it to be the <i>int</i> data type.
 								<div class="split left">
 									<div class="row">
 										<div class="col-6 col-12-medium">
@@ -356,7 +407,7 @@
 								<h4>
 									category
 								</h4>
-									Because category is a single character string representing which category a user falls into, I would like it to be the <i>VARCHAR(1)</i> data type.
+								Because category is a single character string representing which category a user falls into, I would like it to be the <i>VARCHAR(1)</i> data type.
 								<div class="split left">
 									<div class="row">
 										<div class="col-6 col-12-medium">
@@ -375,7 +426,7 @@
 										</div>
 									</div>
 									<p>
-										It converts to <i>VARCHAR(1)</i> with no problems, and all values in the dataset are either 'A', 'B', or 'C', as they're supposed to be.  Everything looks good here too.
+										It converts to <i>VARCHAR(1)</i> with no problems, and all values in the dataset are either 'A', 'B', or 'C', as they're supposed to be.  Everything looks good here, too.
 									</p>
 								</div>
 								<h3>
@@ -469,7 +520,7 @@ ALTER TABLE event_performance_staging
 										<div class="col-6 col-12-medium">
 											<section class="middle">
 												<p>
-													Because some event_dates use a 2 digit year format (MM/DD/YY) while other event_dates use a different 4 digit year format (YYYY/MM/DD), I'm also going to use the to_date function to convert any dates from the MM/DD/YY format to the more standard YYYY/MM/DD format.
+													Because some event_dates use a 2-digit year format (MM/DD/YY) while other event_dates use a different 4-digit year format (YYYY/MM/DD), I'm also going to use the to_date function to convert any dates from the MM/DD/YY format to the more standard YYYY/MM/DD format.
 												</p>
 											</section>
 										</div>
@@ -637,13 +688,12 @@ CREATE TABLE users (
 															</ul>
 														</li>
 													</ol>
-													
 											</section>
 										</div>
 									</div>
 								</div>
 								<p>
-									Once the new table is created, the query then copies the data from users_staging table to the new users table.
+									Once the new table is created, the query copies the data from the users_staging table to the new users table.
 								</p>
 								<div class="split left">
 									<h4>
@@ -745,7 +795,11 @@ INSERT INTO event_performance(userid, event_date, hour, points)
 									<u>Section 7: Next Steps</u>
 								</h3>
 								<p>
-									Now that the data has been cleaned and moved to new tables in the database, I begin exploring the dataset in <a href="mobile_app_data_analysis.html">part 2</a> of the case study.
+									Now that the data has been cleaned and moved to new tables in the database, I begin exploring the dataset in 
+									<a href="mobile_app_data_analysis.html">
+										part 2
+									</a> 
+									of the case study.
 								</p>
 							</article>
 						</div>
