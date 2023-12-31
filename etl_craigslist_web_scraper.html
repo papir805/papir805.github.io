@@ -104,9 +104,9 @@
 										<a href="https://github.com/papir805/craigslist_web_scraper">Extract, Transform, Load (ETL) Craigslist Web Scraper</a>
 									</h2>
 									<p>
-									Goal: To build a dataset of tutoring prices that can be used to understand my local and national competition as a math tutor.
+									Goal: To curate a dataset of math tutoring prices that can be used to understand the local and national competition.
 									</p>
-									<i class="icon solid fa-code"> Python, PostgreSQL, HTML</i>
+									<i class="icon solid fa-code"> Python, PostgreSQL, HTML, RegEx</i>
 									<br>
 									<i class="icon solid fa-chart-line"> Web Scraping, Data Cleaning</i>
 								</header>
@@ -114,10 +114,7 @@
 									<h3>
 										<u>Background</u>
 									</h3>
-									As a math tutor, a majority of my business comes from word-of-mouth recommendations or Craigslist (CL) and I wanted to understand my competition on CL better.  I'm curious to know how my prices compare to those of other tutors in my neighboring areas as well as in other parts of the country.
-									<br>
-									<br>
-									I built this web scraper using Python to grab the prices of tutors from the services section, then stored the information in a PostgreSQL database to be used later in exploratory data analysis (EDA). 
+									As someone who runs a tutoring business where a large portion of its business comes from Craigslist , I wanted to understand what competing tutors were charging nearby and in other parts of the country. Using Python, I built this web scraper to extract the prices of tutors from posts found in Craigslist's services section.
 									<br>
 									<br>
 									The full project can be found on <a href="https://github.com/papir805/craigslist_web_scraper">my GitHub</a>.
@@ -139,33 +136,70 @@
 									</ol>
 								</p>
 								<section>
-									<header>
 										<h3>
 											<u>Part 1: Extract</u>
 										</h3>
-										<i class="icon solid fa-book">Pandas, Requests and BeautifulSoup</i>
-									</header>
-									<p>
-										To begin, I created a bunch of functions that would perform various tasks necessary to scrape posting information for Craigslist.  
-									</p>
-									<p>
-										<ul>
+										<i class="icon solid fa-book"> Pandas, Requests and BeautifulSoup</i>
+										<p>
+										To begin, I created functions that would perform various tasks necessary to scrape posting information for Craigslist.
+										</p>
+										<ol>
 											<li>
-												I had to scrape URL information for all of the various geographic regions on Craigslist in the US.
+												get_state_and_region_tags():
+												<ul>
+													<li>
+														Extracts the state and region names for all geographic areas.
+													</li>
+													<li>
+														Ex: California - Sacramento, California - SFbayarea,
+														Florida - Miami
+													</li>
+												</ul>
 											</li>
-											<ul>
-												<li>
-													Ex: sacramento.craigslist.org, sfbayarea.craigslist.org, miami.craigslist.org
-												</li>
-											</ul>
 											<li>
-												Initiate HTTP requests to each of those URLs for search results for the string "math tutor" in the services section.
+												get_state_to_region_dict():
+												<ul>
+													<li>
+														Uses state and region names to construct a dictionary containing URLs for each unique state and region pair.
+													</li>
+													<li>
+														Ex: sacramento.craigslist.org, sfbayarea.craigslist.org, miami.craigslist.org
+													</li>
+												</ul>
 											</li>
 											<li>
-												Scrape posting information from each search result and store it in a Pandas DataFrame.
+												get_region_search_page_urls():
+												<ul>
+													<li>
+														Initiate an HTTP request to each URL and perform a search for "math tutor" in the services section of each region.  Extracts the HTML of the search results.
+													</li>
+												</ul>
 											</li>
-										</ul>
-									</p>
+											<li>
+												get_urls_of_posts():
+												<ul>
+													<li>
+														Crawls the HTML of the search results page, extracting the URL of each posting contained within.
+													</li>
+												</ul>
+											</li>
+											<li>
+												convert_urls_to_soup_objs():
+												<ul>
+													<li>
+														Extracts and parses the HTML code from every posting using BeautfulSoup.
+													</li>
+												</ul>
+											</li>
+											<!-- <li>
+												extract_post_features():
+												<ul>
+													<li>
+														Extracts pricing information using REGEX from each posting and stores it in a Pandas DataFrame.
+													</li>
+												</ul>
+											</li> -->
+										</ol>
 								</section>
 								<section>
 									<header>
@@ -175,34 +209,31 @@
 										<i class="icon solid fa-book"> Pandas, NumPy, and Sklearn</i>
 									</header>
 									<p>
-										Once the posting information had been scraped, I had to manipulate it so that it could be used for analysis.
+										Next, I began inspecting the posts to determine the best way to extract the information I wanted.
 									</p>
-									<p>
 										<h4>
 											2.1 Drop duplicate posts
 										</h4>
-										I was surprised to find that, although I had scraped 4720 postings nationwide, only 1257 of them were unique.  Investigating further, I found that many math tutors place ads in multiple geographic locations, hence why there were so many duplicate postings.
+									<p>
+										I was surprised to find that, although I had scraped 4,720 postings nationwide, only 1,257 of them were unique.   I discovered that many math tutors place ads in multiple geographic locations, hence why there were so many duplicate postings.
 									</p>
 									<p>
-										Furthermore, some tutors change the wording of their posts, making detection difficult.  Instead of identifying which posts had text that matched 100%, I had to use something known as the cosine similarity ratio.  By calculating the ratio for each post, I could identify when a post was similar enough to other postings and mark them as duplicates.
+										Investigating further, I found some tutors change the wording of their posts, making detection difficult.  Instead of removing posts with text that matches character for character, I had to get creative.  In the end, I solved the problem using vector embeddings and something known as the cosine similarity ratio.  By calculating the ratio between each pair of postings, I could identify when a post was "similar enough" to another posting and mark it as a duplicate for subsequent removal.  After removing these posts, only 685 remained, or about 6.36% of the posts that were originally scraped.
 									</p>
-									<p>
 										<h4>
 											2.2 Determining the hourly rate
 										</h4>
-										Since posts can be so different from tutor to tutor, one post may have no pricing information, while another post can have a single flat hourly rate, and others can have more complicated pricing schedules that change based on the length of a tutoring session (ex: $30 for 1 hr, $50 for 2 hrs), or a multitude of other factors like the subject tutored (ex: algebra vs. calculus).
+									<p>
+										Reading through some of the postings showed they can be fairly different from tutor to tutor. One post may have no pricing information, while another post can have a single flat hourly rate, and others can have more complicated pricing schedules that change based on the length of a tutoring session (ex: $30 for 1 hr, $50 for 2 hrs), or a multitude of other factors like the subject tutored (ex: algebra vs. calculus). 
 									</p>
 									<p>
-										Posts that had no pricing information had to be identified and excluded from the analysis, whereas posts that had a single flat hourly rate were kept and the pricing information stored; however, posts with more complicated pricing schedules were more difficult to deal with.
-									</p>
-									<p>
-										My current implementation for handling these kinds of posts is as follows:
+										My plan for extracting the different prices depended on how complicated the pricing schedule was. First, I used RegEx to identify any postings without any pricing information and excluded them from the analysis.  This brought the number of postings down to 300.  From there, any posts that had a single hourly rate were kept, and I used RegEx to extract the pricing information.  However, the implementation for handling posts with two or more prices is as follows:
 										<ul> 
 											<li>
-												If two prices were mentioned in a post, average them.
+												If two prices were mentioned in a post, extract them using RegEx and average them.
 											</li>
 											<li>
-												If three or more prices are mentioned, flag the post, then manually inspect and fill in the price later.
+												If three or more prices are mentioned, flag the post, then manually inspect and determine the price later.
 											</li>
 										</ul> 
 									</p>
@@ -215,7 +246,10 @@
 										<i class="icon solid fa-book"> Pandas and Psycopg2</i>
 									</header>
 									<p>
-										After the data is transformed appropriately, I export the Pandas DataFrame containing the data to Excel CSV files and then use Psycopg2 to insert rows from the CSV file into a local PostgreSQL database.  The analysis of the data that was collected can be found <a href='craigslist_EDA.html'>here</a>.
+										After transforming the data, it gets loaded into a Pandas DataFrame, exported to an Excel CSV file, and then Psycopg2 inserts rows from the CSV file into a local PostgreSQL database.
+									</p>
+									<p>
+										The analysis of the data that was collected can be found <a href='craigslist_EDA.html'>here</a>.
 									</p>
 								</section>
 							</article>
