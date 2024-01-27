@@ -175,13 +175,13 @@
 										</tr>
 										<tr>
 											<td>
-												category
+												country
 											</td>
 											<td>
-												VARCHAR(1)
+												VARCHAR(2)
 											</td>
 											<td>
-												A variable that identifies whether the userid falls in category 'A', 'B', or 'C'
+												A variable that identifies which country the userid is from: 'CA' (Canada), 'US' (United States), or 'MX' (Mexico)
 											</td>
 										</tr>
 									</table>
@@ -330,12 +330,12 @@ ORDER BY num;</pre>
 GROUP BY subscriber
 ORDER BY subscriber;
 
-      SELECT category
+      SELECT country
                    , ROUND(COUNT(userid)::numeric / 
                              SUM(COUNT(userid)) OVER (), 3) AS proportion
          FROM users
-GROUP BY category
-ORDER BY category;</pre>
+GROUP BY country
+ORDER BY country;</pre>
 												</section>
 											</div>
 											<div class="col-6 col-12-medium">
@@ -346,7 +346,7 @@ ORDER BY category;</pre>
 										</div>
 									</div>
 									<p>
-										Two queries, the first grouping by subscriber and the second grouping by category, are needed to generate the data for the plot.  Using GROUP BY with COUNT(userid) will get the counts of each subgroup, but those will need to be divided by the total number of users in order to calculate the proportion of each subgroup.
+										Two queries, the first grouping by subscriber and the second grouping by country, are needed to generate the data for the plot.  Using GROUP BY with COUNT(userid) will get the counts of each subgroup, but those will need to be divided by the total number of users in order to calculate the proportion of each subgroup.
 									</p>
 									<p>
 										To do this, SUM(COUNT(userid)) OVER () is used.  Using OVER () tells SQL that the SUM should be performed as a window function and will therefore occur <i>after</i> the counts of each subgroup are calculated from the GROUP BY.  This ensures the SUM(COUNT(userid)) will add together the counts of each subgroup, thus giving the total count of all users that is needed to calculate the proportions.  Python's Matplotlib library is then used to create the bar chart.
@@ -359,10 +359,10 @@ ORDER BY category;</pre>
 												Subscriber -  Most common value is 0, a non-subscriber, by a significant majority (81.7%).
 											</li>
 											<li>
-												Category - Most common value is B (40.4%), but A isn't that far behind (37.4%).
+												Country - Most common value is B (40.4%), but A isn't that far behind (37.4%).
 											</li>
 											<li>
-												subscriber = 1 and category = C are the least common and have roughly the same proportions, 18% and 22% respectively.
+												subscriber = 1 and country = C are the least common and have roughly the same proportions, 18% and 22% respectively.
 											</li>
 										</ul>
 									<h4>
@@ -375,14 +375,14 @@ ORDER BY category;</pre>
 													<!-- <h4>SQL Code</h4> -->
 										<pre class="prettyprint lang-sql">
       SELECT subscriber
-                   , category
+                   , country
                    , ROUND(COUNT(userid)::numeric / 
                                   SUM(COUNT(userid)) OVER (), 3) AS proportion
          FROM users
-GROUP BY subscriber, category
-ORDER BY subscriber, category;</pre>
+GROUP BY subscriber, country
+ORDER BY subscriber, country;</pre>
 													<p>
-														Grouping by both subscriber and category and using the same SUM(COUNT(userid)) OVER () strategy from earlier, the proportions for each unique user profile can be calculated.  Python's statsmodels library is then used to create a mosaic plot for visualization.  
+														Grouping by both subscriber and country and using the same SUM(COUNT(userid)) OVER () strategy from earlier, the proportions for each unique user profile can be calculated.  Python's statsmodels library is then used to create a mosaic plot for visualization.  
 													</p>
 													<p>
 														In the mosaic plot, the proportion between the area of each of the six smaller rectangles and the area of the larger rectangle corresponds to the proportions of each of the subgroups 0A, 0B, 0C, 1A, 1B, and 1C to all users.  
@@ -399,17 +399,17 @@ ORDER BY subscriber, category;</pre>
 									</div>
 									<br>
 									<b>
-										<u>The plot reveals more about the relationship between subscriber and category:</u>
+										<u>The plot reveals more about the relationship between subscriber and country:</u>
 									</b>
 									<ul>
 										<li>
-											Most Common: 0B (with 0A not far behind)
+											Most Common: 0US (with 0CA not far behind)
 										</li>
 										<li>
-											Least Common: 1C
+											Least Common: 1MX
 										</li>
 										<li>
-											Regardless of whether a user is a subscriber, the most common category is B, then A, then C.
+											Regardless of whether a user is a subscriber, the most common country is the US, then CA, then MX.
 										</li>
 									</ul>
 									<h4>

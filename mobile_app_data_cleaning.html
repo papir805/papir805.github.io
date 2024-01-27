@@ -174,10 +174,10 @@
 													</tr>
 													<tr>
 														<td>
-															category
+															country
 														</td>
 														<td>
-															A variable that identifies whether the userid falls in category 'A', 'B', or 'C'
+															A variable that identifies which country a userid is from, either 'CA' (Canada), 'US' (United States), or 'MX' (Mexico)
 														</td>
 													</tr>
 												</table>
@@ -250,8 +250,8 @@
 											<section class="first">
 												<pre class="prettyprint lang-sql">
     DROP TABLE IF EXISTS users_staging;
-    CREATE TABLE users_staging (userid text, subscriber text, category text);
-    COPY users_staging(userid, subscriber, category)
+    CREATE TABLE users_staging (userid text, subscriber text, country text);
+    COPY users_staging(userid, subscriber, country)
     FROM '{working_dir}/data/users.csv'
     DELIMITER ','
     CSV HEADER;									</pre>
@@ -295,11 +295,11 @@
 										<div class="col-6 col-12-medium">
 											<section class="first">
 												<pre class="prettyprint lang-sql">
- SELECT userid, subscriber, category
+ SELECT userid, subscriber, country
     FROM users_staging
  WHERE userid IS NULL
          OR subscriber IS NULL
-         OR category IS NULL;						</pre>
+         OR country IS NULL;						</pre>
 											</section>
 										</div>
 										<div class="col-6 col-12-medium">
@@ -399,28 +399,28 @@
 									</p>
 								</div>
 								<h4>
-									category
+									country
 								</h4>
-								Because category is a single character string representing which category a user falls into, I would like it to be the <i>VARCHAR(1)</i> data type.
+								Because country is a two character string representing which country a user is from, I would like it to be the <i>VARCHAR(2)</i> data type.
 								<div class="split left">
 									<div class="row">
 										<div class="col-6 col-12-medium">
 											<section class="first">
 												<pre class="prettyprint lang-sql">
-  SELECT DISTINCT(category::VARCHAR(1))
+  SELECT DISTINCT(country::VARCHAR(2))
      FROM users_staging;						</pre>
      											
 											</section>
 										</div>
 										<div class="col-6 col-12-medium">
 											<section class="middle">
-												<img src="images/mobile_app_data/distinct_category_levels.png" alt="" style="width: 20%; display:block; margin-left: auto; margin-right: auto;"/>
+												<img src="images/mobile_app_data/distinct_country_levels.png" alt="" style="width: 20%; display:block; margin-left: auto; margin-right: auto;"/>
 
 											</section>
 										</div>
 									</div>
 									<p>
-										It converts to <i>VARCHAR(1)</i> with no problems, and all values in the dataset are either 'A', 'B', or 'C', as they're supposed to be.  Everything looks good here, too.
+										It converts to <i>VARCHAR(2)</i> with no problems, and all values in the dataset are either 'CA', 'US', or 'MX', as they're supposed to be.  Everything looks good here, too.
 									</p>
 								</div>
 								<h3>
@@ -631,16 +631,16 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users (
 	  userid VARCHAR(36) NOT NULL,
   subscriber int NOT NULL,
-  category VARCHAR(1) NOT NULL,
+  country VARCHAR(1) NOT NULL,
  PRIMARY KEY (userid),
   CONSTRAINT valid_subscriber CHECK (subscriber IN (0, 1)),
-  CONSTRAINT valid_category CHECK (category IN ('A', 'B', 'C'))
+  CONSTRAINT valid_country CHECK (country IN ('CA', 'US', 'MX'))
 	);
 
- INSERT INTO users(userid, subscriber, category)
+ INSERT INTO users(userid, subscriber, country)
       SELECT userid
            , subscriber
-           , category
+           , country
         FROM users_staging;						</pre>
 											</section>
 										</div>
@@ -671,13 +671,13 @@ CREATE TABLE users (
 															</ul>
 														</li>
 														<li>
-															category
+															country
 															<ul>
 																<li>
-																	Data type: <i>VARCHAR(1)</i>
+																	Data type: <i>VARCHAR(2)</i>
 																</li>
 																<li>
-																	Constraints: only non-null values of 'A', 'B', or 'C' are allowed
+																	Constraints: only non-null values of 'CA', 'US', or 'MX' are allowed
 																</li>
 															</ul>
 														</li>

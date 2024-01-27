@@ -188,13 +188,13 @@
 										</tr>
 										<tr>
 											<td>
-												category
+												country
 											</td>
 											<td>
-												VARCHAR(1)
+												VARCHAR(2)
 											</td>
 											<td>
-												A variable that identifies whether the userid falls in category 'A', 'B', or 'C'
+												A variable that identifies whether the userid is from 'CA' (Canada), 'US' (United States), or 'MX' (Mexico)
 											</td>
 										</tr>
 									</table>
@@ -273,7 +273,7 @@
 									<br>
 									<br>
 									<p>
-										For the purposes of this project, I'll define a user's performance as their yearly point total and explore if there's any correlation with the value of subscriber or category.
+										For the purposes of this project, I'll define a user's performance as their yearly point total and explore if there's any correlation with the value of subscriber or country.
 									</p>
 									<h4>
 										Joining Tables
@@ -293,7 +293,7 @@ WITH total_points_per_user AS (
 
    SELECT u.userid
         , u.subscriber
-        , u.category
+        , u.country
         , COALESCE(tp.total_points, 0) AS total_points
      FROM users AS u
 LEFT JOIN total_points_per_user AS tp
@@ -303,7 +303,7 @@ LEFT JOIN total_points_per_user AS tp
 											<div class="col-6 col-12-medium">
 												<section class="middle">
 													<p>
-														Information on whether a user is a subscriber and which category they fall in is in the users table, but information on point scores is in the event_performance table, so the two tables have to be joined before any investigation into correlation can happen. Because there may be userids in the users table who have never participated in a gaming event and thus have no entries in the event_performance table, a LEFT JOIN is needed to ensure all userids from the users table make it into the joined table. 
+														Information on whether a user is a subscriber and which country they fall in is in the users table, but information on point scores is in the event_performance table, so the two tables have to be joined before any investigation into correlation can happen. Because there may be userids in the users table who have never participated in a gaming event and thus have no entries in the event_performance table, a LEFT JOIN is needed to ensure all userids from the users table make it into the joined table. 
 													</p>
 													<p>
 														Any userids that aren't found in the event_performance table would normally be assigned NULL values, but these users have no matching entries because they've never played in a gaming event.  If they've never played in a gaming event, then their yearly point total should be 0, and COALESCE is used to make this happen.  
@@ -317,13 +317,13 @@ LEFT JOIN total_points_per_user AS tp
 										Visualizing the Yearly Point Distribution
 									</h4>
 									<p>
-										These boxplots compare the yearly point totals for subscribers against non-subscribers, as well as users in category A against those in category B against those in category C.  Userids that had yearly point totals less than $Q_1 - 1.5 \cdot \text{IQR}$ or more than $Q_3 + 1.5 \cdot \text{IQR}$ are considered outliers and are represented by the circles that lay beyond the whiskers.  Pay extra close attention to these, as they'll become important soon. 
+										These boxplots compare the yearly point totals for subscribers against non-subscribers, as well as users in Canada against those in the US against those in Mexico.  Userids that had yearly point totals less than $Q_1 - 1.5 \cdot \text{IQR}$ or more than $Q_3 + 1.5 \cdot \text{IQR}$ are considered outliers and are represented by the circles that lay beyond the whiskers.  Pay extra close attention to these, as they'll become important soon. 
 									</p>
 									<div class="split left">
 										<div class="row">
 											<div class="col-6 col-12-medium">
 												<section class="first">
-													<img src="images/mobile_app_data/subscriber_category_yearly_points_boxplot.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+													<img src="images/mobile_app_data/subscriber_country_yearly_points_boxplot.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
 												</section>
 											</div>
 											<div class="col-6 col-12-medium">
@@ -332,20 +332,20 @@ LEFT JOIN total_points_per_user AS tp
 														The first boxplot shows roughly the same spread of point totals regardless of whether a user is a subscriber or not. The medians are close, and the overall distribution of point totals is pretty similar. My initial impression is that there's either no correlation or a weak correlation between whether a user is a subscriber and their yearly point totals.
 													</p>
 													<p>
-														On the other hand, the second boxplot shows more noticeable differences between the three categories: A, B, and C. Category A and B have fairly similar performance, although category A has a little less variability than category B. However, category C is quite different and is the most interesting.
+														On the other hand, the second boxplot shows more noticeable differences between the three countries: CA (Canada), US (United States), and MX (Mexico). Canada and the United States have fairly similar performance, although Canada has a little less variability than the US. However, Mexico is quite different and is the most interesting.
 													</p>
 													<p>
-														The plot reveals point totals for category C are skewed right and look to be the strongest performing group.  Very few users in this category have yearly point totals that are negative, and therefore these users must be consistently contributing to the human team's bottom line.
+														The plot reveals point totals for Mexico are skewed right and look to be the strongest performing group.  Very few users in this country have yearly point totals that are negative, and therefore these users must be consistently contributing to the human team's bottom line.
 													</p>
 													<p>
-														Additionally, category C contains the users with the 9 highest point totals of the year, and it seems unlikely for that to be a coincidence.  This can be seen in the graph, where the red line represents the 9th highest point total of the year.  The nine players who scored at least that many points are represented by the colored circles to the right.
+														Additionally, Mexico contains the users with the 9 highest point totals of the year, and it seems unlikely for that to be a coincidence.  This can be seen in the graph, where the red line represents the 9th highest point total of the year.  The nine players who scored at least that many points are represented by the colored circles to the right.
 													</p>
 												</section>
 											</div>
 										</div>
 										<br>
 										<p>
-											While nothing is definitive yet, it's starting to look like there could be some correlation between a user's attributes and yearly point totals.  Category seems like it would have the strongest correlation, but subscriber may be important too.
+											While nothing is definitive yet, it's starting to look like there could be some correlation between a user's attributes and yearly point totals.  Country seems like it would have the strongest correlation, but subscriber may be important too.
 										</p>
 									</div>
 									<h4>
@@ -378,13 +378,13 @@ LEFT JOIN total_points_per_user AS tp
 										<div class="row">
 											<div class="col-6 col-12-medium">
 												<section class="first">
-													<img src="images/mobile_app_data/category_scatterplot.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+													<img src="images/mobile_app_data/country_scatterplot.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
 												</section>
 											</div>
 											<div class="col-6 col-12-medium">
 												<section class="middle">
 													<p>
-														This scatterplot tells the same story as before but makes it even clearer.  Category C has by far the highest yearly point totals, while categories A and B are pretty similar to each other. Occasionally, there are those in category B who score highly too, but it's heavily dominated by users in category C.
+														This scatterplot tells the same story as before but makes it even clearer.  Mexico has by far the highest yearly point totals, while Canada and the US are pretty similar to each other. Occasionally, there are those in the US who score highly too, but it's heavily dominated by users in Mexico.
 													</p>
 													<p>
 														Pearson's correlation coefficient would be nice to measure the strength of the correlation here, but it can't be calculated on categorical data.  However, it can be calculated after encoding the categorical data using dummy variables.
@@ -407,7 +407,7 @@ LEFT JOIN total_points_per_user AS tp
 											<div class="col-6 col-12-medium">
 												<section class="middle">
 													<p>
-														Using Pandas, I encoded category as a dummy variable and calculated the correlation with yearly point totals.  Category C has a correlation of 0.5365, indicating a moderately positive correlation, and is the strongest correlation out of all the user attributes.  Category A and category B both have similar correlations of -0.2429 and -0.2147, respectively, indicating weak negative correlations.
+														Using Pandas, I encoded country as a dummy variable and calculated the correlation with yearly point totals.  Mexico has a correlation of 0.5365, indicating a moderately positive correlation, and is the strongest correlation out of all the user attributes.  Canada and the US both have similar correlations of -0.2429 and -0.2147, respectively, indicating weak negative correlations.
 													</p>
 													<p>
 														Everything observed so far is promising evidence of some correlation between user attributes and user performance; however, the relationship that's observed in the dataset could simply be the result of a fluke and not necessarily because a correlation truly exists.  To be certain beyond a reasonable doubt, hypothesis testing can be used.
@@ -465,9 +465,9 @@ LEFT JOIN total_points_per_user AS tp
 													<!-- <h4>SQL Code</h4> -->
 													<p>
 														<left>
-															$H_0$: category and total yearly points are not correlated
+															$H_0$: country and total yearly points are not correlated
 															<br>
-															$H_a$: category and total yearly points are correlated
+															$H_a$: country and total yearly points are correlated
 															<br>
 														</left>
 													</p>
@@ -477,10 +477,10 @@ LEFT JOIN total_points_per_user AS tp
 											<div class="col-6 col-12-medium">
 												<section class="middle">
 													<p>
-														At the $\alpha=0.05$ level of significance, a F-test is performed, and the results are shown.  The P-value is ~0, and the test statistic of 222.330 is so far into the rejection region that it can't be pictured in the graph.  The null hypothesis should be rejected, and there's sufficient evidence to conclude that category is a statistically significant predictor of yearly point totals.
+														At the $\alpha=0.05$ level of significance, a F-test is performed, and the results are shown.  The P-value is ~0, and the test statistic of 222.330 is so far into the rejection region that it can't be pictured in the graph.  The null hypothesis should be rejected, and there's sufficient evidence to conclude that country is a statistically significant predictor of yearly point totals.
 													</p>
 													<p>
-														Now that hypothesis testing has indicated both subscriber and category are statistically significant, regression modeling can be performed to quantify these relationships.
+														Now that hypothesis testing has indicated both subscriber and country are statistically significant, regression modeling can be performed to quantify these relationships.
 													</p>
 												</section>
 											</div>
@@ -501,7 +501,7 @@ LEFT JOIN total_points_per_user AS tp
 											<div class="col-6 col-12-medium">
 												<section class="middle">
 													<p>
-														In order to avoid the dummy variable trap, regression has to be performed using all but one level of the dummy variable, which acts as the baseline level for comparison.  In this model, category A represents the baseline level for the dummy variable, and any coefficients of the model must be interpreted relative to that category.
+														In order to avoid the dummy variable trap, regression has to be performed using all but one level of the dummy variable, which acts as the baseline level for comparison.  In this model, Canada represents the baseline level for the dummy variable, and any coefficients of the model must be interpreted relative to that country.
 													</p>
 												</section>
 											</div>
@@ -520,15 +520,15 @@ LEFT JOIN total_points_per_user AS tp
 											<br>
 											<li>
 												$x_2 = \left\{\begin{aligned} 
-													1 &\text{ if userid is in category B} \\
-													0 &\text{ if userid is not in category B}
+													1 &\text{ if userid is from the US} \\
+													0 &\text{ if userid is not from the US}
 												\end{aligned} \right.$
 											</li>
 											<br>
 											<li>
 												$x_3 = \left\{\begin{aligned} 
-													1 &\text{ if userid is in category C} \\
-													0 &\text{ if userid is not in category C}
+													1 &\text{ if userid is from Mexico} \\
+													0 &\text{ if userid is not from Mexico}
 												\end{aligned} \right.$
 											</li>
 											<br>
@@ -540,22 +540,22 @@ LEFT JOIN total_points_per_user AS tp
 										Interpreting the Model
 									</h4>
 									<p>
-										Understanding how to interpret the model will help understand the relationship between user attributes and user performance.  When $x_1, x_2$, and $x_3$ are all set to 0, you have your baseline user, a non-subscriber, who is neither in category B nor in category C; therefore, they must be in category A.  For this kind of user, the model's predicted yearly point total would simply be the constant 114.4202.  
+										Understanding how to interpret the model will help understand the relationship between user attributes and user performance.  When $x_1, x_2$, and $x_3$ are all set to 0, you have your baseline user, a non-subscriber, who is neither in the US nor in Mexico; therefore, they must be in Canada.  For this kind of user, the model's predicted yearly point total would simply be the constant 114.4202.  
 									</p>
 									<p>
-										If $x_2$ is set to 1 and all other variables remain 0, then this would represent a non-subscriber in category B.  For this kind of user, the predicted yearly point total would increase by the coefficient of 617.8321 points.  This indicates that, on average, non-subscribers in category B earn 617.8321 points more than non-subscribers in category A.  This echoes what was seen earlier regarding there not being much difference in point scores between users in these categories.
+										If $x_2$ is set to 1 and all other variables remain 0, then this would represent a non-subscriber in the US.  For this kind of user, the predicted yearly point total would increase by the coefficient of 617.8321 points.  This indicates that, on average, non-subscribers in the US earn 617.8321 points more than non-subscribers in Canada.  This echoes what was seen earlier regarding there not being much difference in point scores between users in these countries.
 									</p>
 									<p>
-										When $x_3$ is set to 1 and all other variables remain 0, the user is a non-subscriber in category C.  For this kind of user, the model would predict a yearly point total of 22,002.314 points higher than the baseline user.  This is the largest coefficient of the model and emphasizes just how strong the performance of users in category C really is.
+										When $x_3$ is set to 1 and all other variables remain 0, the user is a non-subscriber in Mexico.  For this kind of user, the model would predict a yearly point total of 22,002.314 points higher than the baseline user.  This is the largest coefficient of the model and emphasizes just how strong the performance of users in Mexico really is.
 									</p>
 									<p>
-										When $x_1 = 1$, this indicates the user is a subscriber.  Users of any category can be subscribers; therefore, regardless of the values of $x_2$ or $x_3$, $x_1$ could be set to one and "turned on".  Turning on $x_1$ would increase the model's prediction of yearly point totals by its coefficient of 7258.8017, meaning that a subscribing user is predicted to earn that many points more than a non-subscribing user from the same category.  Despite earlier identifying subscriber as having a weak correlation, it produces the second largest effect on predicted yearly point totals in this model and looks to be more important than was initially thought.
+										When $x_1 = 1$, this indicates the user is a subscriber.  Users of any country can be subscribers; therefore, regardless of the values of $x_2$ or $x_3$, $x_1$ could be set to one and "turned on".  Turning on $x_1$ would increase the model's prediction of yearly point totals by its coefficient of 7258.8017, meaning that a subscribing user is predicted to earn that many points more than a non-subscribing user from the same country.  Despite earlier identifying subscriber as having a weak correlation, it produces the second largest effect on predicted yearly point totals in this model and looks to be more important than was initially thought.
 									</p>
 									<h4>
 										Conclusions
 									</h4>
 									<p>
-										In summary, it seems as though the question of whether there's any correlation between user attributes and user performance has been answered.  Both subscriber and category are statistically significant predictors of a user's performance as measured through their yearly point totals.  The single best predictor is which category a user falls into, with category C being the most important; however, knowing whether a user is a subscriber or not is pretty important too.
+										In summary, it seems as though the question of whether there's any correlation between user attributes and user performance has been answered.  Both subscriber and country are statistically significant predictors of a user's performance as measured through their yearly point totals.  The single best predictor is which country a user falls into, with Mexico being the most important; however, knowing whether a user is a subscriber or not is pretty important too.
 									</p>
 								
 							</article>
