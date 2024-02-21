@@ -6,12 +6,12 @@
 -->
 <html>
 	<head>
-		<title>About</title>
+		<title>Portfolio</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
-	<body class="right-sidebar is-preload">
+	<body class="no-sidebar is-preload">
 		<div id="page-wrapper">
 
 			<!-- Header -->
@@ -123,65 +123,245 @@
 			<!-- Main -->
 				<section id="main">
 					<div class="container">
-						<div class="row">
-							<div class="col-8 col-12-medium">
 
-								<!-- Content -->
-									<article class="box post">
-										<header>
-											<h2>About me:</h2>
-										</header>
-										<p>
-											Hi, my name is Jonathan. I have more than fifteen years of experience working with mathematics, with five years as a reporting analyst. I thoroughly enjoy problem solving and derive satisfaction from being able to work a problem through to completion. Having spent some time as a teacher and tutor, I also have a knack for communicating complex ideas in a way that is easy to digest, and I enjoy learning, especially if it relates to math in some way.
-										</p>
-										<p>
-											Several years ago, I was introduced to the idea of data science and immediately became interested. In my time as an analyst, I had never seen such novel and intriguing problems being solved before, and witnessing data science blend statistics, calculus, and linear algebra together was eye-opening. In order to work with large amounts of data, I began beefing up certain technical skills  through self-learning in my spare time.
-										</p>
-										<p>
-											Now, I'm proficient with SQL, Python, Tableau, and Excel, and I'm looking for a job as a data analyst. I've spent time creating personal projects to showcase my skills and track my progress on data analytics / data science-related topics. 
-										</p>
-										<p>
-											Please take a look through my portfolio; I hope you find it interesting.<br><br>
-										</p>
-										<section>
-											<footer>
-												<ul class="actions">
-													<li><a href="portfolio.html" class="button alt">Portfolio</a></li>
-												</ul>
-											</footer>
-										</section>
-									</article>
+						<!-- Content -->
+							<article class="box post">
+								<a class="image featured"><img src="images/projects_banner4.png" alt="" /></a>
+								<header>
+									<h2>
+										Personal Projects
+									</h2>
+								</header>
+								<p>
+									<h3>
+										<u>
+											<a href="/personal_projects/acupuncture_analysis.html">Acupuncture Analysis</a>
+										</u>
+									</h3>
+									Constructed confidence intervals and linear regression models, and performed A/B testing on data from a scholarly article testing the effectiveness of acupuncture treatments on hypertension. 
+									<br>
+									<br>
+									<i class="icon solid fa-code">
+									 Python
+									</i>
+									<br>
+									<i class="icon solid fa-chart-line"> A/B Testing, Confidence Intervals, Linear Regression</i>
+									<br>
+									<i class="icon solid fa-book">
+									 Pandas, NumPy, Sklearn, Statsmodels, Matplotlib, Seaborn
+									</i>
+							</p>
+							<p>
+								<h3>
+									<u>
+										<a href="/personal_projects/craigslist_web_scraper/craigslist_EDA.html">Craigslist Tutoring Exploratory Data Analysis</a>
+									</u>
+								</h3>
+								Using data collected from the 
+								<a href="/personal_projects/craigslist_web_scraper/etl_craigslist_web_scraper.html">ETL Craigslist web scraper</a> 
+								I built, I've analyzed tutoring prices on Craigslist to better understand my competition as a math tutor.  I query the data from a local PostgreSQL database and then visualize it using Plotly Express and Matplotlib.
+								<br/>
+								<br>
+								<i class="icon solid fa-code">
+									 Python, PostgreSQL
+								</i>
+								<br>
+								<i class="icon solid fa-chart-line">
+									 Data Analysis, Visualization
+								</i>
+								<br>
+								<i class="icon solid fa-book">
+									 Pandas, Psycopg2, Plotly Express, and Matplotlib
+								</i>
+							</p>
+							<p>
+								<h3>
+									<u>
+										<a href="/personal_projects/craigslist_web_scraper/craigslist_tableau_dashboard.html">Craigslist Tutoring Rates Dashboard</a>
+									</u>
+								</h3>
+								This is an interactive dashboard that can be used to understand tutoring prices at the national, regional, state, and local levels. It was built using data scraped from Craigslist
+								<a href="/personal_projects/craigslist_web_scraper/etl_craigslist_web_scraper.html">another project</a>.
+								<br>
+								<br>
+								<i class="icon solid fa-code">
+									 Tableau
+								</i>
+								<br>
+								<i class="icon solid fa-chart-line">
+									 Visualization
+								</i>
+								<br>
+							</p>
+							<p>
+								<h3>
+									<u>
+										<a href="/personal_projects/datasheet_qa_tool.html">Datasheet Question Answering (QA) Tool</a>
+									</u>
+								</h3>
+								A tool that harnesses the power of large language models (LLMs) to answer domain-specific questions, citing pages from official documentation as sources.
+								<br/>
+								<br>
+								<i class="icon solid fa-code">
+									 Python, LLMs
+								</i>
+								<br>
+								<i class="icon solid fa-chart-line">
+								 Web Scraping, Vectorstores
+								</i>
+								<br>
+								<i class="icon solid fa-book">
+									 Langchain, Streamlit
+								</i>
+							</p>
+							<p>
+								<h3>
+									<u>
+										<a href="/personal_projects/craigslist_web_scraper/etl_craigslist_web_scraper.html">ETL Craigslist Web Scraper</a>
+									</u>
+								</h3>
+								An extract/transform/load tool to understand my competition as a math tutor.  Tutoring prices from the services section of Craigslist were extracted, transformed to my specifications, and loaded into a SQL database for analysis.
+								<br/>
+								<br>
+								<i class="icon solid fa-code">
+									 Python, PostgreSQL, HTML, RegEx
+								</i>
+								<br>
+								<i class="icon solid fa-chart-line">
+									 Web Scraping, Data Cleaning
+									</i>
+								<br>
+								<i class="icon solid fa-book">
+									 Requests, BeautifulSoup, Pandas, NumPy, Psycopg2, and SKlearn
+								</i>
+							</p>
+							<p>
+								<h3>
+									<u>
+										<a href="/personal_projects/pokemon_classifier.html">Pokémon Legendary Classifier</a>
+									</u>
+								</h3>
+								Classification models to predict whether a Pokémon is legendary.  The model was trained on Generation 1-6 Pokémon and tested on the new Pokémon from Generation 7.
+								<br>
+								<br>
+								<i class="icon solid fa-code">
+									 Python
+								</i>
+								<br>
+								<i class="icon solid fa-chart-line">
+									 Visualization, k-Nearest Neighbors, Logistic Regression, Over and Under-Sampling Techniques
+									</i>
+								<br>
+								<i class="icon solid fa-book">
+									 Pandas, Sklearn, Statsmodels, Matplotlib, Seaborn, Imblearn
+								</i>
+							</p>
+							<p>
+								<h3>
+									<u>
+										<a href="/personal_projects/ISLR_Python/islr_python.html">Porting Code from ISLR (2e)</a>
+									</u>
+								</h3>
+								The textbook <i>Introduction to Statistical Learning </i>(ISLR) released a second edition in August 2021, with three new chapters that were not present in the first edition.  This project takes R code from the labs in these three chapters, ports it to Python, and answers each chapter's exercises in Python too.
+								<br>
+								<br>
+								<i class="icon solid fa-code">
+									 R and Python
+								</i>
+								<br>
+								<i class="icon solid fa-chart-line">
+									 Regression, Neural Networks, Survival Analysis, and Hypothesis Testing
+								</i>
+								<br>
+								<i class="icon solid fa-book">
+									 Pandas, NumPy, Sklearn, Statsmodels, Scipy, Matplotlib, Tensorflow/Keras, Patsy, glmnet_python, Survive, Lifelines,  Scikit-survive
+								</i>
+							</p>
+							<p>
+								<h3>
+									<u>
+										<a href="/personal_projects/us_accounting/us_accounting_survey_analysis.html">U.S. Accounting Survey Analysis</a>
+									</u>
+								</h3>
+								An exploratory data analysis inspired by my wife's entry into the accounting field last year.  I cleaned and manipulated publicly available data to analyze various segments of this profession, visualize the results, and determine what factors maximize long-term salary.
+								<br>
+								<br>
+								<i class="icon solid fa-code">
+									 Python, Excel
+								</i>
+								<br>
+								<i class="icon solid fa-chart-line">
+									 Data Cleaning, Exploratory Data Analysis, Visualization, Linear Regression
+								</i>
+								<br>
+								<i class="icon solid fa-book">
+									 Pandas, NumPy, Matplotlib, Seaborn, SciPy, SKlearn, Statsmodels
+								</i>
+							</p>
+							<!-- <p>
+								<h3><u><a href="sql_queries.html">SQL Queries</a></u></h3>
+								Queries to practice solving common business problems using joins, window functions, subqueries, common table expressions, and more. 
+								<br><br>
+									<i class="icon solid fa-code">
+									 PostgreSQL, MySQL
+									</i>
+									<br>
+									<i class="icon solid fa-chart-line"> Queries</i>
+									<br>
+							</p> -->
+							<p>
+								<h3>
+									<u>
+										<a href="/personal_projects/us_accounting/us_accounting_viz.html">U.S. Accounting Viz</a>
+									</u>
+								</h3>
+								A Tableau story focusing on visualizing salary differences among male and female accountants using the cleaned data from another project, the Reddit Accounting Survey Analysis.
+								<br>
+								<br>
+								<i class="icon solid fa-code">
+									 Tableau
+								</i>
+								<br>
+								<i class="icon solid fa-chart-line">
+									 Visualization
+								</i>
+							</p>
+								<!-- <section>
+									<header>
+										<h3>Something else</h3>
+									</header>
+									<p>
+										Elementum odio duis semper risus et lectus commodo fringilla. Maecenas sagittis convallis justo vel mattis.
+										placerat, nunc diam iaculis massa, et aliquet nibh leo non nisl vitae porta lobortis, enim neque fringilla nunc,
+										eget faucibus lacus sem quis nunc suspendisse nec lectus sit amet augue rutrum vulputate ut ut mi. Aenean
+										elementum, mi sit amet porttitor lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
+										sit amet nullam consequat feugiat dolore tempus.
+										Elementum odio duis semper risus et lectus commodo fringilla. Maecenas sagittis convallis justo vel mattis.
+										placerat, nunc diam iaculis massa, et aliquet nibh leo non nisl vitae porta lobortis, enim neque fringilla nunc,
+										eget faucibus lacus sem quis nunc suspendisse nec lectus sit amet augue rutrum vulputate ut ut mi. Aenean
+										elementum, mi sit amet porttitor lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor.
+									</p>
+									<p>
+										Nunc diam iaculis massa, et aliquet nibh leo non nisl vitae porta lobortis, enim neque fringilla nunc,
+										eget faucibus lacus sem quis nunc suspendisse nec lectus sit amet augue rutrum vulputate ut ut mi. Aenean
+										elementum, mi sit amet porttitor lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
+										sit amet nullam consequat feugiat dolore tempus.
+									</p>
+								</section>
+								<section>
+									<header>
+										<h3>So in conclusion ...</h3>
+									</header>
+									<p>
+										Nunc diam iaculis massa, et aliquet nibh leo non nisl vitae porta lobortis, enim neque fringilla nunc,
+										eget faucibus lacus sem quis nunc suspendisse nec lectus sit amet augue rutrum vulputate ut ut mi. Aenean
+										elementum, mi sit amet porttitor lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
+										sit amet nullam consequat feugiat dolore tempus. Elementum odio duis semper risus et lectus commodo fringilla.
+										Maecenas sagittis convallis justo vel mattis.
+									</p>
+								</section> -->
+							</article>
 
-							</div>
-							<div class="col-4 col-12-medium">
-
-								<!-- Sidebar -->
-									<section class="box">
-										<a class="image featured"><img src="images/me.jpeg" alt="" /></a>
-										<header>
-											<h3>Jonathan Papir</h3>
-										</header>
-										<p>A seasoned mathematician who can communicate complex ideas to technical and non-technical people alike.  </p>
-										<p>I possess a superb capacity for problem solving and an extremely high level of comfort with statistical concepts, and I am looking for a job as a data analyst.</p>
-									</section>
-									<!-- <section class="box">
-										<header>
-											<h3>Feugiat consequat</h3>
-										</header>
-										<p>Veroeros sed amet blandit consequat veroeros lorem blandit adipiscing et feugiat sed lorem consequat feugiat lorem dolore.</p>
-										<ul class="divided">
-											<li><a href="#">Sed et blandit consequat sed</a></li>
-											<li><a href="#">Hendrerit tortor vitae sapien dolore</a></li>
-											<li><a href="#">Sapien id suscipit magna sed felis</a></li>
-											<li><a href="#">Aptent taciti sociosqu ad litora</a></li>
-										</ul>
-										<footer>
-											<a href="#" class="button alt">Ipsum consequat</a>
-										</footer>
-									</section> -->
-
-							</div>
-						</div>
 					</div>
 				</section>
 

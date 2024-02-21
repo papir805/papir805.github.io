@@ -6,12 +6,12 @@
 -->
 <html>
 	<head>
-		<title>About</title>
+		<title>Portfolio</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
-	<body class="right-sidebar is-preload">
+	<body class="no-sidebar is-preload">
 		<div id="page-wrapper">
 
 			<!-- Header -->
@@ -123,65 +123,125 @@
 			<!-- Main -->
 				<section id="main">
 					<div class="container">
-						<div class="row">
-							<div class="col-8 col-12-medium">
 
-								<!-- Content -->
-									<article class="box post">
-										<header>
-											<h2>About me:</h2>
-										</header>
-										<p>
-											Hi, my name is Jonathan. I have more than fifteen years of experience working with mathematics, with five years as a reporting analyst. I thoroughly enjoy problem solving and derive satisfaction from being able to work a problem through to completion. Having spent some time as a teacher and tutor, I also have a knack for communicating complex ideas in a way that is easy to digest, and I enjoy learning, especially if it relates to math in some way.
-										</p>
-										<p>
-											Several years ago, I was introduced to the idea of data science and immediately became interested. In my time as an analyst, I had never seen such novel and intriguing problems being solved before, and witnessing data science blend statistics, calculus, and linear algebra together was eye-opening. In order to work with large amounts of data, I began beefing up certain technical skills  through self-learning in my spare time.
-										</p>
-										<p>
-											Now, I'm proficient with SQL, Python, Tableau, and Excel, and I'm looking for a job as a data analyst. I've spent time creating personal projects to showcase my skills and track my progress on data analytics / data science-related topics. 
-										</p>
-										<p>
-											Please take a look through my portfolio; I hope you find it interesting.<br><br>
-										</p>
-										<section>
-											<footer>
-												<ul class="actions">
-													<li><a href="portfolio.html" class="button alt">Portfolio</a></li>
-												</ul>
-											</footer>
-										</section>
-									</article>
-
-							</div>
-							<div class="col-4 col-12-medium">
-
-								<!-- Sidebar -->
-									<section class="box">
-										<a class="image featured"><img src="images/me.jpeg" alt="" /></a>
-										<header>
-											<h3>Jonathan Papir</h3>
-										</header>
-										<p>A seasoned mathematician who can communicate complex ideas to technical and non-technical people alike.  </p>
-										<p>I possess a superb capacity for problem solving and an extremely high level of comfort with statistical concepts, and I am looking for a job as a data analyst.</p>
-									</section>
-									<!-- <section class="box">
-										<header>
-											<h3>Feugiat consequat</h3>
-										</header>
-										<p>Veroeros sed amet blandit consequat veroeros lorem blandit adipiscing et feugiat sed lorem consequat feugiat lorem dolore.</p>
-										<ul class="divided">
-											<li><a href="#">Sed et blandit consequat sed</a></li>
-											<li><a href="#">Hendrerit tortor vitae sapien dolore</a></li>
-											<li><a href="#">Sapien id suscipit magna sed felis</a></li>
-											<li><a href="#">Aptent taciti sociosqu ad litora</a></li>
+						<!-- Content -->
+							<article class="box post">
+								<a class="image featured"><img src="images/projects_banner4.png" alt="" /></a>
+								<header>
+									<h2>
+										Featured Projects
+									</h2>
+									<p>
+										<h3>
+											<u>
+												<a href="/featured_projects/bot_battles/bot_battles_introduction.html">Bot Battles Player Analysis</a>
+											</u>
+										</h3>
+										A case study using one year's worth of mobile gaming data to determine if there's any correlation between user attributes and user performance.  An introduction to the game can be found <a href="/featured_projects/bot_battles/bot_battles_introduction.html">here</a>.  The analysis is broken into three parts: 
+										<ul>
+											<li style="list-style: none;">
+												<a href="/featured_projects/bot_battles/bot_battles_data_cleaning.html">Part 1</a>: Loading and cleaning the data in PostgreSQL.
+											</li>
+											<li style="list-style: none;">
+												<a href="/featured_projects/bot_battles/bot_battles_exploratory_data_analysis.html">Part 2</a>:
+												An exploratory data analysis to familiarize myself with the game and its data.
+											</li>
+											<li style="list-style: none;">
+												<a href="/featured_projects/bot_battles/bot_battles_correlation.html">Part 3</a>:
+												Using hypothesis testing and regression modeling to answer the question about correlation. 
+											</li>
 										</ul>
-										<footer>
-											<a href="#" class="button alt">Ipsum consequat</a>
-										</footer>
-									</section> -->
+											<i class="icon solid fa-code">
+												 Python and PostgreSQL
+											</i>
+											<br>
+											<i class="icon solid fa-chart-line">
+												 Data Cleaning, Visualization, Regression, Hypothesis Testing
+												</i>
+											<br>
+											<i class="icon solid fa-book">
+												 SQLAlchemy, Pandas, Matplotlib, Seaborn, Statsmodels, SciPy
+											</i>
+									</p>
+									<p>
+										<h3>
+											<u>
+												<a href="/featured_projects/electronicart/electronicart_sales_analysis.html">ElectroniCart Sales Analysis</a>
+											</u>
+										</h3>
+										ElectroniCart is an online electronics retailer who has collected a wealth of data from 100k+ orders 
+										since being established in 2019.  This project aims to provide insights and recommendations 
+										on trends in sales, refunds, and performance of the recently introduced loyalty program.
+										<br>
+										<br>
+										<i class="icon solid fa-code">
+											 Python, Excel, Google Slides
+										</i>
+										<br>
+										<i class="icon solid fa-chart-line">
+											 Automation, Data Cleaning, Visualization
+										</i>
+										<br>
+										<i class="icon solid fa-book">
+											 Pandas, NumPy, Matplotlib, Seaborn
+										</i>
+									</p>
+									<p>
+										<h3>
+											<u>
+												<a href="/featured_projects/telepulse/telepulse_ad_campaign_report.html">TelePulse Ad Campaign Report</a>
+											</u>
+										</h3>
+										A data pipeline that automates the process of cleaning TV advertising data from Excel files and computing cost per visitor,
+										cost per acquisition, and conversion rate.  Two months of data are visualized in a Google Slides 
+										presentation that gives recommendations for future ad spending.
+										<br>
+										<br>
+										<i class="icon solid fa-code">
+											Google BigQuery SQL, Excel
+										</i>
+										<br>
+										<i class="icon solid fa-chart-line">
+											Data Cleaning, Pivot Tables, Visualization
+										</i>
+									</p>
+								</header>
+								<!-- <section>
+									<header>
+										<h3>Something else</h3>
+									</header>
+									<p>
+										Elementum odio duis semper risus et lectus commodo fringilla. Maecenas sagittis convallis justo vel mattis.
+										placerat, nunc diam iaculis massa, et aliquet nibh leo non nisl vitae porta lobortis, enim neque fringilla nunc,
+										eget faucibus lacus sem quis nunc suspendisse nec lectus sit amet augue rutrum vulputate ut ut mi. Aenean
+										elementum, mi sit amet porttitor lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
+										sit amet nullam consequat feugiat dolore tempus.
+										Elementum odio duis semper risus et lectus commodo fringilla. Maecenas sagittis convallis justo vel mattis.
+										placerat, nunc diam iaculis massa, et aliquet nibh leo non nisl vitae porta lobortis, enim neque fringilla nunc,
+										eget faucibus lacus sem quis nunc suspendisse nec lectus sit amet augue rutrum vulputate ut ut mi. Aenean
+										elementum, mi sit amet porttitor lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor.
+									</p>
+									<p>
+										Nunc diam iaculis massa, et aliquet nibh leo non nisl vitae porta lobortis, enim neque fringilla nunc,
+										eget faucibus lacus sem quis nunc suspendisse nec lectus sit amet augue rutrum vulputate ut ut mi. Aenean
+										elementum, mi sit amet porttitor lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
+										sit amet nullam consequat feugiat dolore tempus.
+									</p>
+								</section>
+								<section>
+									<header>
+										<h3>So in conclusion ...</h3>
+									</header>
+									<p>
+										Nunc diam iaculis massa, et aliquet nibh leo non nisl vitae porta lobortis, enim neque fringilla nunc,
+										eget faucibus lacus sem quis nunc suspendisse nec lectus sit amet augue rutrum vulputate ut ut mi. Aenean
+										elementum, mi sit amet porttitor lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
+										sit amet nullam consequat feugiat dolore tempus. Elementum odio duis semper risus et lectus commodo fringilla.
+										Maecenas sagittis convallis justo vel mattis.
+									</p>
+								</section> -->
+							</article>
 
-							</div>
-						</div>
 					</div>
 				</section>
 
