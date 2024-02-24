@@ -1,0 +1,543 @@
+<!DOCTYPE HTML>
+<!--
+	Dopetrope by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Project: Craigslist Tutoring Exploratoratory Data Analysis</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&amp;skin=doxy&amp;lang=css" defer=""></script>
+		<script src="https://github.com/googlearchive/code-prettify/blob/master/src/lang-sql.js"></script>
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<section id="header">
+
+					<!-- Logo -->
+					<h1>
+						Using mathematics to solve problems with real-world data excites me.
+					</h1>
+
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li class="current">
+							<a href="index.html">Home</a>
+						</li>
+						<li>
+							<a href="portfolio.html">Portfolio</a>
+							<ul>
+								<li>
+									<a href="featured_projects.html">Featured Projects</a>
+									<ul>
+										<li>
+											<a href="#">Bot Battles Player Analysis</a>
+											<ul>
+												<li>
+													<a href='/featured_projects/bot_battles/bot_battles_introduction.html'>An Introduction</a>
+												</li>
+												<li>
+													<a href="/featured_projects/bot_battles/bot_battles_data_cleaning.html">Part 1: Data Cleaning</a>
+												</li>
+												<li>
+													<a href="/featured_projects/bot_battles/bot_battles_exploratory_data_analysis.html">Part 2: EDA</a>
+												</li>
+												<li>
+													<a href="/featured_projects/bot_battles/bot_battles_correlation.html">Part 3: Correlation</a>
+												</li>
+											</ul>
+										</li>
+										<li>
+											<a href="/featured_projects/electronicart/electronicart_sales_analysis.html">ElectroniCart Sales Analysis</a>
+										</li>
+										<li>
+											<a href="/featured_projects/telepulse/telepulse_ad_campaign_report.html">TelePulse Ad Campaign Report</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="personal_projects.html">Personal Projects</a>
+									<ul>
+										<li>
+											<a href="/personal_projects/acupuncture_analysis.html">Acupuncture Analysis</a>
+										</li>
+										<li>
+											<a href='#'>Craigslist Math Tutoring Rate Analysis </a>
+											<ul>
+												<li>
+													<a href="/personal_projects/craigslist_web_scraper/etl_craigslist_web_scraper.html">Part 1: Web Scraper</a>
+												</li>
+												<li>
+													<a href="/personal_projects/craigslist_web_scraper/craigslist_EDA.html">Part 2: EDA</a>
+												</li>
+												<li>
+													<a href="/personal_projects/craigslist_web_scraper/craigslist_tableau_dashboard.html">Part 3: Tableau Dashboard</a>
+												</li>
+											</ul>
+										</li>							
+										<li>
+											<a href="/personal_projects/datasheet_qa_tool.html">Data Sheet Question Answering Tool</a>
+										</li>
+										
+										<li>
+											<a href="/personal_projects/pokemon_classifier.html">Pokémon Classification</a>
+										</li>
+										<li>
+											<a href="/personal_projects/ISLR_Python/islr_python.html">Porting Code From ISLR2e</a>
+										</li>
+										<li>
+											<a href='#'>U.S. Accounting Survey Analysis </a>
+											<ul>
+												<li>
+													<a href="/personal_projects/us_accounting/us_accounting_survey_analysis.html">Part 1: Analysis</a>
+												</li>
+												<li>
+													<a href="/personal_projects/us_accounting/us_accounting_viz.html">Part 2: Gender Salary Gap</a>
+												</li>
+											</ul>
+										</li>		
+										<li>
+	<!-- 									<li>
+											<a href="sql_queries.html">SQL Queries</a>
+										</li> -->
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="resume/jonathan_papir_resume2.pdf">Resume</a>
+							<!-- <a href="https://drive.google.com/file/d/1RAcaKhw9TIj3sL1ute5pMXsO_pgfHx5R/view?usp=sharing">Resume</a> -->
+						</li>
+						<li>
+							<a href="about.html">About</a>
+						</li>
+							<!-- <li><a href="tbd_sidebar.html">tbd</a></li> -->
+					</ul>
+				</nav>
+				</section>
+
+			<!-- Main -->
+				<section id="main">
+					<div class="container">
+
+						<!-- Content -->
+							<article class="box post">
+								<header>
+									<h2>Analyzing Craigslist Tutoring Prices</h2>
+									<p>
+										Goal: To analyze the dataset of tutoring prices I built and understand my local and national competition for the math tutoring service I run.
+									</p>
+									<i class="icon solid fa-code"> Python, PostgreSQL</i>
+									<br>
+									<i class="icon solid fa-chart-line"> Data Analysis, Visualization
+									</i>
+								</header>
+								<p>
+									<h3><u>Background and Impact</u></h3>
+									Outside of my day job, I also run a math tutoring service.  A majority of my business comes from Craigslist (CL), and I wanted to understand my competition on CL better.
+									<br>
+									<br>
+									<a href="/personal_projects/craigslist_web_scraper/etl_craigslist_web_scraper.html">In another project</a>, I built a tool that mined tutoring prices from Craigslist postings and stored them in a local PostgreSQL database.  In order to analyze the dataset, I queried it from the database using SQL and then created visualizations using Python.
+								</p>
+								<p>
+									<h5>The process:</h5>
+									<ol>
+										<li>
+											Create a table in the database for United States Census data to aid visualizations.
+										</li>
+										<li>
+											Query Craigslist data from the local PostgreSQL database and join it to the US census data.  Segment by various geographic locations, then visualize using Python:
+										</li>
+											<ul style='margin:0';>
+												<li>
+													US Census Region
+												</li>
+												<li>
+													State
+												</li>
+												<li>
+													SF Bay Area
+												</li>
+											</ul>
+											<li>
+												State any important conclusions.
+											</li>
+									</ol>
+								</p>
+								<h5>Impact</h5>
+								<p>
+									Based on the findings, I was able to see that my hourly rates were below average relative to not just the South Bay, where I predominately operate, but also lower than the average for the state of California and lower than the average for the entire West Coast of the United States.  As such, I was able to increase my hourly rates to a level where I felt I'd still be able to remain competitive.
+								</p>
+								<section>
+									<header>
+										<h3><u>Part 1: Creating table for United States (US) Census Data</u></h3>
+										<i class="icon solid fa-book">
+										PostgreSQL, Pandas, Psycopg2</i>
+									</header>
+									<p>
+										Craigslist postings aren't segmented by US Census regions such as North, West, South, and East, or by the more granular US divisions such as New England, the Middle Atlantic, the South Atlantic, etc.  Because I wanted to be able to segment my analysis based on dimensions not found in the Craigslist data itself, I downloaded publicly available data from the US Census to supplement the analysis.
+									</p>
+									<p>
+										After using Psycopg2 to initialize a connection to my local PostgreSQL database, I created a table called us_census_regions and loaded the data from the US census onto it.
+									</p>
+								</section>
+								<section>
+										<h3><u>Part 2: Querying and Visualizing the Data</u></h3>
+										<i class="icon solid fa-book">
+										 PostgreSQL, Pandas, Psycopg2, Plotly Express, Matplotlib
+										</i>
+									<p>
+										<h4>2.1 Segmenting by US Census Region</h4>
+										<h5>Query for mean hourly price and number of postings</h5>
+										<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+													<pre class="prettyprint lang-sql">
+WITH cl_tutoring_2022_02_03 AS (
+    SELECT state
+                 , id
+                 , price
+        FROM cl_tutoring
+     WHERE date_scraped = '2022-02-03'
+           AND price IS NOT NULL
+      ),
+cl_tutoring_w_census AS (
+    SELECT cr.state
+                 , cr.state_code
+                 , cr.us_region 
+                 , COALESCE(cl.price, 0) AS price
+                 , cl.id
+        FROM us_census_regions AS cr
+LEFT JOIN cl_tutoring_2022_02_03 AS cl
+            ON cr.state = cl.state
+  ),
+mean_price_size_by_us_region as (
+    SELECT state
+                 , state_code
+                 , us_region
+                 , AVG(price) OVER (PARTITION BY us_region) AS mean_price
+                 , COUNT(id) OVER (PARTITION BY us_region) AS num_posts
+                 , ROW_NUMBER() OVER (PARTITION BY us_region, state) AS rn
+        FROM cl_tutoring_w_census)
+
+    SELECT state_code
+                 , us_region
+                 , mean_price
+                 , num_posts
+        FROM mean_price_size_by_us_region
+     WHERE rn = 1
+ORDER BY state_code;</pre>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<p>
+														Because Craigslist postings stay up for extended periods of time and can be reposted once expired, my database has multiple instances of the same posts due to the web scraper being run multiple times over many days.
+														<br>
+														<br>
+														The first block of the SQL query below creates a common table expression (CTE), which limits the scope of my analysis to just data from a recent run of the web scraper on 2022-02-03, using a WHERE clause.  Furthermore, since the main purpose of the analysis is to understand the pricing of my competition, the WHERE clause limits the CTE to include only observations that have a price.
+														<br>
+														<br>
+														The second block joins the CTE to the US Census data so that we can categorize a post as belonging to one of four regions: West, Midwest, South, or Northeast.  Because some states on Craigslist have no postings for tutoring, our dataset doesn't contain information for all 50 states.  We need to use a left join on the US Census data in order to ensure the names of all 50 states end up in our final table.
+														<br>
+														<br>
+														The third block uses window functions to calculate the average hourly price and count of the number of postings when partitioned by US Census region.  Because of the way plotly works, it needs state-level granularity in order to plot correctly, which is why I use a window function as opposed to the standard GROUP BY.  If I were to use GROUP BY, we'd lose the state-level granularity and Plotly couldn't produce the graph I wanted. Unfortunately, because of the way window functions work, this means that many of the rows become duplicates, so I also use the ROW_NUMBER window function, which will help me filter out duplicates in the final block of the query.
+														<br>
+														<br>
+														The final block filters out the duplicates using a condition on ROW_NUMBER.
+													</p>
+												</section>
+											</div>
+										</div>
+									</div>
+									<br>
+									<p>
+										<h5>Visualizing using Plotly</h5>
+										<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="./personal_projects/craigslist_web_scraper/mean_price_by_us_census_region_plotly.html" height="525" width="100%"></iframe>
+									</p>
+									<p>
+										Looking at the map plotted above, it's interesting to note that the vast majority of postings (202 / 308 = ~60%) come from the Western US, with a mean of $44.79 / hr for tutoring.  The Northeast region has the highest mean of $44.98, only slightly higher than in the West.
+									<p>
+										<h4>2.2 Segmenting by State</h4>
+										<h5>Query for mean hourly price and number of postings</h5>
+										<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+													<pre class="prettyprint lang-sql">
+WITH mean_price_size_by_state AS (
+      SELECT cl.state
+                   , AVG(cl.price) AS mean_price
+                   , COUNT(cl.id) AS num_posts
+         FROM cl_tutoring AS cl
+      WHERE cl.date_scraped = '2022-02-03'
+            AND cl.price IS NOT NULL
+GROUP BY cl.state
+)
+
+    SELECT cr.state
+                 , cr.state_code
+                 , COALESCE(mp.mean_price, 0) AS mean_price 
+                 , COALESCE(mp.num_posts, 0) AS num_posts 
+        FROM us_census_regions AS cr
+LEFT JOIN mean_price_size_by_state AS mp
+             ON cr.state=mp.state;</pre>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													<p>
+														The first block of the query below creates a common table expression (CTE) containing the average hourly tutoring cost as well as the number of postings, broken down by state.
+														<br>
+														<br>
+														As discussed before, I filter the data to only include postings from 2022-02-03 that have a non-null entry for price.
+														<br>
+														<br>
+														The last block uses another left join between the US Census table and the CTE in order to get the state abbreviations (ex: CA, NY, etc.), which is necessary for visualizing the data using Plotly Express in the next step.
+													</p>
+												</section>
+											</div>
+										</div>
+									</div>
+									<br>
+									<p>
+										<h4>Visualizing using Plotly</h4>
+										<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="./personal_projects/craigslist_web_scraper/mean_price_by_state_plotly.html" height="525" width="100%"></iframe>
+									</p>
+									<p>
+										Paying attention to the colorbar in the graph above, the darker the green color, the higher the average hourly rate for tutoring.
+										<br>
+										<br>
+										Idaho, Tennessee, Massachusetts, and the District of Columbia have the darkest green coloring and the highest mean hourly price; however, these states only have 2, 2, 5, and 8 posts, respectively.  With so few data points on tutors from these states, I'd be skeptical regarding whether they're truly the costliest states for tutoring.  By the way, the District of Columbia is there but is hard to see...zoom in and you'll see it.
+										<br>
+										<br>
+										Focusing on the remaining states that are darker green, the following states are the five costliest and have at least 10 postings:
+										<ol>
+											<li>New YorK: $50.37 / hr</li>
+											<li>California: $48.21 / hr</li>
+											<li>Colorado: $44.54 / hr</li>
+											<li>Arizona: $42.29 / hr</li>
+											<li>Florida: $40.09 / hr</li>
+
+										</ol>
+									</p>
+									<p>
+										<h4>2.3 Segmenting the SF Bay Area</h4>
+										<h5>Query for mean hourly price and number of postings</h5>
+										<div class="split left">
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<section class="first">
+													<!-- <h4>SQL Code</h4> -->
+										<pre class="prettyprint lang-sql">
+      SELECT subregion
+                   , AVG(price) AS mean_price
+                   , COUNT(id) AS num_posts
+          FROM cl_tutoring
+       WHERE date_scraped = '2022-02-03'
+            AND price IS NOT NULL
+            AND region = 'sfbayarea'
+GROUP BY subregion
+ORDER BY COUNT(id) DESC;
+</pre>
+												</section>
+											</div>
+											<div class="col-6 col-12-medium">
+												<section class="middle">
+													This query is much easier than the previous ones.  I do the same filtering in the WHERE condition as before, but filter by region to include only results for sfbayarea, then group by subregion and compute the average hourly price and number of postings for each subregion.
+												</section>
+											</div>
+										</div>
+									</div>
+									<br>
+										<h4>Visualizing using Matplotlib</h4>
+									<img src="images/craigslist_EDA/mean_price_and_num_posts_sfbayarea.png" alt="" style="width: 70%;"/>
+										<br> 
+										<p>
+											San Francisco is by far the costliest, with an average price of $79.81 / hr, and also has the greatest number of tutoring postings at 13.  To my surprise, the South Bay was the cheapest at $40.93 / hr, with the third highest number of postings at 7.  The rest of the SF Bay Area subregions were all fairly close in price, although the only one of these subregions with a respectable amount of posts was the East Bay.
+										</p>
+								</section>
+								<section>
+										<h3>Part 3: Conclusion(s)</h3>
+										The South Bay has one of the highest costs of living in the nation and is certainly one of the highest in regards to tutoring costs, with an average hourly tutoring rate of $40.93/hr.  The average for the West Coast was $44.79/hr, and the average for the state was $48.21/hr; however, all three of these hourly rates are higher than what my tutoring service charges. As such, I feel a rate increase is reasonable and that I'd still likely be able to remain competitive and retain the same level of business.
+								</section>
+							</article>
+					</div>
+				</section>
+
+			<!-- Footer -->
+				<section id="footer">
+					<div class="container">
+						<!-- <div class="row">
+							<div class="col-8 col-12-medium">
+								<section>
+									<header>
+										<h2>Blandit nisl adipiscing</h2>
+									</header>
+									<ul class="dates">
+										<li>
+											<span class="date">Jan <strong>27</strong></span>
+											<h3><a href="#">Lorem dolor sit amet veroeros</a></h3>
+											<p>Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat etiam.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>23</strong></span>
+											<h3><a href="#">Ipsum sed blandit nisl consequat</a></h3>
+											<p>Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>15</strong></span>
+											<h3><a href="#">Magna tempus lorem feugiat</a></h3>
+											<p>Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>12</strong></span>
+											<h3><a href="#">Dolore tempus ipsum feugiat nulla</a></h3>
+											<p>Feugiat lorem dolor sed nullam tempus lorem ipsum dolor sit amet nullam consequat.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>10</strong></span>
+											<h3><a href="#">Blandit tempus aliquam?</a></h3>
+											<p>Feugiat sed tempus blandit tempus adipiscing nisl lorem ipsum dolor sit amet dolore.</p>
+										</li>
+									</ul>
+								</section>
+							</div>
+							<div class="col-4 col-12-medium">
+								<section>
+									<center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center>
+								</section>
+							</div> -->
+<!-- 							<div class="col-4 col-6-medium col-12-small">
+								<section>
+									<center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center>
+								</section>
+							</div> -->
+							<div class="col-4 col-6-medium col-12-small">
+								<div class="right">
+									<section>
+										<center>
+											<header>
+												<h2>Socials</h2>
+											</header>
+										</center>
+										<center>
+											<ul class="social">
+												<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+		<!-- 										<li><a class="icon solid fa-envelope" href="mailto:papir805@gmail.com"><span class="label">Email</span></a></li> -->
+												<!-- <li><a class="icon brands fa-dribbble" href="#"><span class="label">Dribbble</span></a></li>
+												<li><a class="icon brands fa-tumblr" href="#"><span class="label">Tumblr</span></a></li> -->
+												<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+											
+											</ul>
+											<ul class="contact">
+											<!-- <li>
+												<h3>Address</h3>
+												<p>
+													Untitled Incorporated<br />
+													1234 Somewhere Road Suite<br />
+													Nashville, TN 00000-0000
+												</p>
+											</li> -->
+											<li>
+												<h3>E-mail:</h3>
+												<p><a href="mailto:papir805@gmail.com">papir805@gmail.com</a></p>
+											</li>
+											<!-- <li>
+												<h3>Phone</h3>
+												<p>(800) 000-0000</p>
+											</li> -->
+										</ul>
+
+										</center>
+									</section>
+								</div>
+							</div>
+<!-- 							<div class="col-4 col-12-medium">
+								<section>
+									<center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center>
+									<ul class="contact">
+										<li>
+											<h3>Address</h3>
+											<p>
+												Untitled Incorporated<br />
+												1234 Somewhere Road Suite<br />
+												Nashville, TN 00000-0000
+											</p>
+										</li>
+										<li>
+											<h3 style="color:black;">E-mail:</h3>
+											<p><a href="mailto:papir805@gmail.com">papir805@gmail.com</a></p>
+										</li>
+										<li>
+											<h3>Phone</h3>
+											<p>(800) 000-0000</p>
+										</li>
+									</ul>
+								</section>
+							</div> -->
+							<div class="col-12">
+
+								<!-- Copyright -->
+									<div id="copyright">
+										<ul class="links">
+											<li>&copy; Jonathan Papir. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+										</ul>
+									</div>
+
+							</div>
+						<!-- </div> -->
+					</div>
+				</section>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
