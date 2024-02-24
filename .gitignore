@@ -5,3 +5,5 @@ resume/*.docx
 */.ipynb_checkpoints/*
 
 */*/.DS_Store
+
+.vscode/
