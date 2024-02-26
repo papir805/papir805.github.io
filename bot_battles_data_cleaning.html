@@ -1,0 +1,700 @@
+<!DOCTYPE HTML>
+<!--
+	Dopetrope by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Bot Battles Player Analysis - Part 1: Data Cleaning</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../../assets/css/main.css" />
+		<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&amp;skin=doxy&amp;lang=css" defer=""></script>
+		<script src="https://github.com/googlearchive/code-prettify/blob/master/src/lang-sql.js"></script>
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<section id="header">
+
+					<!-- Logo -->
+						<h1>
+							Using mathematics to solve problems with real-world data excites me.
+						</h1>
+
+					<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li>
+								<a href="index.html">Home</a>
+							</li>
+							<li  class="current">
+								<a href="#">Projects</a>
+								<ul>
+									<li>
+										<a href="featured_projects.html">Featured Projects</a>
+										<ul>
+											<li>
+												<a href="#">Bot Battles Player Analysis</a>
+												<ul>
+													<li>
+														<a href='bot_battles_introduction.html'>An Introduction</a>
+													</li>
+													<li>
+														<a href="bot_battles_data_cleaning.html">Part 1: Data Cleaning</a>
+													</li>
+													<li>
+														<a href="bot_battles_exploratory_data_analysis.html">Part 2: EDA</a>
+													</li>
+													<!-- <li>
+														<a href="bot_battles_correlation.html">Part 3: Correlation</a>
+													</li> -->
+												</ul>
+											</li>
+											<li>
+												<a href="electronicart_sales_analysis.html">ElectroniCart Sales Analysis</a>
+											</li>
+											<li>
+												<a href="telepulse_ad_campaign_report.html">TelePulse Ad Campaign Report</a>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<a href="personal_projects.html">Personal Projects</a>
+										<ul>
+											<li>
+												<a href="acupuncture_analysis.html">Acupuncture Analysis</a>
+											</li>
+											<li>
+												<a href='#'>Craigslist Math Tutoring Rate Analysis </a>
+												<ul>
+													<li>
+														<a href="craigslist_etl_web_scraper.html">Part 1: Web Scraper</a>
+													</li>
+													<li>
+														<a href="craigslist_EDA.html">Part 2: EDA</a>
+													</li>
+													<li>
+														<a href="craigslist_tableau_dashboard.html">Part 3: Tableau Dashboard</a>
+													</li>
+												</ul>
+											</li>							
+											<li>
+												<a href="datasheet_qa_tool.html">Data Sheet Question Answering Tool</a>
+											</li>
+											
+											<li>
+												<a href="pokemon_classifier.html">Pokémon Classification</a>
+											</li>
+											<li>
+												<a href="islr_python.html">Porting Code From ISLR2e</a>
+											</li>
+											<li>
+												<a href='#'>U.S. Accounting Survey Analysis </a>
+												<ul>
+													<li>
+														<a href="us_accounting_survey_analysis.html">Part 1: Analysis</a>
+													</li>
+													<li>
+														<a href="us_accounting_viz.html">Part 2: Gender Salary Gap</a>
+													</li>
+												</ul>
+											</li>		
+											<li>
+		<!-- 									<li>
+												<a href="sql_queries.html">SQL Queries</a>
+											</li> -->
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="resume/jonathan_papir_resume2.pdf">Resume</a>
+								<!-- <a href="https://drive.google.com/file/d/1RAcaKhw9TIj3sL1ute5pMXsO_pgfHx5R/view?usp=sharing">Resume</a> -->
+							</li>
+							<li>
+								<a href="about.html">About</a>
+							</li>
+								<!-- <li><a href="tbd_sidebar.html">tbd</a></li> -->
+						</ul>
+					</nav>
+				</section>
+
+			<!-- Main -->
+				<section id="main">
+					<div class="container">
+
+						<!-- Content -->
+							<article class="box post">
+								<!-- <a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a> -->
+								<header>
+									<h2>
+										Bot Battles Player Analysis - Part 1: Data Cleaning
+									</h2>
+									<p>
+										Goal: Clean the Bot Battles data in preparation for analysis.
+									</p>
+									<i class="icon solid fa-code">
+										 PostgreSQL
+									</i>
+									<br>
+									<i class="icon solid fa-chart-line">
+										 Data Cleaning
+										</i>
+								</header>
+								<h3>
+									Background
+								</h3>
+								<p>
+									This article covers part 1 and is meant to detail my process as I progress through cleaning the data.  I'll discuss the obstacles that I encounter, how I overcome them, and my overall logic in general.  
+								</p>
+								<p>
+									An introduction to the game and the data can be found 
+									<a href="bot_battles_introduction.html">here</a>.  
+									The full project containing the code and both the original and cleaned versions of the data can be found on 
+									<a href="https://github.com/papir805/mobile_app_data_analysis">my GitHub</a>.
+								</p>
+								<h3>
+									Section 1: Loading the Dataset
+								</h3>
+								<i class="icon solid fa-code"><a href="https://github.com/papir805/mobile_app_data_analysis/blob/master/sql_queries/part_1_loading_and_cleaning/sec1_loading.sql"> SQL Queries</a></i>
+								<br>
+								<br>
+									The dataset comes in two csv files, users.csv and event_performance.csv
+								<div class="split left">
+									<div class="row">
+										<div class="col-6 col-12-medium">
+											<section class="first">
+												<br>
+												<h4>
+													users.csv
+												</h4>
+												<table>
+													<caption style="text-align:left">
+														This file contains a complete list of every player that has an account for the game.  It also contains information about user demographics and attributes.  
+														<br>
+														<b>Each line represents a unique user.</b>
+														<br>
+														<br>
+													</caption>
+													<tr>
+														<th>
+															Field
+														</th>
+														<th>
+															Description
+														</th>
+													</tr>
+													<tr>
+														<td>
+															userid
+														</td>
+														<td>
+															A string that uniquely identifies a player
+														</td>
+													</tr>
+													<tr>
+														<td>
+															subscriber
+														</td>
+														<td>
+															A binary variable identifying whether the userid is a paid subscriber or not
+														</td>
+													</tr>
+													<tr>
+														<td>
+															country
+														</td>
+														<td>
+															A variable that identifies which country a userid is from, either 'CA' (Canada), 'US' (United States), or 'MX' (Mexico)
+														</td>
+													</tr>
+												</table>
+											</section>
+										</div>
+										<div class="col-6 col-12-medium">
+											<section class="middle">
+												<br>
+												<h4>
+													event_performance.csv
+												</h4>
+												<table>
+													<caption style="text-align:left">
+														This file contains the total points scored during every hour of gameplay over the course of 2019 for every participating player.  
+														<br>
+														<b>Each line represents the number of points a user scored during a single hour of gameplay.</b>
+														<br>
+														<br>
+													</caption>
+													<tr>
+														<th>
+															Field
+														</th>
+														<th>
+															Description
+														</th>
+													</tr>
+													<tr>
+														<td>
+															userid
+														</td>
+														<td>
+															A string that uniquely identifies a player
+														</td>
+													</tr>
+													<tr>
+														<td>
+															event_date
+														</td>
+														<td>
+															The date corresponding to when the userid participated in a gaming event
+														</td>
+													</tr>
+													<tr>
+														<td>
+															hour
+														</td>
+														<td>
+															The hour of the day in which the userid participated in the gaming event
+														</td>
+													</tr>
+													<tr>
+														<td>
+															points
+														</td>
+														<td>
+															The number of points scored by the userid during a single hour of gameplay
+														</td>
+													</tr>
+												</table>
+											</section>
+										</div>
+									</div>
+								</div>
+								Because the data may need cleaning, I create two staging tables in a local PostgreSQL database so I can begin inspecting it.
+								<br>
+<!-- 								<div class="split left">
+									<div class="row">
+										<div class="col-6 col-12-medium">
+											<section class="first">
+												<img src="images/bot_battles/null_users_staging.png" alt="" style="width: 65%;;"/>
+											</section>
+										</div>
+										<div class="col-6 col-12-medium">
+											<section class="middle">		
+    											<img src="images/bot_battles/null_event_performance_staging.png" alt="" style="width: 65%;;"/>
+											</section>
+										</div>
+									</div>
+								</div> -->
+								<br>
+								<h3>
+									Section 2: Checking for Null and Duplicate Values
+								</h3>
+								<i class="icon solid fa-code"><a href="https://github.com/papir805/mobile_app_data_analysis/blob/master/sql_queries/part_1_loading_and_cleaning/sec2_null_and_duplicate_values.sql"> SQL Queries</a></i>
+								<br>
+								<br>
+								<p>
+									No rows are returned by any of the queries.  There are no null or duplicate values in any of the columns in either of the tables.
+								</p>
+								<h3>
+									Section 3: Inspecting the users_staging Table
+								</h3>
+								<i class="icon solid fa-code"><a href="https://github.com/papir805/mobile_app_data_analysis/blob/master/sql_queries/part_1_loading_and_cleaning/sec3_inspecting_users.sql"> SQL Queries</a></i>
+								<br>
+								<br>
+								<h4>
+									userid
+								</h4>
+								<p>
+									All userids are 36 characters long and are a mixture of alphanumeric characters.
+								</p>
+								<h4>
+									subscriber
+								</h4>
+								
+								<p>
+									Subscriber is a binary variable.  A value of 0 means the user isn't a subscriber, while a value of 1 means they are a subscriber.
+									All values in the dataset are either 0 or 1, as they're supposed to be. 
+								</p>
+								<h4>
+									country
+								</h4>
+								<p>
+									Country is a two character string representing which country a user is from.  All players are from 'CA' (Canada), 'US' (United States), or 'MX' (Mexico).
+								</p>
+								<h3>
+									Section 4: Inspecting the events_performance_staging Table
+								</h3>
+								<i class="icon solid fa-code"><a href="https://github.com/papir805/mobile_app_data_analysis/blob/master/sql_queries/part_1_loading_and_cleaning/sec4_inspecting_event_performance.sql"> SQL Queries</a></i>
+								<br>
+								<br>
+								<h4>
+									userid
+								</h4>
+								<div class="split left">
+									<div class="row">
+										<div class="col-6 col-12-medium">
+											<section class="first">
+												<p>
+													All userids in the users_staging table had 36 characters.  However, two userids in the
+													events_performance_staging table have 37 characters.
+												</p>	
+												<p>
+													It appears one userid had a whitespace character at the end (denoted by "\s") and the other had a double quotation mark.  Later, I'll use REGEX to trim both of those characters when importing to the new tables.
+												</p>
+											</section>
+										</div>
+										<div class="col-6 col-12-medium">
+											<section class="middle">
+												<img src="images/bot_battles/long_userids.png" alt="" style="width: 100%; display:block; margin-left: auto; margin-right: auto;"/>
+											</section>
+										</div>
+									</div>
+
+								</div>
+								<br>
+								<h4>
+									event_date
+								</h4>
+								The event_date field has the most obstacles to overcome.  It contains several different forms of dates that aren't valid, as well as inconsistent date formats.
+								<br>
+								<br>
+								<ul>
+									<li>
+										One of the dates is 19/24/2019 and there's no way to identify whether this date is meant to be 1/24/2019, 9/24/2019, or perhaps something else entirely.  The safest option is to drop it.  Dropping one entry in a dataset this size won't make much of a difference.
+									</li>
+									<li>
+										Some event_dates use a 2-digit year format (MM/DD/YY) while other event_dates use a different 4-digit year format (YYYY/MM/DD). I'll convert any dates from the MM/DD/YY format to the more standard YYYY/MM/DD format.
+									</li>
+									<li>
+										Lastly, there are two dates remaining that are invalid and need to be dropped:
+										<ul>
+											<li style="list-style-type:circle;">
+												One date from the future, 2039-08-02.
+											</li>
+											<li style="list-style-type:circle;">
+												One date from too far in the past to be valid, 1999-03-22.
+											</li>
+										</ul>
+									</li> 
+								</ul>
+								<h4>
+									hour
+								</h4>
+								<p>
+									Hour represents an hour of the day.  All values are in military time, ranging from 16:00 to 20:00 or 4:00 to 8:00 p.m.  No cleaning is needed.
+								</p>
+								<br>
+								<h4>
+									points
+								</h4>
+								
+								<div class="split left">
+									<div class="row">
+										<div class="col-6 col-12-medium">
+											<section class="first">
+												<p>
+													Using REGEX, I look for any point scores with non-numeric characters.  One point score has quotation marks and the other has question marks.
+												</p>
+											</section>
+										</div>
+										<div class="col-6 col-12-medium">
+											<section class="middle">
+												<img src="images/bot_battles/bad_points.png" alt="" style="width: 20%; display:block; margin-left: auto; margin-right: auto;"/>
+											</section>
+										</div>
+									</div>
+									<br>
+								</div>
+								<h3>
+									Section 5: Moving Cleaned Data to New Tables
+								</h3>
+								<i class="icon solid fa-code"><a href="https://github.com/papir805/mobile_app_data_analysis/blob/master/sql_queries/part_1_loading_and_cleaning/sec5_moving_to_clean_tables.sql"> SQL Queries</a></i>
+								<br>
+								<br>
+								<p>
+									Once loaded, this is what the database ERD will look like:
+									<img src="images/bot_battles/database_erd.png" alt="" style="display:block;  margin-right: auto;"/>
+								</p>
+								<h4>
+									users
+								</h4>
+									<p>
+										No cleaning was needed for the users_staging data.  The query below simply creates a new table called users with more explicit data types and introduces constraints to ensure all rows get entered with the correct values.
+									</p>
+									Here is the schema for a newly defined users table:
+									<ol>
+										<li>
+											userid
+											<ul style="margin: 0;">
+												<li>
+													Data type: <i>VARCHAR(36)</i>
+												</li>
+												<li>
+													Constraints: PRIMARY KEY
+												</li>
+											</ul>
+										</li>
+										<li>
+											subscriber
+											<ul style="margin: 0;">
+												<li>
+													Data type: <i>int</i>
+												</li>
+												<li>
+													Constraints: only non-null values of 0 or 1 are allowed
+												</li>
+											</ul>
+										</li>
+										<li>
+											country
+											<ul>
+												<li>
+													Data type: <i>VARCHAR(2)</i>
+												</li>
+												<li>
+													Constraints: only non-null values of 'CA', 'US', or 'MX' are allowed
+												</li>
+											</ul>
+										</li>
+									</ol>
+								<h4>
+									event_performance
+								</h4>
+								<p>
+									The event_performance_staging table needed a little bit of cleaning.  The query below creates a new table called event_performance with more explicit data types and introduces constraints, but also uses REGEX to remove typos from the userid and points fields, as well as using a WHERE clause to filter out observations corresponding to invalid dates.
+								</p>
+								Here is the schema for the newly defined events_performance table:
+									<ol>
+										<li>
+											userid
+											<ul style="margin: 0;">
+												<li>
+													Data type: <i>VARCHAR(36)</i>
+												</li>
+												<li>
+													Constraints: can't be null
+												</li>
+												<li>
+													Note: I use REGEX to remove the whitespace character and the quotation marks from the userids that were 37 characters long
+												</li>
+											</ul>
+										</li>
+										<li>
+											event_date
+											<ul style="margin: 0;">
+												<li>
+													Data type: <i>date</i>
+												</li>
+												<li>
+													Constraints: Must be a non-null date from after the company was formed (2013-01-01) and before the current date.
+												</li>
+												<li>
+													Note: I filter the dates that were identified to be invalid from earlier.  
+												</li>
+											</ul>
+										</li>
+										<li>
+											hour
+											<ul style="margin: 0;">
+												<li>
+													Data type: <i>int</i>
+												</li>
+												<li>
+													Constraints: must be a non-null integer from 0 to 23 inclusive
+												</li>
+											</ul>
+										</li>
+										<li>
+											points
+											<ul>
+												<li>
+													Data type: <i>int</i>
+												</li>
+												<li>
+													Constraints: can't be null
+												</li>
+											</ul>
+										</li>
+									</ol>
+								<h3>
+									Section 6: Next Steps
+								</h3>
+								<p>
+									Now that the data has been cleaned and moved to new tables in the database, I begin exploring it in 
+									<a href="bot_battles_exploratory_data_analysis.html">part 2</a>.
+								</p>
+							</article>
+						</div>
+					</section>
+
+			<!-- Footer -->
+				<section id="footer">
+					<div class="container">
+						<!-- <div class="row">
+							<div class="col-8 col-12-medium">
+								<section>
+									<header>
+										<h2>Blandit nisl adipiscing</h2>
+									</header>
+									<ul class="dates">
+										<li>
+											<span class="date">Jan <strong>27</strong></span>
+											<h3><a href="#">Lorem dolor sit amet veroeros</a></h3>
+											<p>Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat etiam.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>23</strong></span>
+											<h3><a href="#">Ipsum sed blandit nisl consequat</a></h3>
+											<p>Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>15</strong></span>
+											<h3><a href="#">Magna tempus lorem feugiat</a></h3>
+											<p>Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>12</strong></span>
+											<h3><a href="#">Dolore tempus ipsum feugiat nulla</a></h3>
+											<p>Feugiat lorem dolor sed nullam tempus lorem ipsum dolor sit amet nullam consequat.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>10</strong></span>
+											<h3><a href="#">Blandit tempus aliquam?</a></h3>
+											<p>Feugiat sed tempus blandit tempus adipiscing nisl lorem ipsum dolor sit amet dolore.</p>
+										</li>
+									</ul>
+								</section>
+							</div>
+							<div class="col-4 col-12-medium">
+								<section>
+									<center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center>
+								</section>
+							</div> -->
+<!-- 							<div class="col-4 col-6-medium col-12-small">
+								<section>
+									<center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center>
+								</section>
+							</div> -->
+							<div class="col-4 col-6-medium col-12-small">
+								<div class="right">
+									<section>
+										<center>
+											<header>
+												<h2>Socials</h2>
+											</header>
+										</center>
+										<center>
+											<ul class="social">
+												<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+		<!-- 										<li><a class="icon solid fa-envelope" href="mailto:papir805@gmail.com"><span class="label">Email</span></a></li> -->
+												<!-- <li><a class="icon brands fa-dribbble" href="#"><span class="label">Dribbble</span></a></li>
+												<li><a class="icon brands fa-tumblr" href="#"><span class="label">Tumblr</span></a></li> -->
+												<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+											
+											</ul>
+											<ul class="contact">
+											<!-- <li>
+												<h3>Address</h3>
+												<p>
+													Untitled Incorporated<br />
+													1234 Somewhere Road Suite<br />
+													Nashville, TN 00000-0000
+												</p>
+											</li> -->
+											<li>
+												<h3>E-mail:</h3>
+												<p><a href="mailto:papir805@gmail.com">papir805@gmail.com</a></p>
+											</li>
+											<!-- <li>
+												<h3>Phone</h3>
+												<p>(800) 000-0000</p>
+											</li> -->
+										</ul>
+
+										</center>
+									</section>
+								</div>
+							</div>
+<!-- 							<div class="col-4 col-12-medium">
+								<section>
+									<center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center>
+									<ul class="contact">
+										<li>
+											<h3>Address</h3>
+											<p>
+												Untitled Incorporated<br />
+												1234 Somewhere Road Suite<br />
+												Nashville, TN 00000-0000
+											</p>
+										</li>
+										<li>
+											<h3 style="color:black;">E-mail:</h3>
+											<p><a href="mailto:papir805@gmail.com">papir805@gmail.com</a></p>
+										</li>
+										<li>
+											<h3>Phone</h3>
+											<p>(800) 000-0000</p>
+										</li>
+									</ul>
+								</section>
+							</div> -->
+							<div class="col-12">
+
+								<!-- Copyright -->
+									<div id="copyright">
+										<ul class="links">
+											<li>&copy; Jonathan Papir. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+										</ul>
+									</div>
+
+							</div>
+						<!-- </div> -->
+					</div>
+				</section>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

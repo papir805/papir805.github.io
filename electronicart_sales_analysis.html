@@ -1,0 +1,614 @@
+<!DOCTYPE HTML>
+<!--
+	Dopetrope by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>electroniCart Sales Analysis</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&amp;skin=doxy&amp;lang=css" defer=""></script>
+		<script src="https://github.com/googlearchive/code-prettify/blob/master/src/lang-sql.js"></script>
+		<script type="text/javascript" id="MathJax-script" async
+		  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.0.0/es5/latest?tex-mml-chtml.js">
+		</script>
+		<script>
+		MathJax = {
+		  tex: {
+		    inlineMath: [['$', '$'], ['\\(', '\\)']]
+		  }
+		};
+		</script>
+		<script id="MathJax-script" async
+		  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+		</script>
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<section id="header">
+
+					<!-- Logo -->
+					<h1>
+						Using mathematics to solve problems with real-world data excites me.
+					</h1>
+
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li>
+							<a href="index.html">Home</a>
+						</li>
+						<li  class="current">
+							<a href="#">Projects</a>
+							<ul>
+								<li>
+									<a href="featured_projects.html">Featured Projects</a>
+									<ul>
+										<li>
+											<a href="#">Bot Battles Player Analysis</a>
+											<ul>
+												<li>
+													<a href='bot_battles_introduction.html'>An Introduction</a>
+												</li>
+												<li>
+													<a href="bot_battles_data_cleaning.html">Part 1: Data Cleaning</a>
+												</li>
+												<li>
+													<a href="bot_battles_exploratory_data_analysis.html">Part 2: EDA</a>
+												</li>
+												<!-- <li>
+													<a href="bot_battles_correlation.html">Part 3: Correlation</a>
+												</li> -->
+											</ul>
+										</li>
+										<li>
+											<a href="electronicart_sales_analysis.html">ElectroniCart Sales Analysis</a>
+										</li>
+										<li>
+											<a href="telepulse_ad_campaign_report.html">TelePulse Ad Campaign Report</a>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<a href="personal_projects.html">Personal Projects</a>
+									<ul>
+										<li>
+											<a href="acupuncture_analysis.html">Acupuncture Analysis</a>
+										</li>
+										<li>
+											<a href='#'>Craigslist Math Tutoring Rate Analysis </a>
+											<ul>
+												<li>
+													<a href="craigslist_etl_web_scraper.html">Part 1: Web Scraper</a>
+												</li>
+												<li>
+													<a href="craigslist_EDA.html">Part 2: EDA</a>
+												</li>
+												<li>
+													<a href="craigslist_tableau_dashboard.html">Part 3: Tableau Dashboard</a>
+												</li>
+											</ul>
+										</li>							
+										<li>
+											<a href="datasheet_qa_tool.html">Data Sheet Question Answering Tool</a>
+										</li>
+										
+										<li>
+											<a href="pokemon_classifier.html">Pokémon Classification</a>
+										</li>
+										<li>
+											<a href="islr_python.html">Porting Code From ISLR2e</a>
+										</li>
+										<li>
+											<a href='#'>U.S. Accounting Survey Analysis </a>
+											<ul>
+												<li>
+													<a href="us_accounting_survey_analysis.html">Part 1: Analysis</a>
+												</li>
+												<li>
+													<a href="us_accounting_viz.html">Part 2: Gender Salary Gap</a>
+												</li>
+											</ul>
+										</li>		
+										<li>
+	<!-- 									<li>
+											<a href="sql_queries.html">SQL Queries</a>
+										</li> -->
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="resume/jonathan_papir_resume2.pdf">Resume</a>
+							<!-- <a href="https://drive.google.com/file/d/1RAcaKhw9TIj3sL1ute5pMXsO_pgfHx5R/view?usp=sharing">Resume</a> -->
+						</li>
+						<li>
+							<a href="about.html">About</a>
+						</li>
+							<!-- <li><a href="tbd_sidebar.html">tbd</a></li> -->
+					</ul>
+				</nav>
+				</section>
+
+			<!-- Main -->
+				<section id="main">
+					<div class="container">
+
+						<!-- Content -->
+							<article class="box post">
+								<!-- <a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a> -->
+								<header>
+									<h2>
+										electroniCart Sales Analysis
+									</h2>
+									<p>
+										Goal: To provide insights and recommendations 
+                                        on trends in sales, refunds, and performance of the recently introduced loyalty program.
+									</p>
+									<i class="icon solid fa-code">
+                                        Google BigQuery SQL, Excel
+									</i>
+									<br>
+									<i class="icon solid fa-chart-line">
+                                        Data Cleaning, Pivot Tables, Visualization
+									</i>
+								</header>
+								<h3>
+									<u>Background</u>
+								</h3>
+                                <p>
+                                    ElectroniCart is an online electronics retailer. The company has collected a wealth of data from 100k+ orders since being established in 2019.  So far, the dataset is underutilized, and this project aims to provide insights and recommendations on the following key areas:
+                                </p>
+                                <ol>
+                                    <li>
+                                        <b>
+                                            Sales
+                                        </b>
+                                    <ul style="margin: 0;">
+                                        <li>Key Performance Indicators (KPIs)
+                                            <ul style="margin: 0;">
+                                                <li style="list-style-type:circle;">
+                                                    Total sales 
+                                                </li>
+                                                <li style="list-style-type:circle;">
+                                                    Sales volume 
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>Product Mix 
+                                            <ul style="margin: 0;">
+                                                <li style="list-style-type:circle;">
+                                                    Which items contribute most to total sales?
+                                                </li>
+                                                <li style="list-style-type:circle;">
+                                                    Which items are purchased most frequently?
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            Seasonality
+                                            <ul style="margin: 0;">
+                                                <li style="list-style-type:circle;">
+                                                    How do the KPIs change over time?
+                                                </li>
+                                                <li style="list-style-type:circle;">
+                                                    Which month(s) see the highest or lowest KPIs?
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            Loyalty Program Performance
+                                            <ul style="margin: 0;">
+                                                <li style="list-style-type:circle;">
+                                                    How do the KPIs compare for loyalty vs. non-loyalty customers?
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    </li>
+                                    <li>
+                                        <b>
+                                            Refunds
+                                        </b>
+                                        <ul>
+                                            <li>
+                                                Key Performance Indicators (KPIs)
+                                                <ul style="margin: 0;">
+                                                    <li style="list-style-type:circle;">
+                                                        Dollars refunded
+                                                    </li>
+                                                    <li style="list-style-type:circle;">
+                                                        Refund rate
+                                                    </li>
+                                                    <li style="list-style-type:circle;">
+                                                        Average order value (AOV)
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                How do the KPIs change for each product?
+                                                <ul style="margin: 0;">
+                                                    <li style="list-style-type:circle;">
+                                                        Which products have the highest return rates?
+                                                    </li>
+                                                    <li style="list-style-type:circle;">
+                                                        Which products are returned most frequently?
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                How do dollars refunded affect electroniCart's bottom line?
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ol>
+								<p>
+									The full project containing the code and both the original and cleaned versions of the data can be found on 
+									<a href="https://github.com/papir805/ElectroniCart-Sales-Analysis/tree/master">my GitHub</a>.
+								</p>
+								<h3>
+									<u>Data Quality</u>
+								</h3>
+                                <p>
+                                    The dataset required cleaning before analysis.  There were data quality issues relating to inconsistent formatting, missing values, and more.  Documentation on these issues and their resolution is <a href="https://github.com/papir805/ElectroniCart-Sales-Analysis/blob/master/issue_log.md">here</a>.
+                                </p>
+                                <h3>
+                                    <u>Dataset Structure</u>
+                                </h3>
+                                <p>
+                                    <b>The dataset initially came as an <a href="https://github.com/papir805/ElectroniCart-Sales-Analysis/blob/master/data/electronicart_data_cleaned_final.xlsx">Excel Workbook</a> containing 108,127 records</b>.  Order ID is the table grain, and each record represents a unique order.  
+                                    After cleaning, <b>the dataset was normalized and uploaded to a Google BigQuery database for more advanced analysis in <a href="https://github.com/papir805/ElectroniCart-Sales-Analysis/tree/master/sql_queries">SQL</a></b>.  The schema consists of four tables: orders, customers, geo_lookup, and order_status.
+                                </p>
+								<img src="images/electronicart_sales_analysis/database_erd2.png" alt="" style="display:block;  margin-right: auto;"/>
+								<br>
+                                <br>
+                                <h2>
+                                    Sales Insights
+                                </h2>
+                                <br>
+                                <h3>
+                                    Overview
+                                </h3>
+                                <p>
+                                    <b>ElectroniCart experienced staggering annual sales growth in 2020 (+163%)</b> when the pandemic started, and more people were placing orders from home. <b>Sales decreased in 2021 (-10%) and dropped sharply in 2022 (-46%)</b> as lockdowns eased and people progressively returned to normalcy.
+                                </p>
+
+                                <h3>
+                                    Sales Volume
+                                </h3>
+                                <img src="/images/electronicart_sales_analysis/sales_volume_heatmap.png">
+                                <p style="text-align: left;">
+                                    <em>Sample pivot table.  Other tables are linked below in their relevant sections.</em>
+                                </p>
+                                <p>
+                                Sales volume grew steadily throughout 2020, reaching its highest point in December 2020, but declined throughout 2021 and 2022 and is now lower than most pre-pandemic levels. <b>Two out of three of the most recent months have the lowest sales volume in the company's lifetime</b>.
+                                </p>
+                                <h3>
+                                    Product Mix
+                                </h3>
+                                Between 2019 and 2022, <b>four items constitute 96% of all sales</b>: 
+                                <ul>
+                                    <li>
+                                        27in 4K Gaming Monitor (35%)
+                                    </li>
+                                    <li>
+                                        Apple Airpods Headphones (28%)
+                                    </li>
+                                    <li>
+                                        Macbook Air Laptop (22%)
+                                    </li>
+                                    <li>
+                                        Thinkpad Laptop (11%)
+                                    </li>
+                                </ul>                                   
+                                <p>
+                                    <b>
+                                        The Bose Soundsport Headphones is the worst performing, only selling ~$3,000
+                                    </b> 
+                                    (<a href="./images/electronicart_sales_analysis/product_mix.png">figure 1</a>).
+                                </p>
+                                <h3>
+                                    Seasonality
+                                </h3>
+                                <p>
+                                    Starting in January, <b>sales fall until reaching their lowest point in May/June</b>, and then pick up <b>until September to October, when they drop anywhere between 18% to 55%</b>.  Sales rebound in the remaining months and finish the year strong.
+                                </p>
+                                <p>
+                                    <b>These patterns were more volatile in 2020 and 2021</b>, likely due to the increased number of people being home when COVID lockdowns were in full effect, but <b>sales before COVID-19 in 2019 and after COVID-19 in 2022 show similar sales levels, indicating that consumer purchasing behavior may have returned to normal</b> (<a href="./images/electronicart_sales_analysis/sales_by_year.png">figure 2</a>).
+                                </p>
+                                <h3>
+                                    Loyalty Program</a>
+                                </h3>
+                                <i class="icon solid fa-code"><a href="https://github.com/papir805/ElectroniCart-Sales-Analysis/blob/master/sql_queries/avg_days_between_orders.sql"> SQL Queries</a></i>
+                                <p>
+                                    <b>When first introduced in 2019, loyalty program customers underperformed compared to non-loyalty customers, although this switches in 2021 and carries into 2022</b>.  Now, loyalty customers have higher total sales and more sales volume than non-loyalty customers  (<a href="images/electronicart_sales_analysis/loyalty_hist_total_sales_and_sales_volume_vertical.png">figure 3</a>).
+                                </p>
+                                <p>
+                                    Although total sales and sales volume dropped from 2021 to 2022 for both customer types, loyalty customers' AOV has been more resilient to change.  From 2020 to 2021, AOV decreased by 24% for non-loyalty customers yet increased by 10% for loyalty customers.  Between 2021 and 2022, AOV fell an additional 24% for non-loyalty customers while only dropping by 2% for loyalty customers.  On average, <b>loyalty customers now spend $30 more per order</b> (<a href="images/electronicart_sales_analysis/loyalty_hist_aov.png">figure 4</a>) <b>and place orders 60 days more quickly than non-loyalty customers</b>.
+                                </p>
+                                <h3>
+                                    Refund Rates
+                                </h3>
+                                On average, ~5% of orders get refunded. However, several items have much higher refund rates: 
+                                <ul>
+                                    <li>
+                                        Thinkpad Laptop (12%)
+                                    </li>
+                                    <li>
+                                        Macbook Air Laptop (11%)
+                                    </li>
+                                    <li>
+                                        Apple iPhone (8%) 
+                                    </li>
+                                </ul>
+                                <p>
+                                    <b>Despite a high refund rate, the Apple iPhone represents a tiny chunk of ElectroniCart's sales (~1%), and returns have a negligible impact on dollars refunded</b>.
+                                </p>
+                                <h3>
+                                    Dollars Refunded
+                                </h3>
+                                Four items make up nearly all (99%) of the dollars refunded:
+                                <ul>
+                                    <li>
+                                        Macbook Air Laptop (33%)
+                                    </li>
+                                    <li>
+                                        27in 4K Gaming Monitor (29%)
+                                    </li>
+                                    <li>
+                                        Apple Airpods Headphones (19%)
+                                    </li>
+                                    <li>
+                                        Thinkpad Laptop (17%)
+                                    </li>
+                                </ul>
+                                <p>
+                                    Because <b>the Thinkpad and Macbook Air Laptop have high AOVs and high refund rates</b>, their returns significantly threaten ElectroniCart's revenue. <b>The 27in 4K Gaming Monitor and Apple Airpods Headphones</b> had low refund rates, but <b>have a high refund frequency</b>, also contributing to lost sales revenue.  
+                                </p>
+                                <p>
+                                    <b>Returns of the Macbook Air Laptop, the Apple Airpods Headphones, the Thinkpad Laptop, and the 27in 4K Gaming Monitor constitute 8% of all sales and represent $2.2 million in dollars refunded between 2019 and 2022</b> (<a href="images/electronicart_sales_analysis/refunds_percent_dollars_refunded_and_refund_count.png">figure 5</a>).
+                                </p>
+                                <h2>
+                                    Recommendations
+                                </h2>
+                                <br>
+                                <p>
+                                    Based on the insights listed above, the company should consider the following recommendations:
+                                </p>
+                                <h3>
+                                    Sales Team
+                                </h3>
+                                <i class="icon solid fa-code"><a href="https://github.com/papir805/ElectroniCart-Sales-Analysis/blob/master/sql_queries/product_sales_volume_pct_changes.sql"> SQL Queries</a></i>
+                                <ul>
+                                    <li>
+                                        Increase promotions during May, June, and July to increase sales during historically slow months.
+                                    </li>
+                                    <li>
+                                        <b>Investigate why sales of <i>all</i> products consistently experience average drops in sales volume between 14% - 47% from September to October</b>, particularly for these three traditionally best-selling items: 
+                                        <ul style="margin: 0;">
+                                            <li>
+                                                ThinkPad Laptop (-47%)
+                                            </li>
+                                            <li>
+                                                Apple Airpod Headphones (-31%)
+                                            </li>
+                                            <li>
+                                                27in 4k Gaming Monitor (-31%)
+                                            </li>
+                                        </ul>
+                                        <li>
+                                            Collaborate with the loyalty team to identify why spending and AOV for loyalty customers have eclipsed non-loyalty customers since 2021.
+                                        </li>
+                                    </li>
+                                </ul>
+                                <h3>
+                                    Loyalty Team
+                                </h3>
+                                <i class="icon solid fa-code"><a href="https://github.com/papir805/ElectroniCart-Sales-Analysis/blob/master/sql_queries/loyalty_queries.sql"> SQL Queries</a></i>
+                                <ul>
+                                    <li>
+                                        Continue the loyalty program and expand its offerings to increase the number of participating users and AOV, especially given the switch from underperforming to overperforming in 2021.
+                                        <ul style="margin: 0;">
+                                            <li>
+                                                <b>Average shipping times for non-loyalty customers (5.502 days) are nearly identical to those of loyalty customers (5.504 days)</b>.  Consider partnering with shipping carriers to offer faster shipping methods for loyalty customers to incentivize new signups.
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <b>Cut social media and affiliate marketing channel spending</b> for poor conversion rates, 1.06% and 1.53%, respectively, when successfully signing up new loyalty program members, <b>in favor of direct marketing (72.76% signup rate)</b>.
+                                    </li>
+                                </ul>
+                                <h3>
+                                    Inventory Team
+                                </h3>
+                                <ul>
+                                    <li>
+                                        Start tracking reasons for customer returns and identify why certain products get returned more frequently.  Fix those issues to minimize return rates for items with high AOV, like the Macbook Air Laptop and Thinkpad Laptop, or items with high return frequencies, like the Apple Airpods Headphones and 27in 4K Gaming Monitor.
+                                    </li>
+                                    <li>
+                                        <b>Phase out the sale of the Bose Soundsport Headphones</b> for severe underperformance.  <b>This item only sold 27 units, totaling ~$3,000 in revenue over four years</b>.   Investigate reasons for their poor sales and select new product offerings that are more likely to perform well.  
+                                    </li>
+                                </ul>
+                                <h2>
+                                    Technical Analysis
+                                </h2>
+                                <br>
+                                <p>
+                                    The <a href="https://github.com/papir805/ElectroniCart-Sales-Analysis/blob/master/data/electronicart_data_cleaned_final.xlsx">Excel workbook</a> containing all pivot tables and graphs, as well as the <a href="https://github.com/papir805/ElectroniCart-Sales-Analysis/tree/master/sql_queries">SQL queries</a> used to perform additional calculations are in my <a href="https://github.com/papir805/ElectroniCart-Sales-Analysis/tree/master">GitHub repository</a>.
+                                </p>
+							</article>
+						</div>
+					</section>
+
+			<!-- Footer -->
+				<section id="footer">
+					<div class="container">
+						<!-- <div class="row">
+							<div class="col-8 col-12-medium">
+								<section>
+									<header>
+										<h2>Blandit nisl adipiscing</h2>
+									</header>
+									<ul class="dates">
+										<li>
+											<span class="date">Jan <strong>27</strong></span>
+											<h3><a href="#">Lorem dolor sit amet veroeros</a></h3>
+											<p>Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat etiam.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>23</strong></span>
+											<h3><a href="#">Ipsum sed blandit nisl consequat</a></h3>
+											<p>Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>15</strong></span>
+											<h3><a href="#">Magna tempus lorem feugiat</a></h3>
+											<p>Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>12</strong></span>
+											<h3><a href="#">Dolore tempus ipsum feugiat nulla</a></h3>
+											<p>Feugiat lorem dolor sed nullam tempus lorem ipsum dolor sit amet nullam consequat.</p>
+										</li>
+										<li>
+											<span class="date">Jan <strong>10</strong></span>
+											<h3><a href="#">Blandit tempus aliquam?</a></h3>
+											<p>Feugiat sed tempus blandit tempus adipiscing nisl lorem ipsum dolor sit amet dolore.</p>
+										</li>
+									</ul>
+								</section>
+							</div>
+							<div class="col-4 col-12-medium">
+								<section>
+									<center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center>
+								</section>
+							</div> -->
+<!-- 							<div class="col-4 col-6-medium col-12-small">
+								<section>
+									<center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center>
+								</section>
+							</div> -->
+							<div class="col-4 col-6-medium col-12-small">
+								<div class="right">
+									<section>
+										<center>
+											<header>
+												<h2>Socials</h2>
+											</header>
+										</center>
+										<center>
+											<ul class="social">
+												<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+		<!-- 										<li><a class="icon solid fa-envelope" href="mailto:papir805@gmail.com"><span class="label">Email</span></a></li> -->
+												<!-- <li><a class="icon brands fa-dribbble" href="#"><span class="label">Dribbble</span></a></li>
+												<li><a class="icon brands fa-tumblr" href="#"><span class="label">Tumblr</span></a></li> -->
+												<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+											
+											</ul>
+											<ul class="contact">
+											<!-- <li>
+												<h3>Address</h3>
+												<p>
+													Untitled Incorporated<br />
+													1234 Somewhere Road Suite<br />
+													Nashville, TN 00000-0000
+												</p>
+											</li> -->
+											<li>
+												<h3>E-mail:</h3>
+												<p><a href="mailto:papir805@gmail.com">papir805@gmail.com</a></p>
+											</li>
+											<!-- <li>
+												<h3>Phone</h3>
+												<p>(800) 000-0000</p>
+											</li> -->
+										</ul>
+
+										</center>
+									</section>
+								</div>
+							</div>
+<!-- 							<div class="col-4 col-12-medium">
+								<section>
+									<center>
+										<header>
+											<h2 style="color:black;">Socials</h2>
+										</header>
+									</center>
+									<center>
+										<ul class="social">
+											<li><a class="icon brands fa-github" href="https://github.com/papir805"><span class="label">GitHub</span></a></li>
+											<li><a class="icon brands fa-linkedin-in" href="https://www.linkedin.com/in/jonathan-papir/"><span class="label">LinkedIn</span></a></li>
+										</ul>
+									</center>
+									<ul class="contact">
+										<li>
+											<h3>Address</h3>
+											<p>
+												Untitled Incorporated<br />
+												1234 Somewhere Road Suite<br />
+												Nashville, TN 00000-0000
+											</p>
+										</li>
+										<li>
+											<h3 style="color:black;">E-mail:</h3>
+											<p><a href="mailto:papir805@gmail.com">papir805@gmail.com</a></p>
+										</li>
+										<li>
+											<h3>Phone</h3>
+											<p>(800) 000-0000</p>
+										</li>
+									</ul>
+								</section>
+							</div> -->
+							<div class="col-12">
+
+								<!-- Copyright -->
+									<div id="copyright">
+										<ul class="links">
+											<li>&copy; Jonathan Papir. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+										</ul>
+									</div>
+
+							</div>
+						<!-- </div> -->
+					</div>
+				</section>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

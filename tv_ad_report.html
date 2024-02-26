@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Project: TV Advertising Report</title>
+		<title>TelePulse Ad Campaign Report</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -25,11 +25,11 @@
 				<!-- Nav -->
 				<nav id="nav">
 					<ul>
-						<li class="current">
+						<li>
 							<a href="index.html">Home</a>
 						</li>
-						<li>
-							<a href="portfolio.html">Portfolio</a>
+						<li  class="current">
+							<a href="#">Projects</a>
 							<ul>
 								<li>
 									<a href="featured_projects.html">Featured Projects</a>
@@ -38,24 +38,24 @@
 											<a href="#">Bot Battles Player Analysis</a>
 											<ul>
 												<li>
-													<a href='/featured_projects/bot_battles/bot_battles_introduction.html'>An Introduction</a>
+													<a href='bot_battles_introduction.html'>An Introduction</a>
 												</li>
 												<li>
-													<a href="/featured_projects/bot_battles/bot_battles_data_cleaning.html">Part 1: Data Cleaning</a>
+													<a href="bot_battles_data_cleaning.html">Part 1: Data Cleaning</a>
 												</li>
 												<li>
-													<a href="/featured_projects/bot_battles/bot_battles_exploratory_data_analysis.html">Part 2: EDA</a>
+													<a href="bot_battles_exploratory_data_analysis.html">Part 2: EDA</a>
 												</li>
-												<li>
-													<a href="/featured_projects/bot_battles/bot_battles_correlation.html">Part 3: Correlation</a>
-												</li>
+												<!-- <li>
+													<a href="bot_battles_correlation.html">Part 3: Correlation</a>
+												</li> -->
 											</ul>
 										</li>
 										<li>
-											<a href="/featured_projects/electronicart/electronicart_sales_analysis.html">ElectroniCart Sales Analysis</a>
+											<a href="electronicart_sales_analysis.html">ElectroniCart Sales Analysis</a>
 										</li>
 										<li>
-											<a href="/featured_projects/telepulse/telepulse_ad_campaign_report.html">TelePulse Ad Campaign Report</a>
+											<a href="telepulse_ad_campaign_report.html">TelePulse Ad Campaign Report</a>
 										</li>
 									</ul>
 								</li>
@@ -63,40 +63,40 @@
 									<a href="personal_projects.html">Personal Projects</a>
 									<ul>
 										<li>
-											<a href="/personal_projects/acupuncture_analysis.html">Acupuncture Analysis</a>
+											<a href="acupuncture_analysis.html">Acupuncture Analysis</a>
 										</li>
 										<li>
 											<a href='#'>Craigslist Math Tutoring Rate Analysis </a>
 											<ul>
 												<li>
-													<a href="/personal_projects/craigslist_web_scraper/etl_craigslist_web_scraper.html">Part 1: Web Scraper</a>
+													<a href="craigslist_etl_web_scraper.html">Part 1: Web Scraper</a>
 												</li>
 												<li>
-													<a href="/personal_projects/craigslist_web_scraper/craigslist_EDA.html">Part 2: EDA</a>
+													<a href="craigslist_EDA.html">Part 2: EDA</a>
 												</li>
 												<li>
-													<a href="/personal_projects/craigslist_web_scraper/craigslist_tableau_dashboard.html">Part 3: Tableau Dashboard</a>
+													<a href="craigslist_tableau_dashboard.html">Part 3: Tableau Dashboard</a>
 												</li>
 											</ul>
 										</li>							
 										<li>
-											<a href="/personal_projects/datasheet_qa_tool.html">Data Sheet Question Answering Tool</a>
+											<a href="datasheet_qa_tool.html">Data Sheet Question Answering Tool</a>
 										</li>
 										
 										<li>
-											<a href="/personal_projects/pokemon_classifier.html">Pokémon Classification</a>
+											<a href="pokemon_classifier.html">Pokémon Classification</a>
 										</li>
 										<li>
-											<a href="/personal_projects/ISLR_Python/islr_python.html">Porting Code From ISLR2e</a>
+											<a href="islr_python.html">Porting Code From ISLR2e</a>
 										</li>
 										<li>
 											<a href='#'>U.S. Accounting Survey Analysis </a>
 											<ul>
 												<li>
-													<a href="/personal_projects/us_accounting/us_accounting_survey_analysis.html">Part 1: Analysis</a>
+													<a href="us_accounting_survey_analysis.html">Part 1: Analysis</a>
 												</li>
 												<li>
-													<a href="/personal_projects/us_accounting/us_accounting_viz.html">Part 2: Gender Salary Gap</a>
+													<a href="us_accounting_viz.html">Part 2: Gender Salary Gap</a>
 												</li>
 											</ul>
 										</li>		
@@ -129,13 +129,13 @@
 							<!-- 	<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a> -->
 								<header>
 									<h2>
-										<a href="https://github.com/papir805/ad_campaign_report">TV Advertising Report</a>
+										TelePulse Ad Campaign Report
 									</h2>
 									<p>
-										Goal: To automate the process of generating monthly reports that can be used to determine the most cost-efficient TV networks to advertise on.
+										Goal: Automating the generation of monthly reports to determine the most cost-efficient TV networks for ad spending.
 									</p>
 									<i class="icon solid fa-code">
-										 Python, Excel, and PowerPoint
+										 Python, Excel, and Google Slides
 									</i>
 									<br>
 									<i class="icon solid fa-chart-line">
@@ -148,7 +148,7 @@
 											Background
 										</u>
 									</h3>
-									Every month, a data pipeline generates a Microsoft Excel file containing information relating to ads shown on over 30 TV networks for a particular company or brand. Each row in the table contains data on a particular ad airing in a particular time spot.  The data consists of the following:
+									Every month, a data pipeline generates an Excel file containing information on ads shown on over 30 TV networks. Each row in the table represents data on a particular ad airing in a specific time slot, consisting of:
 									<ul>
 										<li>
 											Amount spent on the ad
@@ -162,7 +162,7 @@
 									</ul>
 								</p>
 								<p>
-									The Python script I wrote cleans the data, performs joins, and calculates important metrics, then generates and exports three summary reports as PDF files, which can be used to produce recommendations for the TV networks where ad spending should be increased or decreased.
+									My Python script cleans the data, performs joins, and calculates important metrics, then generates and exports three summary reports as PDF files to produce recommendations for the TV networks where ad spending should be increased or decreased.
 								</p>
 								<p>
 									The full project can be found on 
@@ -185,7 +185,7 @@
 										</i>
 									</header>
 									<p>
-										Using data from September and October 2017, I've generated three reports and created visuals in Python.  Using these visuals, I've created a PowerPoint presentation and provided my own recommendations for the TV networks where advertising spending should be increased or decreased.
+										Using data from September and October, I've calculated cost per visitor, cost per acquisition, and conversion rate for $200k in spending from 6K records over 28 marketing channels and assigned rankings based on average performance in each metric. The Google Slides presentation below summarizes the analysis recommending channels for increased and decreased ad spend.
 									</p>
 <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vStD7y26fO2lPFwWCmDEPe84jliTRvQy-Sp_sBybZjucJlQTZmJ1m-BNF-TjYSJ8VqNWKvg1-6PxoJ-/embed?start=false&loop=false&delayms=5000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 								</section>
