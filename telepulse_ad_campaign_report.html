@@ -149,13 +149,13 @@
 									Every month, a data pipeline generates an Excel file containing information on ads shown for various TV networks. Each row in the table represents data on a particular ad airing in a specific time slot, consisting of:
 									<ul>
 										<li>
-											Amount spent on the ad
+											Spend: amount spent on the ad
 										</li>
 										<li>
-											Lift generated from the ad
+											Lift: number of distinct visitors to the product's website within a 30 minute period following the ad
 										</li>
 										<li>
-											Customer acquisitions from the ad
+											Acquisitions: number of distinct visitors who ultimately purchased the product 
 										</li>
 									</ul>
 								</p>
@@ -167,12 +167,59 @@
 									<a href="https://github.com/papir805/ad_campaign_report">my GitHub</a>.
 								</p>
 								<h3>
-									Key Insights
+									Insights
 								</h3>
 								<p>
 									Using data from September and October, I've calculated cost per visitor, cost per acquisition, and conversion rate for $221,436 in spending from 6K records over 28 marketing channels and assigned rankings based on average performance in each metric.
 								</p>
+								<h4>
+									Definitions: Key Performance Indicators (KPIs)
+								</h4>
 									<ul>
+										<li>
+											<b>Cost Per Visitor (CPV)= Total Spend / Total Lift</b> 
+											<ul style="margin: 0;">
+												<li style="list-style-type:circle;">
+													Average CPV = $10.81
+												</li>
+											</ul>
+										</li>
+										<li>
+											<b>Cost Per Acquisition (CPA) = Total Spend / Total Number of Purchases Made</b>
+											<ul style="margin: 0;">
+												<li style="list-style-type:circle;">
+													Average CPA = $1,265.35
+												</li>
+											</ul>
+										</li>
+										<li>
+											<b>Conversion Rate = Total Number of Purchases Made / Total Lift * 100</b>
+											<ul style="margin: 0;">
+												<li style="list-style-type:circle;">
+													Average Conversion Rate = 0.9%
+												</li>
+											</ul>
+										</li>
+									</ul> 
+									<p>
+										Several channels ranked in the top five for at least two KPIs.  <b>The biggest winner was CNBC, who had the best CPA</b>
+										($432/acquisition) <b>and the highest conversion rate</b> (3.7%).  <b>In close second and third place were MSNBC and CNN</b>.  MSNBC had the 4th
+										best CPV ($10.09/visitor) and the 3rd best CPA ($708.13/acquisition), while CNN had the 4th best CPA ($787.58/acquisition) and
+										the 4th highest conversion rate (2.1%).
+									</p>
+									<p>
+										Despite not ranking in the top five for any metric, <b>The History Channel and Turner Network Television</b> had above-average performance in multiple KPIs and are worth mentioning.
+										Both channels <b>had below-average CPAs and above-average conversion rates, indicating
+										 ads on these channels are cost-efficient, and consumers are more likely to purchase the product being advertised</b>.
+									</p>
+									<p>
+										On the other hand, several channels ranked in the bottom five for at least two KPIs.  <b>The Weather Channel
+										was in the bottom five for all three KPIs and was the biggest loser by far,</b> having the 3rd worst CPV ($36.58/visitor)
+										<b>with 0 purchases, leading to a 0% conversion rate.  Similarly, CNBC World had 0 purchases and a 0% conversion rate</b>.  ZeeTV had the worst 
+										CPA ($5,120.85/acquisition) and the 4th worst conversion rate (0.3%), while Star Plus had the 4th worst CPA ($2,945.14/acquisition)
+										and the 3rd worst conversion rate (0.2%).
+									</p>
+									<!-- <ul> -->
 										<!-- <li>
 											Averages
 											<ul>
@@ -187,7 +234,7 @@
 												</li>
 											</ul> 
 										</li> -->
-										<li>
+										<!-- <li>
 											Channels to Increase Spending:
 											<ul>
 												<ul style="margin: 0;">
@@ -224,7 +271,7 @@
 															</li>
 														</ul>
 													</li>
-												</ul>
+												</ul> -->
 
 												<!-- <li  style="list-style-type:circle;">
 													Honorable Mentions (in top 5 for 1/3 metrics):
@@ -240,8 +287,8 @@
 														</li>
 													</ul>
 												</li> -->
-											</ul>
-										</li>
+											<!-- </ul> -->
+										<!-- </li>
 										<li>
 											Channels to Decrease Spending:
 										
@@ -290,7 +337,7 @@
 															</li>
 														</ul>
 													</li>
-												</ul>
+												</ul> -->
 												<!-- <li style="list-style-type:circle;">
 													Honorable Mentions (in bottom 5 for 1/3 metrics):												
 													<ul style="margin: 0;">
@@ -299,9 +346,9 @@
 														</li>
 													</ul>
 												</li> -->
-										</li>
-									</ul>
-									<p>
+										<!-- </li>
+									</ul> -->
+									<!-- <p>
 										<b>Some channels already generate purchases with no ad spend</b>.  
 										Purchasing any ads on <b>these channels</b> is likely to increase purchases
 										and <b>represent excellent opportunities to capture new business</b>:
@@ -331,9 +378,20 @@
 															</li>
 														</ul>
 													</li>
-												</ul>
+												</ul> -->
 
 								<section>
+									<h3>
+										Recommendations
+									</h3>
+									<p>
+                                        <b>Ad spending on The Weather Channel</b>, the worst-performing channel, <b>should be cut and immediately diverted towards CNBC</b>,
+                                        the best-performing channel.
+                                        <b>Spending on other poor-performing channels</b> like CNBC World, ZeeTV, and Star Plus
+                                        <b>should be cut, but further analysis needs to be conducted to determine the optimal way of redistributing those dollars 
+                                        across the strongest-performing channels</b>, CNBC, MSNBC, and CNN, <b>as well as other cost-efficient 
+                                        channels, </b>like The History Channel and Turner Network Television.   
+									</p>
 									<header>
 										<h3>
 											Visualizing the Findings
