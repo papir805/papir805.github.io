@@ -427,7 +427,7 @@
 									users
 								</h4>
 									<p>
-										No cleaning was needed for the users_staging data.  The query below simply creates a new table called users with more explicit data types and introduces constraints to ensure all rows get entered with the correct values.
+										No cleaning was needed for the users_staging data.  I simply write a query that creates a new table called users with more explicit data types and introduces constraints to ensure correct values are entered into all rows.
 									</p>
 									Here is the schema for a newly defined users table:
 									<ol>
@@ -469,7 +469,7 @@
 									event_performance
 								</h4>
 								<p>
-									The event_performance_staging table needed a little bit of cleaning.  The query below creates a new table called event_performance with more explicit data types and introduces constraints, but also uses REGEX to remove typos from the userid and points fields, as well as using a WHERE clause to filter out observations corresponding to invalid dates.
+									The event_performance_staging table needed a little bit of cleaning.  I wrote a query to create a new table called event_performance which has more explicit data types and introduces constraints.  I also used REGEX to remove typos from the userid and points fields and a WHERE clause to filter out observations corresponding to invalid dates.
 								</p>
 								Here is the schema for the newly defined events_performance table:
 									<ol>
